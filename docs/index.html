@@ -191,6 +191,14 @@ button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0
     if(/half time|halftime|devre arasi/.test(lower) || /\bht\b/i.test(text))
       return {label:"DEVRE ARASI",type:"live"};
 
+    if(/second half|2nd half|segunda parte|ikinci yari/.test(lower))
+      return {label:"2. YARI",type:"live"};
+
+    if(/first half|1st half|primera parte|ilk yari/.test(lower)) {
+      const firstMinute = extractMinute(match);
+      return {label:firstMinute || "1. YARI",type:"live"};
+    }
+
     if(/upcoming|scheduled|not started|fixture|baslamadi/.test(lower))
       return {label:"BAŞLAMADI",type:"wait"};
 
@@ -198,7 +206,7 @@ button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0
 
     if(status === "live" || /live|in play|in-play|canli/.test(lower)){
       return {
-        label: minute || "CANLI · dakika bekleniyor",
+        label: minute || "CANLI",
         type:"live"
       };
     }
@@ -331,19 +339,39 @@ button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0
     }
   }
 
+  function formatKickoff(candidate){
+    // Aday verisindeki tarih/saat alanlarını kullan; bilinmeyen saat uydurma.
+    const raw = candidate?.kickoff ?? candidate?.start_time ?? candidate?.match_time ?? candidate?.time ?? candidate?.date ?? "";
+    if(!raw) return "Başlama saati kaynakta bulunmuyor";
+    const value = String(raw).trim();
+    const parsed = new Date(value);
+    if(!Number.isNaN(parsed.getTime()) && /T|\d{4}-\d{2}-\d{2}/.test(value)){
+      return "Başlama saati · " + parsed.toLocaleString("tr-TR",{
+        timeZone:"Europe/Istanbul", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"
+      });
+    }
+    // Metin alanında saat varsa aynen göster; yalnızca tarih varsa da onu göster.
+    const timeMatch = value.match(/(?:^|\s)([01]?\d|2[0-3]):[0-5]\d(?:\s|$)/);
+    if(timeMatch) return "Başlama saati · " + timeMatch[0].trim();
+    return "Maç saati · " + value;
+  }
+
   function renderLive(candidate){
     const live = findLiveMatch(candidate);
 
     if(!live){
+      const kickoff = formatKickoff(candidate);
       return `
         <div class="livebox">
           <div class="livehead">
-            <span class="live-label">CANLI SKOR</span>
-            <span class="pill wait">EŞLEŞME YOK</span>
+            <span class="live-label">MAÇ BİLGİSİ</span>
+            <span class="pill wait">FİKSTÜR</span>
           </div>
-          <div class="muted">
-            Bu maç canlı skor listesinden bulunamadı. Maç henüz başlamamış
-            olabilir veya kaynak bu karşılaşmayı sunmuyor olabilir.
+          <div class="muted" style="text-align:center;padding:5px 0">
+            ${esc(kickoff)}
+          </div>
+          <div class="muted" style="text-align:center;margin-top:5px">
+            Canlı skor henüz bu karşılaşma için kaynakta bulunamadı.
           </div>
         </div>`;
     }
