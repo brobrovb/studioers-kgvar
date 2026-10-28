@@ -440,6 +440,10 @@ footer a{color:var(--green)}
             ? "Kaynak skor: " + esc(score.home) + " – " + esc(score.away)
             : "Kaynakta skor bilgisi henüz bulunmuyor."}
         </div>
+        <details style="margin-top:12px;color:var(--muted);font-size:12px">
+          <summary style="cursor:pointer">Teknik kontrol: kaynak maç verisi</summary>
+          <pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:320px;overflow:auto;background:#080d18;padding:10px;border-radius:8px;color:#d8e2f5">${esc(JSON.stringify(live,null,2))}</pre>
+        </details>
       </div>`;
   }
 
