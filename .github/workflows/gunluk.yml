@@ -1,0 +1,43 @@
+
+name: Update daily KG Var candidates
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kgvar-daily-update
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build today's shortlist
+        run: python gunun_kgvar.py
+
+      - name: Commit updated JSON
+        run: |
+          if git diff --quiet -- docs/kgvar.json; then
+            echo "JSON did not change."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/kgvar.json
+          git commit -m "Update daily KG Var candidates"
+          git push
