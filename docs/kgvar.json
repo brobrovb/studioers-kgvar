@@ -1,0 +1,13 @@
+
+{
+  "updated_at": null,
+  "date": null,
+  "timezone": "Europe/Istanbul",
+  "source": "open-matchday public CSV data",
+  "notice": "Puan bir olasılık değildir. Geçmiş maçlardan türetilmiş sıralama puanıdır.",
+  "candidate_count": 0,
+  "candidates": [],
+  "diagnostics": {
+    "status": "İlk otomatik çalıştırma bekleniyor"
+  }
+}
