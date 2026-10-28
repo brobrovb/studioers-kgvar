@@ -1,13 +1,12 @@
-
 {
-  "updated_at": null,
-  "date": null,
+  "updated_at": "2026-10-28T18:30:45+03:00",
+  "date": "2026-10-28",
   "timezone": "Europe/Istanbul",
   "source": "open-matchday public CSV data",
-  "notice": "Puan bir olasılık değildir. Geçmiş maçlardan türetilmiş sıralama puanıdır.",
+  "notice": "Puan olasılık veya garanti değildir; geçmiş maçlardan üretilmiş sıralama puanıdır. Fikstürler eksik olabilir.",
   "candidate_count": 0,
   "candidates": [],
   "diagnostics": {
-    "status": "İlk otomatik çalıştırma bekleniyor"
+    "fatal_error": "HTTPError: HTTP Error 404: Not Found"
   }
 }
