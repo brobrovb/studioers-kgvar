@@ -1,12 +1,98 @@
 {
-  "updated_at": "2026-10-28T18:30:45+03:00",
+  "updated_at": "2026-10-28T18:37:29+03:00",
   "date": "2026-10-28",
   "timezone": "Europe/Istanbul",
   "source": "open-matchday public CSV data",
-  "notice": "Puan olasılık veya garanti değildir; geçmiş maçlardan üretilmiş sıralama puanıdır. Fikstürler eksik olabilir.",
-  "candidate_count": 0,
-  "candidates": [],
+  "source_url": "https://github.com/oladeeayo/open-matchday",
+  "notice": "100 üzerinden puan bir olasılık veya garanti değildir. Geçmiş maçlardaki KG Var oranlarından oluşturulan sıralama puanıdır. Kaynak veriler eksik olabilir.",
+  "candidate_count": 3,
+  "candidates": [
+    {
+      "date": "2026-10-28",
+      "home": "SSV Jeddeloh II",
+      "away": "Hertha Berlin",
+      "league": "GER_CUP_dfb-pokal",
+      "score": 100,
+      "home_form": {
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
+      },
+      "away_form": {
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
+      },
+      "home_home_form": {
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
+      },
+      "away_away_form": {
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
+      }
+    },
+    {
+      "date": "2026-10-28",
+      "home": "JOS Watergraafsmeer",
+      "away": "NAC Breda",
+      "league": "NED_CUP_knvb-beker",
+      "score": 89,
+      "home_form": {
+        "played": 2,
+        "btts": 2,
+        "rate": 1.0
+      },
+      "away_form": {
+        "played": 8,
+        "btts": 6,
+        "rate": 0.75
+      },
+      "home_home_form": {
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
+      },
+      "away_away_form": {
+        "played": 6,
+        "btts": 5,
+        "rate": 0.833
+      }
+    },
+    {
+      "date": "2026-10-28",
+      "home": "Poblense",
+      "away": "Ceuta",
+      "league": "ESP_CUP_copa-del-rey",
+      "score": 85,
+      "home_form": {
+        "played": 0,
+        "btts": 0,
+        "rate": null
+      },
+      "away_form": {
+        "played": 8,
+        "btts": 7,
+        "rate": 0.875
+      },
+      "home_home_form": {
+        "played": 0,
+        "btts": 0,
+        "rate": null
+      },
+      "away_away_form": {
+        "played": 5,
+        "btts": 4,
+        "rate": 0.8
+      }
+    }
+  ],
   "diagnostics": {
-    "fatal_error": "HTTPError: HTTP Error 404: Not Found"
+    "competitions_discovered": 75,
+    "matches_parsed": 17672,
+    "source_errors_count": 0,
+    "source_errors_sample": []
   }
 }
