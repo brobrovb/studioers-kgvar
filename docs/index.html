@@ -15,9 +15,24 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;ba
 main{position:relative;max-width:1120px;margin:auto;padding:28px 20px 44px}header{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 0 22px;border-bottom:1px solid #24334b}.logo{font-weight:900;letter-spacing:2px;font-size:14px}.logo span,h1 span{color:var(--mint)}.tag{border:1px solid #31435f;border-radius:999px;padding:6px 12px;color:#bdcbe0;font-size:11px;letter-spacing:.6px;text-transform:uppercase;background:#111c2d}
 h1{font-size:clamp(38px,7vw,68px);letter-spacing:-2.6px;line-height:.99;margin:42px 0 18px;font-weight:850}.intro{color:#aab8ce;max-width:680px;font-size:15px;margin:0 0 26px}.status{margin:18px 0;color:#b9c7dc;font-size:13px}.refresh{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 16px;padding:12px 14px;border:1px solid #253650;border-radius:14px;background:rgba(17,26,43,.82);color:var(--muted);font-size:12px;backdrop-filter:blur(8px)}
 button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0;border-radius:10px;padding:10px 15px;cursor:pointer;font-weight:800;font-size:12px;box-shadow:0 5px 18px #42d7a21b;transition:transform .18s,filter .18s}button:hover{filter:brightness(1.08);transform:translateY(-1px)}button:disabled{opacity:.6;cursor:wait;transform:none}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:18px}.card{position:relative;overflow:hidden;background:linear-gradient(155deg,rgba(24,38,61,.98),rgba(13,21,36,.98));border:1px solid #2b3b55;border-radius:22px;padding:22px;min-width:0;box-shadow:0 18px 42px #00000024;transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px);border-color:#45617f}.card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--mint),#8aaeff,transparent)}.league{color:var(--blue);text-transform:uppercase;font-size:10px;letter-spacing:1.15px;font-weight:800}.teams{display:grid;grid-template-columns:1fr 36px 1fr;align-items:center;gap:8px;margin:22px 0 18px;font-size:14px;font-weight:750}.team{text-align:center;min-width:0;overflow-wrap:anywhere}.team img{display:block;width:48px;height:48px;object-fit:contain;margin:0 auto 9px;filter:drop-shadow(0 4px 7px #0005)}.vs{text-align:center;color:#7487a5;font-size:10px;letter-spacing:1px;font-weight:800}.score{font-size:34px;color:var(--mint);font-weight:850;line-height:1.2;letter-spacing:-1px}.muted{color:var(--muted);font-size:11px}.bar{height:6px;background:#27364e;border-radius:99px;margin:11px 0 20px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#48cfa1,#9bffce);border-radius:99px;box-shadow:0 0 12px #6ff0bd50}.forms{display:grid;grid-template-columns:1fr 1fr;gap:9px}.form{padding:12px;border:1px solid #293a54;border-radius:13px;background:#0e1727;color:#9eacc3;font-size:11px;overflow-wrap:anywhere}.form strong{display:block;color:#f4f7ff;font-size:13px;margin-top:5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:18px;align-items:stretch}.card{position:relative;overflow:hidden;background:linear-gradient(155deg,rgba(24,38,61,.98),rgba(13,21,36,.98));border:1px solid #2b3b55;border-radius:22px;padding:22px;min-width:0;box-shadow:0 18px 42px #00000024;transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px);border-color:#45617f}.card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--mint),#8aaeff,transparent)}.league{color:var(--blue);text-transform:uppercase;font-size:10px;letter-spacing:1.15px;font-weight:800}.teams{display:grid;grid-template-columns:1fr 36px 1fr;align-items:center;gap:8px;margin:22px 0 18px;font-size:14px;font-weight:750}.team{text-align:center;min-width:0;overflow-wrap:anywhere}.team img{display:block;width:48px;height:48px;object-fit:contain;margin:0 auto 9px;filter:drop-shadow(0 4px 7px #0005)}.vs{text-align:center;color:#7487a5;font-size:10px;letter-spacing:1px;font-weight:800}.score{font-size:34px;color:var(--mint);font-weight:850;line-height:1.2;letter-spacing:-1px}.muted{color:var(--muted);font-size:11px}.bar{height:6px;background:#27364e;border-radius:99px;margin:11px 0 20px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#48cfa1,#9bffce);border-radius:99px;box-shadow:0 0 12px #6ff0bd50}.forms{display:grid;grid-template-columns:1fr 1fr;gap:9px}.form{padding:12px;border:1px solid #293a54;border-radius:13px;background:#0e1727;color:#9eacc3;font-size:11px;overflow-wrap:anywhere}.form strong{display:block;color:#f4f7ff;font-size:13px;margin-top:5px}
 .livebox{margin-top:18px;padding:15px;border:1px solid #2e514b;border-radius:16px;background:linear-gradient(145deg,#102923,#0b1b20)}.livehead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px}.live-label{font-size:10px;letter-spacing:1.2px;color:var(--mint);font-weight:900;display:flex;align-items:center;gap:7px}.live-label:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px #6ff0bd1c}.live-status{font-size:12px;font-weight:800;color:#fff}.live-score{font-size:32px;font-weight:900;text-align:center;margin:2px 0;letter-spacing:-1px}.live-teams{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:center}.live-team{display:flex;align-items:center;gap:8px;min-width:0;font-size:12px;font-weight:700}.live-team:last-child{justify-content:flex-end;text-align:right}.live-team img{width:30px;height:30px;object-fit:contain;flex-shrink:0}.live-team span{overflow-wrap:anywhere}.live-mid{text-align:center;min-width:76px}.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:#1a4539;color:#7cf3c3;font-size:10px;font-weight:900;letter-spacing:.25px}.pill.wait{background:#25344b;color:#c8d5e8}.pill.done{background:#30364a;color:#d6dced}.empty,.notice{padding:20px;border:1px solid #2a3b55;border-radius:16px;color:var(--muted);background:#111a2b}.notice{margin-top:24px;font-size:12px}.notice strong{color:#e8efff}footer{margin-top:28px;padding-top:20px;border-top:1px solid #223149;color:#7788a3;font-size:11px}footer a{color:var(--mint);text-decoration:none}footer a:hover{text-decoration:underline}
-@media(max-width:520px){main{padding:18px 12px 32px}header{padding-bottom:17px}h1{margin:32px 0 15px;font-size:clamp(38px,12vw,54px);letter-spacing:-1.8px}.intro{font-size:14px}.card{padding:18px;border-radius:18px}.teams{font-size:13px}.team img{width:40px;height:40px}.live-team{font-size:11px;gap:5px}.live-team img{width:25px;height:25px}.live-mid{min-width:66px}.live-score{font-size:28px}}
+/* Joomla iframe ve Android telefonlar: dar alanlarda tek sütun, kompakt maç kartları */
+@media(max-width:760px){
+  main{max-width:680px;padding:16px 12px 24px}
+  .cards{grid-template-columns:minmax(0,1fr);gap:12px}
+  .card{padding:16px;border-radius:17px;box-shadow:0 10px 25px #00000020}
+  .card:hover{transform:none}
+  .teams{margin:15px 0 13px;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);gap:6px}
+  .team img{width:38px;height:38px;margin-bottom:6px}
+  .forms{gap:7px}
+  .form{padding:9px;border-radius:11px}
+  .livebox{margin-top:13px;padding:12px;border-radius:13px}
+  .intro{margin-bottom:16px}
+  .status{margin:12px 0}
+  .notice{padding:14px;margin-top:16px}
+}
+@media(max-width:520px){main{padding:14px 10px 22px}header{padding-bottom:17px}h1{margin:32px 0 15px;font-size:clamp(38px,12vw,54px);letter-spacing:-1.8px}.intro{font-size:14px}.card{padding:18px;border-radius:18px}.teams{font-size:13px}.team img{width:40px;height:40px}.live-team{font-size:11px;gap:5px}.live-team img{width:25px;height:25px}.live-mid{min-width:66px}.live-score{font-size:28px}}
 </style>
 </head>
 
@@ -340,20 +355,59 @@ button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0
   }
 
   function formatKickoff(candidate){
-    // Aday verisindeki tarih/saat alanlarını kullan; bilinmeyen saat uydurma.
-    const raw = candidate?.kickoff ?? candidate?.start_time ?? candidate?.match_time ?? candidate?.time ?? candidate?.date ?? "";
-    if(!raw) return "Başlama saati kaynakta bulunmuyor";
-    const value = String(raw).trim();
-    const parsed = new Date(value);
-    if(!Number.isNaN(parsed.getTime()) && /T|\d{4}-\d{2}-\d{2}/.test(value)){
-      return "Başlama saati · " + parsed.toLocaleString("tr-TR",{
-        timeZone:"Europe/Istanbul", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"
+    // Kaynakta zaman dilimi olan ISO tarihleri Türkiye saatine çevir.
+    // Sadece HH:mm olarak gelen saatleri kaynakta verildiği gibi göster;
+    // tarih-only değerinden sahte bir saat üretme.
+    const rawTime = String(candidate?.time ?? candidate?.kickoff ?? candidate?.start_time ?? candidate?.match_time ?? "").trim();
+    const rawDate = String(candidate?.date ?? "").trim();
+    const raw = rawTime || String(candidate?.date ?? "").trim();
+    if(!raw) return "Başlama saati belirtilmemiş";
+
+    const formatDateTime = value => {
+      const d = new Date(value);
+      if(Number.isNaN(d.getTime())) return "";
+      return d.toLocaleString("tr-TR", {
+        timeZone:"Europe/Istanbul", day:"2-digit", month:"2-digit",
+        hour:"2-digit", minute:"2-digit", hour12:false
       });
+    };
+
+    // Saat alanı ISO timestamp ise (Z veya +03:00 gibi offset içeriyorsa)
+    // zaman dilimini hesaba katarak Türkiye saatine dönüştür.
+    if(/T/.test(raw) && /(?:Z|[+-]\d{2}:?\d{2})$/i.test(raw)){
+      const formatted = formatDateTime(raw);
+      if(formatted) return "Türkiye saati · " + formatted;
     }
-    // Metin alanında saat varsa aynen göster; yalnızca tarih varsa da onu göster.
-    const timeMatch = value.match(/(?:^|\s)([01]?\d|2[0-3]):[0-5]\d(?:\s|$)/);
-    if(timeMatch) return "Başlama saati · " + timeMatch[0].trim();
-    return "Maç saati · " + value;
+
+    // CSV'deki saat genellikle HH:mm / HH:mm:ss biçimindedir.
+    // Bu saat için tarih alanını yalnızca etikette kullanıyoruz; saat değerini
+    // tarayıcının yerel saat dilimine göre kaydırmıyoruz.
+    const timeMatch = raw.match(/(?:^|T|\s)([01]?\d|2[0-3]):([0-5]\d)(?::[0-5]\d)?(?:$|\s|Z|[+-])/);
+    if(timeMatch){
+      const time = timeMatch[1].padStart(2,"0") + ":" + timeMatch[2];
+      const dateSource = rawDate || (raw.includes("T") ? raw.slice(0,10) : "");
+      if(/^\d{4}-\d{2}-\d{2}$/.test(dateSource)){
+        const parts = dateSource.split("-");
+        return "Türkiye saati · " + parts[2] + "." + parts[1] + " · " + time;
+      }
+      return "Başlama saati · " + time + " (Türkiye)";
+    }
+
+    // Tarih tek başınaysa sadece tarih göster.
+    if(/^\d{4}-\d{2}-\d{2}$/.test(raw)){
+      const parts = raw.split("-");
+      return "Maç tarihi · " + parts[2] + "." + parts[1] + "." + parts[0];
+    }
+
+    // Offset belirtilmemiş, ancak tarih ve saat birlikte gelmişse Türkiye
+    // saatini kaynak metindeki saatten al; UTC varsayımıyla kaydırma yapma.
+    const dateTimeMatch = raw.match(/^(\d{4}-\d{2}-\d{2})[ T]([01]?\d|2[0-3]):([0-5]\d)/);
+    if(dateTimeMatch){
+      const parts = dateTimeMatch[1].split("-");
+      return "Türkiye saati · " + parts[2] + "." + parts[1] + " · " + dateTimeMatch[2].padStart(2,"0") + ":" + dateTimeMatch[3];
+    }
+
+    return "Başlama saati belirtilmemiş";
   }
 
   function renderLive(candidate){
@@ -371,7 +425,7 @@ button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0
             ${esc(kickoff)}
           </div>
           <div class="muted" style="text-align:center;margin-top:5px">
-            Canlı skor henüz bu karşılaşma için kaynakta bulunamadı.
+            Skor bilgisi henüz yayınlanmadı.
           </div>
         </div>`;
     }
@@ -422,6 +476,12 @@ button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0
       </div>`;
   }
 
+  function formatDateOnlyTR(value){
+    const s = String(value ?? "").trim();
+    const m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    return m ? m[3] + "." + m[2] + "." + m[1] : s;
+  }
+
   function renderCandidate(match){
     const score = Math.max(0,Math.min(100,Number(match.score) || 0));
 
@@ -429,7 +489,7 @@ button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0
       <article class="card">
         <div class="league">
           ${esc(match.league || "Lig bilgisi yok")}
-          ${match.date ? " · " + esc(match.date) : ""}
+          ${match.date ? " · " + esc(formatDateOnlyTR(match.date)) : ""}
         </div>
 
         <div class="teams">
