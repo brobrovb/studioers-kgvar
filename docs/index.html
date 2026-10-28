@@ -9,65 +9,15 @@
 <title>Günün KG Var Adayları ve Canlı Skorlar | StudioErs</title>
 
 <style>
-*{box-sizing:border-box}
-:root{
-  --bg:#0b1020;
-  --panel:#131d31;
-  --border:#293852;
-  --text:#f3f6ff;
-  --muted:#aab7ce;
-  --green:#71e0b2;
-  --blue:#a4b8ff;
-}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font:16px/1.6 Arial,Helvetica,sans-serif
-}
-main{max-width:1000px;margin:auto;padding:28px 16px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{font-weight:800;letter-spacing:2px}
-.logo span,h1 span{color:var(--green)}
-.tag{border:1px solid var(--border);border-radius:20px;padding:5px 12px;color:var(--muted);font-size:12px}
-h1{font-size:clamp(32px,6vw,54px);line-height:1.1;margin:38px 0 12px}
-.intro{color:var(--muted);max-width:720px}
-.status{margin:22px 0 14px;color:var(--muted);font-size:13px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px}
-.card{background:linear-gradient(145deg,#19253d,#111827);border:1px solid var(--border);border-radius:18px;padding:20px;min-width:0}
-.league{color:var(--blue);text-transform:uppercase;font-size:11px;letter-spacing:.7px}
-.teams{display:grid;grid-template-columns:1fr 34px 1fr;align-items:center;gap:8px;margin:18px 0 10px;font-size:15px;font-weight:bold}.team{text-align:center;min-width:0;overflow-wrap:anywhere}.team img{display:block;width:42px;height:42px;object-fit:contain;margin:0 auto 7px}.vs{text-align:center;color:var(--muted);font-size:12px}
-.score{font-size:30px;color:var(--green);font-weight:bold;line-height:1.2}
-.muted{color:var(--muted);font-size:12px}
-.bar{height:7px;background:var(--border);border-radius:8px;margin:10px 0 18px;overflow:hidden}
-.bar span{display:block;height:100%;background:var(--green)}
-.forms{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.form{padding:10px;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:12px;overflow-wrap:anywhere}
-.form strong{display:block;color:#fff;font-size:14px;margin-top:4px}
-.livebox{margin-top:16px;padding:13px;border:1px solid #31534c;border-radius:12px;background:#0c211f}
-.livehead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
-.live-label{font-size:11px;letter-spacing:.7px;color:var(--green);font-weight:bold}
-.live-status{font-size:13px;font-weight:bold;color:#fff}
-.live-score{font-size:26px;font-weight:bold;text-align:center;margin:4px 0}
-.live-teams{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
-.live-team{display:flex;align-items:center;gap:7px;min-width:0;font-size:12px}
-.live-team:last-child{justify-content:flex-end;text-align:right}
-.live-team img{width:27px;height:27px;object-fit:contain;flex-shrink:0}
-.live-team span{overflow-wrap:anywhere}
-.live-mid{text-align:center;min-width:70px}
-.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:#233b36;color:var(--green);font-size:11px;font-weight:bold}
-.pill.wait{background:#26334a;color:#c4d0e8}
-.pill.done{background:#303344;color:#d4d6e5}
-.empty,.notice{padding:18px;border:1px solid var(--border);border-radius:14px;color:var(--muted)}
-.notice{margin-top:22px;background:#111827;font-size:13px}
-.refresh{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0;color:var(--muted);font-size:12px}
-button{background:#1d2a42;color:#fff;border:1px solid var(--border);border-radius:9px;padding:8px 12px;cursor:pointer}
-button:hover{border-color:var(--green)}
-footer{margin-top:25px;color:#8290a8;font-size:12px}
-footer a{color:var(--green)}
-@media(max-width:420px){
-  main{padding:20px 12px}
-  .card{padding:16px}
-  .teams{font-size:14px}.team img{width:36px;height:36px}
-}
+:root{color-scheme:dark;--bg:#080d19;--panel:#111a2b;--panel2:#17243a;--line:#2a3b56;--text:#f3f7ff;--muted:#9eacc3;--mint:#6ff0bd;--blue:#91b7ff;--amber:#ffd27a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#1b3150 0,transparent 48%),var(--bg);color:var(--text);font:15px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(#283955 1px,transparent 1px),linear-gradient(90deg,#283955 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,black,transparent 75%)}
+main{position:relative;max-width:1120px;margin:auto;padding:28px 20px 44px}header{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 0 22px;border-bottom:1px solid #24334b}.logo{font-weight:900;letter-spacing:2px;font-size:14px}.logo span,h1 span{color:var(--mint)}.tag{border:1px solid #31435f;border-radius:999px;padding:6px 12px;color:#bdcbe0;font-size:11px;letter-spacing:.6px;text-transform:uppercase;background:#111c2d}
+h1{font-size:clamp(38px,7vw,68px);letter-spacing:-2.6px;line-height:.99;margin:42px 0 18px;font-weight:850}.intro{color:#aab8ce;max-width:680px;font-size:15px;margin:0 0 26px}.status{margin:18px 0;color:#b9c7dc;font-size:13px}.refresh{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 16px;padding:12px 14px;border:1px solid #253650;border-radius:14px;background:rgba(17,26,43,.82);color:var(--muted);font-size:12px;backdrop-filter:blur(8px)}
+button{background:linear-gradient(135deg,#7bf0c2,#48cda2);color:#071a17;border:0;border-radius:10px;padding:10px 15px;cursor:pointer;font-weight:800;font-size:12px;box-shadow:0 5px 18px #42d7a21b;transition:transform .18s,filter .18s}button:hover{filter:brightness(1.08);transform:translateY(-1px)}button:disabled{opacity:.6;cursor:wait;transform:none}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:18px}.card{position:relative;overflow:hidden;background:linear-gradient(155deg,rgba(24,38,61,.98),rgba(13,21,36,.98));border:1px solid #2b3b55;border-radius:22px;padding:22px;min-width:0;box-shadow:0 18px 42px #00000024;transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px);border-color:#45617f}.card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--mint),#8aaeff,transparent)}.league{color:var(--blue);text-transform:uppercase;font-size:10px;letter-spacing:1.15px;font-weight:800}.teams{display:grid;grid-template-columns:1fr 36px 1fr;align-items:center;gap:8px;margin:22px 0 18px;font-size:14px;font-weight:750}.team{text-align:center;min-width:0;overflow-wrap:anywhere}.team img{display:block;width:48px;height:48px;object-fit:contain;margin:0 auto 9px;filter:drop-shadow(0 4px 7px #0005)}.vs{text-align:center;color:#7487a5;font-size:10px;letter-spacing:1px;font-weight:800}.score{font-size:34px;color:var(--mint);font-weight:850;line-height:1.2;letter-spacing:-1px}.muted{color:var(--muted);font-size:11px}.bar{height:6px;background:#27364e;border-radius:99px;margin:11px 0 20px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#48cfa1,#9bffce);border-radius:99px;box-shadow:0 0 12px #6ff0bd50}.forms{display:grid;grid-template-columns:1fr 1fr;gap:9px}.form{padding:12px;border:1px solid #293a54;border-radius:13px;background:#0e1727;color:#9eacc3;font-size:11px;overflow-wrap:anywhere}.form strong{display:block;color:#f4f7ff;font-size:13px;margin-top:5px}
+.livebox{margin-top:18px;padding:15px;border:1px solid #2e514b;border-radius:16px;background:linear-gradient(145deg,#102923,#0b1b20)}.livehead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px}.live-label{font-size:10px;letter-spacing:1.2px;color:var(--mint);font-weight:900;display:flex;align-items:center;gap:7px}.live-label:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px #6ff0bd1c}.live-status{font-size:12px;font-weight:800;color:#fff}.live-score{font-size:32px;font-weight:900;text-align:center;margin:2px 0;letter-spacing:-1px}.live-teams{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:center}.live-team{display:flex;align-items:center;gap:8px;min-width:0;font-size:12px;font-weight:700}.live-team:last-child{justify-content:flex-end;text-align:right}.live-team img{width:30px;height:30px;object-fit:contain;flex-shrink:0}.live-team span{overflow-wrap:anywhere}.live-mid{text-align:center;min-width:76px}.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:#1a4539;color:#7cf3c3;font-size:10px;font-weight:900;letter-spacing:.25px}.pill.wait{background:#25344b;color:#c8d5e8}.pill.done{background:#30364a;color:#d6dced}.empty,.notice{padding:20px;border:1px solid #2a3b55;border-radius:16px;color:var(--muted);background:#111a2b}.notice{margin-top:24px;font-size:12px}.notice strong{color:#e8efff}footer{margin-top:28px;padding-top:20px;border-top:1px solid #223149;color:#7788a3;font-size:11px}footer a{color:var(--mint);text-decoration:none}footer a:hover{text-decoration:underline}
+@media(max-width:520px){main{padding:18px 12px 32px}header{padding-bottom:17px}h1{margin:32px 0 15px;font-size:clamp(38px,12vw,54px);letter-spacing:-1.8px}.intro{font-size:14px}.card{padding:18px;border-radius:18px}.teams{font-size:13px}.team img{width:40px;height:40px}.live-team{font-size:11px;gap:5px}.live-team img{width:25px;height:25px}.live-mid{min-width:66px}.live-score{font-size:28px}}
 </style>
 </head>
 
@@ -125,7 +75,8 @@ footer a{color:var(--green)}
   // Genel listede bulunmayan bazı maçlar için ek sorgular.
   const EXTRA_URLS = [
     API + "/team/?sport=football&slug=hertha-berlin&limit=30",
-    API + "/match/?sport=football&slug=hertha-berlin-vs-ssv-jeddeloh"
+    API + "/match/?sport=football&slug=hertha-berlin-vs-ssv-jeddeloh",
+    "https://sportscore.com/api/v1/match/?sport=football&slug=hertha-berlin-vs-ssv-jeddeloh"
   ];
   const REFRESH_MS = 60000;
 
@@ -440,10 +391,6 @@ footer a{color:var(--green)}
             ? "Kaynak skor: " + esc(score.home) + " – " + esc(score.away)
             : "Kaynakta skor bilgisi henüz bulunmuyor."}
         </div>
-        <details style="margin-top:12px;color:var(--muted);font-size:12px">
-          <summary style="cursor:pointer">Teknik kontrol: kaynak maç verisi</summary>
-          <pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:320px;overflow:auto;background:#080d18;padding:10px;border-radius:8px;color:#d8e2f5">${esc(JSON.stringify(live,null,2))}</pre>
-        </details>
       </div>`;
   }
 
