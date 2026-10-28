@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="StudioErs günlük KG Var maç adayları ve geçmiş karşılıklı gol istatistikleri.">
+<title>Günün KG Var Adayları | StudioErs</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#f3f6ff;font:16px/1.6 Arial,sans-serif}
+main{max-width:1000px;margin:auto;padding:30px 18px}
+header{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font-weight:bold;letter-spacing:2px}.logo span,h1 span{color:#71e0b2}
+.tag{border:1px solid #293852;border-radius:20px;padding:6px 12px;color:#aab7ce;font-size:13px}
+h1{font-size:clamp(32px,6vw,54px);line-height:1.1;margin:40px 0 12px}
+.intro{color:#aab7ce;max-width:680px}
+.status{margin:24px 0;color:#aab7ce;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:linear-gradient(145deg,#19253d,#111827);border:1px solid #293852;border-radius:18px;padding:22px}
+.league{color:#a4b8ff;text-transform:uppercase;font-size:12px;letter-spacing:1px}
+.teams{font-size:23px;font-weight:bold;margin:20px 0}
+.score{font-size:30px;color:#71e0b2;font-weight:bold}
+.muted{color:#aab7ce;font-size:13px}
+.bar{height:7px;background:#293852;border-radius:8px;margin:10px 0 18px;overflow:hidden}
+.bar span{display:block;height:100%;background:#71e0b2}
+.forms{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.form{padding:10px;border:1px solid #293852;border-radius:10px;color:#aab7ce;font-size:12px}
+.form strong{display:block;color:#fff;font-size:15px;margin-top:4px}
+.empty,.notice{padding:18px;border:1px solid #293852;border-radius:14px;color:#aab7ce}
+.notice{margin-top:24px;background:#111827;font-size:13px}
+footer{margin-top:25px;color:#8290a8;font-size:12px}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="logo">STUDIO<span>ERS</span> / KG VAR</div>
+  <div class="tag">Günlük istatistik ekranı</div>
+</header>
+
+<h1>Günün KG Var<br><span>adayları</span></h1>
+<p class="intro">Günün erişilebilen fikstürleri arasından, takımların geçmiş karşılıklı gol sonuçlarına göre sıralanan maçlar.</p>
+
+<div class="status" id="status">Veriler yükleniyor...</div>
+<section class="cards" id="cards" aria-live="polite">
+  <div class="empty">Veriler yükleniyor...</div>
+</section>
+
+<div class="notice">
+<strong>Önemli bilgi:</strong> Puanlar yüzde veya gerçekleşme olasılığı değildir.
+Geçmiş maçlardan türetilmiş sıralama puanlarıdır; sonuç garantisi vermez.
+Fikstürler eksik veya gecikmeli olabilir. Maç bilgilerini bağımsız olarak kontrol edin.
+</div>
+
+<footer>StudioErs · KG Var · Son güncelleme: <span id="updated">—</span></footer>
+</main>
+
+<script>
+(async function(){
+  const status=document.getElementById("status");
+  const cards=document.getElementById("cards");
+  const updated=document.getElementById("updated");
+
+  function esc(value){
+    return String(value??"").replace(/[&<>"']/g,function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  function formText(form){
+    if(!form || !form.played) return "Yeterli veri yok";
+    return form.btts+"/"+form.played+" KG Var";
+  }
+
+  try{
+    const response=await fetch("./kgvar.json?time="+Date.now(),{cache:"no-store"});
+    if(!response.ok) throw new Error("Sonuç dosyası henüz hazır değil.");
+    const data=await response.json();
+
+    if(data.diagnostics && data.diagnostics.fatal_error){
+      throw new Error(data.diagnostics.fatal_error);
+    }
+
+    status.textContent=(data.date||"Bugün")+" · Günlük aday listesi";
+
+    if(data.updated_at){
+      updated.textContent=new Date(data.updated_at).toLocaleString("tr-TR",{timeZone:"Europe/Istanbul"});
+    }
+
+    if(!data.candidates || !data.candidates.length){
+      cards.innerHTML='<div class="empty">Bugün ölçütlerimize uyan aday bulunamadı veya fikstür verisi henüz gelmedi. Daha sonra tekrar kontrol edin.</div>';
+      return;
+    }
+
+    cards.innerHTML=data.candidates.map(function(match){
+      const score=Math.max(0,Math.min(100,Number(match.score)||0));
+      return `
+        <article class="card">
+          <div class="league">${esc(match.league)} · ${esc(match.date)}</div>
+          <div class="teams">${esc(match.home)} <span class="muted">–</span> ${esc(match.away)}</div>
+          <div class="muted">İstatistiksel sıralama puanı</div>
+          <div class="score">${score}<span class="muted"> / 100</span></div>
+          <div class="bar"><span style="width:${score}%"></span></div>
+          <div class="forms">
+            <div class="form">${esc(match.home)}<strong>${esc(formText(match.home_form))}</strong></div>
+            <div class="form">${esc(match.away)}<strong>${esc(formText(match.away_form))}</strong></div>
+          </div>
+        </article>`;
+    }).join("");
+
+  }catch(error){
+    status.textContent="Veri yüklenemedi";
+    cards.innerHTML='<div class="empty">'+esc(error.message)+'<br>GitHub Actions çalıştırmasını kontrol edin.</div>';
+  }
+})();
+</script>
+</body>
+</html>
