@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-29T09:34:53+03:00",
-  "date": "2026-10-29",
+  "updated_at": "2026-10-30T09:34:32+03:00",
+  "date": "2026-10-30",
   "timezone": "Europe/Istanbul",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
@@ -8,10 +8,10 @@
   "candidate_count": 3,
   "candidates": [
     {
-      "date": "2026-10-29",
-      "home": "RKAV Volendam",
-      "away": "ROHDA Raalte",
-      "league": "NED_CUP_knvb-beker",
+      "date": "2026-10-30",
+      "home": "Brisbane Roar FC",
+      "away": "Auckland FC",
+      "league": "AUS_1_a-league",
       "score": 100,
       "home_form": {
         "played": 1,
@@ -19,79 +19,79 @@
         "rate": 1.0
       },
       "away_form": {
-        "played": 1,
-        "btts": 1,
-        "rate": 1.0
-      },
-      "home_home_form": {
-        "played": 1,
-        "btts": 1,
-        "rate": 1.0
-      },
-      "away_away_form": {
-        "played": 1,
-        "btts": 1,
-        "rate": 1.0
-      }
-    },
-    {
-      "date": "2026-10-29",
-      "home": "Kozakken Boys",
-      "away": "FC Utrecht",
-      "league": "NED_CUP_knvb-beker",
-      "score": 91,
-      "home_form": {
         "played": 2,
         "btts": 2,
         "rate": 1.0
       },
-      "away_form": {
-        "played": 8,
-        "btts": 7,
-        "rate": 0.875
-      },
       "home_home_form": {
-        "played": 0,
-        "btts": 0,
-        "rate": null
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
       },
       "away_away_form": {
-        "played": 5,
-        "btts": 4,
-        "rate": 0.8
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
       }
     },
     {
-      "date": "2026-10-29",
-      "home": "Poblense",
-      "away": "Ceuta",
-      "league": "ESP_CUP_copa-del-rey",
-      "score": 85,
+      "date": "2026-10-30",
+      "home": "Seraing U21",
+      "away": "Francs Borains U21",
+      "league": "BEL_U21_pro-league",
+      "score": 93,
       "home_form": {
-        "played": 0,
-        "btts": 0,
-        "rate": null
+        "played": 5,
+        "btts": 5,
+        "rate": 1.0
       },
       "away_form": {
-        "played": 8,
-        "btts": 7,
-        "rate": 0.875
-      },
-      "home_home_form": {
-        "played": 0,
-        "btts": 0,
-        "rate": null
-      },
-      "away_away_form": {
         "played": 5,
         "btts": 4,
         "rate": 0.8
+      },
+      "home_home_form": {
+        "played": 2,
+        "btts": 2,
+        "rate": 1.0
+      },
+      "away_away_form": {
+        "played": 2,
+        "btts": 2,
+        "rate": 1.0
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "home": "RAAL La Louviere U21",
+      "away": "K. Lierse S.K. U21",
+      "league": "BEL_U21_pro-league",
+      "score": 86,
+      "home_form": {
+        "played": 6,
+        "btts": 5,
+        "rate": 0.833
+      },
+      "away_form": {
+        "played": 6,
+        "btts": 5,
+        "rate": 0.833
+      },
+      "home_home_form": {
+        "played": 3,
+        "btts": 3,
+        "rate": 1.0
+      },
+      "away_away_form": {
+        "played": 6,
+        "btts": 5,
+        "rate": 0.833
       }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17668,
+    "matches_parsed": 17664,
     "source_errors_count": 0,
     "source_errors_sample": []
   }
