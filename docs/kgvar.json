@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-30T09:34:32+03:00",
-  "date": "2026-10-30",
+  "updated_at": "2026-10-31T09:24:29+03:00",
+  "date": "2026-10-31",
   "timezone": "Europe/Istanbul",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
@@ -8,10 +8,10 @@
   "candidate_count": 3,
   "candidates": [
     {
-      "date": "2026-10-30",
-      "home": "Brisbane Roar FC",
-      "away": "Auckland FC",
-      "league": "AUS_1_a-league",
+      "date": "2026-10-31",
+      "home": "Threave Rovers",
+      "away": "Pollok",
+      "league": "SCO_CUP_scottish-cup",
       "score": 100,
       "home_form": {
         "played": 1,
@@ -19,8 +19,8 @@
         "rate": 1.0
       },
       "away_form": {
-        "played": 2,
-        "btts": 2,
+        "played": 1,
+        "btts": 1,
         "rate": 1.0
       },
       "home_home_form": {
@@ -29,53 +29,26 @@
         "rate": 1.0
       },
       "away_away_form": {
-        "played": 1,
-        "btts": 1,
-        "rate": 1.0
+        "played": 0,
+        "btts": 0,
+        "rate": null
       }
     },
     {
-      "date": "2026-10-30",
-      "home": "Seraing U21",
-      "away": "Francs Borains U21",
-      "league": "BEL_U21_pro-league",
+      "date": "2026-10-31",
+      "home": "SV Werder Bremen",
+      "away": "TSG Hoffenheim",
+      "league": "GER_1_bundesliga",
       "score": 93,
       "home_form": {
-        "played": 5,
-        "btts": 5,
+        "played": 7,
+        "btts": 7,
         "rate": 1.0
       },
       "away_form": {
-        "played": 5,
-        "btts": 4,
-        "rate": 0.8
-      },
-      "home_home_form": {
-        "played": 2,
-        "btts": 2,
-        "rate": 1.0
-      },
-      "away_away_form": {
-        "played": 2,
-        "btts": 2,
-        "rate": 1.0
-      }
-    },
-    {
-      "date": "2026-10-30",
-      "home": "RAAL La Louviere U21",
-      "away": "K. Lierse S.K. U21",
-      "league": "BEL_U21_pro-league",
-      "score": 86,
-      "home_form": {
-        "played": 6,
-        "btts": 5,
-        "rate": 0.833
-      },
-      "away_form": {
-        "played": 6,
-        "btts": 5,
-        "rate": 0.833
+        "played": 8,
+        "btts": 7,
+        "rate": 0.875
       },
       "home_home_form": {
         "played": 3,
@@ -83,15 +56,42 @@
         "rate": 1.0
       },
       "away_away_form": {
-        "played": 6,
+        "played": 5,
+        "btts": 4,
+        "rate": 0.8
+      }
+    },
+    {
+      "date": "2026-10-31",
+      "home": "Kelty Hearts",
+      "away": "Elgin City",
+      "league": "SCO_4_league-two",
+      "score": 91,
+      "home_form": {
+        "played": 8,
+        "btts": 6,
+        "rate": 0.75
+      },
+      "away_form": {
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
+      },
+      "home_home_form": {
+        "played": 5,
         "btts": 5,
-        "rate": 0.833
+        "rate": 1.0
+      },
+      "away_away_form": {
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
       }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17664,
+    "matches_parsed": 17700,
     "source_errors_count": 0,
     "source_errors_sample": []
   }
