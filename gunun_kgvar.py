@@ -6,29 +6,39 @@ import re
 import unicodedata
 import urllib.request
 import urllib.error
-from datetime import datetime, date
+
+from datetime import datetime, date, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 BASE = "https://raw.githubusercontent.com/oladeeayo/open-matchday/master/data"
 INDEX_URL = "https://raw.githubusercontent.com/oladeeayo/open-matchday/master/LEAGUE_INDEX.md"
+
 SEASON = "2627"
-
 OUTPUT = Path("docs/kgvar.json")
-HISTORY_OUTPUT = Path("docs/kgvar-history.json")
-
 TZ = ZoneInfo("Europe/Istanbul")
 
+# Tarama ayarları
+LOOKAHEAD_DAYS = 3
+MAX_CANDIDATES = 6
 FORM_MATCHES = 10
-MIN_OVERALL_MATCHES = 8
-MIN_VENUE_MATCHES = 3
 
-MIN_TEAM_BTTS_RATE = 0.60
-MIN_TEAM_SCORE_RATE = 0.70
-MIN_TEAM_CONCEDE_RATE = 0.70
+# Güçlü aday eşikleri
+STRONG_MIN_HISTORY = 8
+STRONG_MIN_BTTS = 0.55
+STRONG_MIN_SCORE_RATE = 0.65
+STRONG_MIN_CONCEDE_RATE = 0.65
+STRONG_MIN_VENUE_HISTORY = 2
+STRONG_MIN_VENUE_BTTS = 0.45
+STRONG_MIN_SCORE = 70
 
-MIN_CANDIDATE_SCORE = 75
-MAX_CANDIDATES = 3
+# İzleme listesi: güçlü aday bulunmazsa daha geniş tarama
+WATCH_MIN_HISTORY = 6
+WATCH_MIN_BTTS = 0.45
+WATCH_MIN_SCORE_RATE = 0.60
+WATCH_MIN_CONCEDE_RATE = 0.60
+WATCH_MIN_VENUE_HISTORY = 2
+WATCH_MIN_SCORE = 60
 
 
 def get_text(url):
@@ -36,13 +46,12 @@ def get_text(url):
         url,
         headers={"User-Agent": "StudioErs-KGVar/3.0"}
     )
-    with urllib.request.urlopen(req, timeout=25) as response:
+    with urllib.request.urlopen(req, timeout=30) as response:
         return response.read().decode("utf-8-sig", errors="replace")
 
 
 def get_date(value):
     value = (value or "").strip()
-
     if not value:
         return None
 
@@ -70,12 +79,10 @@ def get_date(value):
 def get_score(value):
     try:
         value = str(value).strip()
-
         if not value:
             return None
 
         n = int(float(value))
-
         return n if n >= 0 else None
 
     except (ValueError, TypeError):
@@ -91,7 +98,6 @@ def value(row, *names):
 
     for name in names:
         result = data.get(name.lower(), "")
-
         if result != "":
             return result
 
@@ -100,27 +106,23 @@ def value(row, *names):
 
 def normalize_team(name):
     s = unicodedata.normalize("NFKD", name or "")
-
     s = "".join(
         c for c in s
         if not unicodedata.combining(c)
     ).casefold()
 
     s = s.replace("&", " and ")
-
     s = re.sub(
         r"\b(fc|cf|afc|sc|ac|club|football|soccer)\b",
         " ",
         s
     )
-
     s = re.sub(r"[^a-z0-9]+", " ", s)
 
     return " ".join(s.split())
 
 
 def parse_row(row, league, filename):
-
     match_date = get_date(
         value(row, "date", "match_date", "fixture_date", "datetime")
     )
@@ -158,12 +160,13 @@ def parse_row(row, league, filename):
         )
     )
 
-    # İki tarafın skoru da yoksa tamamlanmış sayma.
+    # Yalnızca iki skor da varsa tamamlanmış kabul edilir.
     if hs is None or aws is None:
         hs = aws = None
 
     return {
         "date": match_date.isoformat(),
+        "time": value(row, "time", "kickoff", "start_time"),
         "home": home,
         "away": away,
         "home_key": normalize_team(home),
@@ -176,7 +179,6 @@ def parse_row(row, league, filename):
 
 
 def discover_competitions():
-
     text = get_text(INDEX_URL)
 
     folders = re.findall(
@@ -186,41 +188,32 @@ def discover_competitions():
 
     if not folders:
         raise RuntimeError(
-            "LEAGUE_INDEX.md içinden lig klasörleri bulunamadı."
+            "Lig klasörleri bulunamadı."
         )
 
     return sorted(set(folders))
 
 
 def load_matches():
-
     matches = []
     errors = []
 
     folders = discover_competitions()
 
     for folder in folders:
-
         league = folder.rsplit("/", 1)[-1]
 
         for filename in (
             f"results_{SEASON}.csv",
             f"fixtures_{SEASON}.csv"
         ):
+            url = f"{BASE}/{folder}/{filename}"
 
             try:
-
-                content = get_text(
-                    f"{BASE}/{folder}/{filename}"
-                )
+                content = get_text(url)
 
                 for row in csv.DictReader(content.splitlines()):
-
-                    match = parse_row(
-                        row,
-                        league,
-                        filename
-                    )
+                    match = parse_row(row, league, filename)
 
                     if match:
                         matches.append(match)
@@ -231,16 +224,13 @@ def load_matches():
                 ValueError,
                 csv.Error
             ) as exc:
-
                 errors.append(
-                    f"{league}/{filename}: "
-                    f"{type(exc).__name__}: {exc}"
+                    f"{league}/{filename}: {type(exc).__name__}: {exc}"
                 )
 
     unique = {}
 
     for m in matches:
-
         key = (
             m["date"],
             m["home_key"],
@@ -263,51 +253,45 @@ def load_matches():
 
 
 def is_completed(m):
-
     return (
         m["home_score"] is not None
         and m["away_score"] is not None
     )
 
 
-def team_form(matches, team_key, today, venue=None):
-
+def team_form(matches, team_key, fixture_date, venue=None):
     previous = []
 
     for m in matches:
+        match_date = date.fromisoformat(m["date"])
 
-        if (
-            date.fromisoformat(m["date"]) >= today
-            or not is_completed(m)
-        ):
+        if match_date >= fixture_date:
+            continue
+
+        if not is_completed(m):
             continue
 
         if venue == "home":
-
             relevant = m["home_key"] == team_key
             scored = m["home_score"]
             conceded = m["away_score"]
 
         elif venue == "away":
-
             relevant = m["away_key"] == team_key
             scored = m["away_score"]
             conceded = m["home_score"]
 
         elif m["home_key"] == team_key:
-
             relevant = True
             scored = m["home_score"]
             conceded = m["away_score"]
 
         elif m["away_key"] == team_key:
-
             relevant = True
             scored = m["away_score"]
             conceded = m["home_score"]
 
         else:
-
             relevant = False
             scored = conceded = None
 
@@ -320,19 +304,17 @@ def team_form(matches, team_key, today, venue=None):
     )
 
     previous = previous[:FORM_MATCHES]
-
     n = len(previous)
 
     if not n:
-
         return {
             "played": 0,
             "btts": 0,
-            "rate": None,
-            "scored_rate": None,
-            "conceded_rate": None,
-            "avg_scored": None,
-            "avg_conceded": None
+            "rate": 0,
+            "scored_rate": 0,
+            "conceded_rate": 0,
+            "avg_scored": 0,
+            "avg_conceded": 0
         }
 
     btts = sum(
@@ -366,7 +348,6 @@ def team_form(matches, team_key, today, venue=None):
 
 
 def team_quality(form):
-
     return (
         0.50 * form["rate"]
         + 0.25 * form["scored_rate"]
@@ -374,285 +355,152 @@ def team_quality(form):
     )
 
 
+def candidate_score(h, a, hh, aa):
+    overall = (
+        team_quality(h) + team_quality(a)
+    ) / 2
+
+    venue = (
+        hh["rate"] + aa["rate"]
+    ) / 2
+
+    return round(
+        100 * (0.80 * overall + 0.20 * venue)
+    )
+
+
+def analyze_fixture(m, matches):
+    fixture_date = date.fromisoformat(m["date"])
+
+    h = team_form(
+        matches, m["home_key"], fixture_date
+    )
+
+    a = team_form(
+        matches, m["away_key"], fixture_date
+    )
+
+    hh = team_form(
+        matches, m["home_key"], fixture_date, "home"
+    )
+
+    aa = team_form(
+        matches, m["away_key"], fixture_date, "away"
+    )
+
+    score = candidate_score(h, a, hh, aa)
+
+    strong = (
+        h["played"] >= STRONG_MIN_HISTORY
+        and a["played"] >= STRONG_MIN_HISTORY
+        and h["rate"] >= STRONG_MIN_BTTS
+        and a["rate"] >= STRONG_MIN_BTTS
+        and h["scored_rate"] >= STRONG_MIN_SCORE_RATE
+        and a["scored_rate"] >= STRONG_MIN_SCORE_RATE
+        and h["conceded_rate"] >= STRONG_MIN_CONCEDE_RATE
+        and a["conceded_rate"] >= STRONG_MIN_CONCEDE_RATE
+        and hh["played"] >= STRONG_MIN_VENUE_HISTORY
+        and aa["played"] >= STRONG_MIN_VENUE_HISTORY
+        and hh["rate"] >= STRONG_MIN_VENUE_BTTS
+        and aa["rate"] >= STRONG_MIN_VENUE_BTTS
+        and score >= STRONG_MIN_SCORE
+    )
+
+    watch = (
+        h["played"] >= WATCH_MIN_HISTORY
+        and a["played"] >= WATCH_MIN_HISTORY
+        and h["rate"] >= WATCH_MIN_BTTS
+        and a["rate"] >= WATCH_MIN_BTTS
+        and h["scored_rate"] >= WATCH_MIN_SCORE_RATE
+        and a["scored_rate"] >= WATCH_MIN_SCORE_RATE
+        and h["conceded_rate"] >= WATCH_MIN_CONCEDE_RATE
+        and a["conceded_rate"] >= WATCH_MIN_CONCEDE_RATE
+        and hh["played"] >= WATCH_MIN_VENUE_HISTORY
+        and aa["played"] >= WATCH_MIN_VENUE_HISTORY
+        and score >= WATCH_MIN_SCORE
+    )
+
+    if strong:
+        level = "strong"
+        label = "GÜÇLÜ ADAY"
+    elif watch:
+        level = "watch"
+        label = "İZLEME ADAYI"
+    else:
+        return None
+
+    return {
+        "date": m["date"],
+        "time": m["time"],
+        "home": m["home"],
+        "away": m["away"],
+        "league": m["league"],
+        "score": score,
+        "selection_level": level,
+        "selection_label": label,
+        "home_form": h,
+        "away_form": a,
+        "home_home_form": hh,
+        "away_away_form": aa
+    }
+
+
 def build_candidates(matches, today):
+    end_date = today + timedelta(days=LOOKAHEAD_DAYS)
 
     fixtures = [
         m for m in matches
-        if m["date"] == today.isoformat()
+        if today <= date.fromisoformat(m["date"]) <= end_date
         and not is_completed(m)
     ]
 
-    candidates = []
+    analyzed = []
 
     rejected = {
         "insufficient_history": 0,
-        "weak_btts": 0,
-        "weak_scoring": 0,
-        "weak_conceding": 0,
-        "weak_venue_form": 0,
-        "below_score_threshold": 0
+        "weak_statistics": 0,
+        "no_candidate": 0
     }
 
-    for m in fixtures:
+    for fixture in fixtures:
+        result = analyze_fixture(fixture, matches)
 
-        h = team_form(
-            matches,
-            m["home_key"],
-            today
-        )
+        if result:
+            analyzed.append(result)
+        else:
+            rejected["no_candidate"] += 1
 
-        a = team_form(
-            matches,
-            m["away_key"],
-            today
-        )
+    # Önce güçlü adayları göster.
+    strong = [
+        x for x in analyzed
+        if x["selection_level"] == "strong"
+    ]
 
-        hh = team_form(
-            matches,
-            m["home_key"],
-            today,
-            "home"
-        )
+    watch = [
+        x for x in analyzed
+        if x["selection_level"] == "watch"
+    ]
 
-        aa = team_form(
-            matches,
-            m["away_key"],
-            today,
-            "away"
-        )
-
-        if (
-            h["played"] < MIN_OVERALL_MATCHES
-            or a["played"] < MIN_OVERALL_MATCHES
-        ):
-            rejected["insufficient_history"] += 1
-            continue
-
-        if (
-            h["rate"] < MIN_TEAM_BTTS_RATE
-            or a["rate"] < MIN_TEAM_BTTS_RATE
-        ):
-            rejected["weak_btts"] += 1
-            continue
-
-        if (
-            h["scored_rate"] < MIN_TEAM_SCORE_RATE
-            or a["scored_rate"] < MIN_TEAM_SCORE_RATE
-        ):
-            rejected["weak_scoring"] += 1
-            continue
-
-        if (
-            h["conceded_rate"] < MIN_TEAM_CONCEDE_RATE
-            or a["conceded_rate"] < MIN_TEAM_CONCEDE_RATE
-        ):
-            rejected["weak_conceding"] += 1
-            continue
-
-        if (
-            hh["played"] < MIN_VENUE_MATCHES
-            or aa["played"] < MIN_VENUE_MATCHES
-        ):
-            rejected["weak_venue_form"] += 1
-            continue
-
-        if (
-            hh["rate"] < 0.50
-            or aa["rate"] < 0.50
-        ):
-            rejected["weak_venue_form"] += 1
-            continue
-
-        overall = (
-            team_quality(h)
-            + team_quality(a)
-        ) / 2
-
-        venue = (
-            hh["rate"]
-            + aa["rate"]
-        ) / 2
-
-        score = round(
-            100 * (
-                0.80 * overall
-                + 0.20 * venue
-            )
-        )
-
-        if score < MIN_CANDIDATE_SCORE:
-            rejected["below_score_threshold"] += 1
-            continue
-
-        candidates.append({
-            "date": m["date"],
-            "home": m["home"],
-            "away": m["away"],
-            "league": m["league"],
-            "score": score,
-            "home_form": h,
-            "away_form": a,
-            "home_home_form": hh,
-            "away_away_form": aa
-        })
-
-    candidates.sort(
-        key=lambda x: (
-            -x["score"],
-            x["league"],
-            x["home"]
-        )
+    strong.sort(
+        key=lambda x: (-x["score"], x["date"], x["league"])
     )
 
-    return candidates[:MAX_CANDIDATES], rejected, len(fixtures)
-
-
-# -------------------------------
-# TAHMİN GEÇMİŞİ
-# -------------------------------
-
-def load_history():
-
-    if not HISTORY_OUTPUT.exists():
-        return {"days": {}}
-
-    try:
-
-        data = json.loads(
-            HISTORY_OUTPUT.read_text(encoding="utf-8")
-        )
-
-        if (
-            isinstance(data, dict)
-            and isinstance(data.get("days"), dict)
-        ):
-            return data
-
-    except (OSError, json.JSONDecodeError):
-        pass
-
-    return {"days": {}}
-
-
-def match_key(item):
-
-    return (
-        item.get("date", ""),
-        normalize_team(item.get("home", "")),
-        normalize_team(item.get("away", ""))
+    watch.sort(
+        key=lambda x: (-x["score"], x["date"], x["league"])
     )
 
+    # Güçlü adaylar önce gelir. Kalan yerleri izleme adayları doldurur.
+    selected = strong[:MAX_CANDIDATES]
 
-def update_history(history, today, candidates, matches):
+    remaining = MAX_CANDIDATES - len(selected)
 
-    day_key = today.isoformat()
+    if remaining > 0:
+        selected.extend(watch[:remaining])
 
-    days = history.setdefault("days", {})
+    return selected, rejected, len(fixtures), len(strong), len(watch)
 
-    # Günün ilk tahminlerini sabitle.
-    # Sonraki çalıştırmalarda yeni maçlarla değiştirme.
-    if day_key not in days:
-
-        days[day_key] = {
-            "date": day_key,
-            "created_at": datetime.now(TZ).isoformat(
-                timespec="seconds"
-            ),
-            "candidates": [
-                {
-                    **c,
-                    "status": "pending",
-                    "actual_home_score": None,
-                    "actual_away_score": None,
-                    "btts_result": None
-                }
-                for c in candidates
-            ]
-        }
-
-    # Tamamlanmış maçları gerçek sonuçlarla eşleştir.
-    completed = {}
-
-    for m in matches:
-
-        if is_completed(m):
-            completed[match_key(m)] = m
-
-    # Geçmiş günlerin de sonuçlarını kontrol et.
-    for day in days.values():
-
-        for item in day.get("candidates", []):
-
-            if item.get("status") == "finished":
-                continue
-
-            actual = completed.get(match_key(item))
-
-            if actual:
-
-                hs = actual["home_score"]
-                aws = actual["away_score"]
-
-                item["actual_home_score"] = hs
-                item["actual_away_score"] = aws
-
-                item["status"] = "finished"
-
-                # İki takım da gol attıysa bildik.
-                item["btts_result"] = (
-                    hs > 0 and aws > 0
-                )
-
-    return history
-
-
-def history_summary(history):
-
-    total = 0
-    correct = 0
-    wrong = 0
-    pending = 0
-
-    for day in history.get("days", {}).values():
-
-        for item in day.get("candidates", []):
-
-            total += 1
-
-            if (
-                item.get("status") != "finished"
-                or item.get("btts_result") is None
-            ):
-                pending += 1
-
-            elif item["btts_result"]:
-                correct += 1
-
-            else:
-                wrong += 1
-
-    decided = correct + wrong
-
-    success_rate = (
-        round(100 * correct / decided, 1)
-        if decided else None
-    )
-
-    return {
-        "total_picks": total,
-        "correct": correct,
-        "wrong": wrong,
-        "pending": pending,
-        "success_rate": success_rate
-    }
-
-
-# -------------------------------
-# ANA PROGRAM
-# -------------------------------
 
 def main():
-
     now = datetime.now(TZ)
     today = now.date()
 
@@ -660,129 +508,71 @@ def main():
         "updated_at": now.isoformat(timespec="seconds"),
         "date": today.isoformat(),
         "timezone": "Europe/Istanbul",
-
+        "scan_until": (
+            today + timedelta(days=LOOKAHEAD_DAYS)
+        ).isoformat(),
         "source": "open-matchday public CSV data",
         "source_url": "https://github.com/oladeeayo/open-matchday",
-
         "notice": (
-            "KG Var tahmini, iki takımın da gol atması durumunda "
-            "başarılı sayılır. Günlük tahminler sabitlenir. "
-            "Sonuçlar kaynak CSV'ye işlendiğinde otomatik "
-            "olarak değerlendirilir. Aday puanı garanti değildir."
+            "Güçlü aday ve izleme adayı ayrı sınıflandırılır. "
+            "Puan gerçekleşme olasılığı veya garanti değildir. "
+            "İstatistikler geçmiş tamamlanmış maçlardan hesaplanır."
         ),
-
         "candidate_count": 0,
+        "strong_count": 0,
+        "watch_count": 0,
         "candidates": [],
-        "diagnostics": {},
-        "history_summary": {}
+        "diagnostics": {}
     }
 
     try:
-
         matches, folders, errors = load_matches()
 
-        candidates, rejected, fixture_count = build_candidates(
-            matches,
-            today
-        )
-
-        history = load_history()
-
-        history = update_history(
-            history,
-            today,
+        (
             candidates,
-            matches
-        )
+            rejected,
+            fixture_count,
+            strong_count,
+            watch_count
+        ) = build_candidates(matches, today)
 
-        today_record = history["days"].get(
-            today.isoformat(),
-            {}
-        )
-
-        result["candidates"] = today_record.get(
-            "candidates",
-            []
-        )
-
-        result["candidate_count"] = len(
-            result["candidates"]
-        )
-
-        result["history_summary"] = history_summary(
-            history
-        )
-
-        result["history"] = history
+        result["candidates"] = candidates
+        result["candidate_count"] = len(candidates)
+        result["strong_count"] = strong_count
+        result["watch_count"] = watch_count
 
         result["diagnostics"] = {
             "competitions_discovered": len(folders),
             "matches_parsed": len(matches),
-            "today_fixtures": fixture_count,
+            "upcoming_fixtures": fixture_count,
+            "scan_days": LOOKAHEAD_DAYS,
             "rejected_candidates": rejected,
             "source_errors_count": len(errors),
             "source_errors_sample": errors[:8]
         }
 
         print("Türkiye tarihi:", today.isoformat())
+        print("Tarama bitişi:", result["scan_until"])
+        print("Lig sayısı:", len(folders))
+        print("Okunan maç:", len(matches))
+        print("Yaklaşan fikstür:", fixture_count)
+        print("Güçlü aday:", strong_count)
+        print("İzleme adayı:", watch_count)
+        print("Gösterilecek aday:", len(candidates))
 
-        print(
-            "Lig/organizasyon:",
-            len(folders),
-            "| Okunan maç:",
-            len(matches)
-        )
-
-        print(
-            "Bugünkü fikstür:",
-            fixture_count,
-            "| İlk seçim:",
-            len(candidates)
-        )
-
-        print(
-            "Tahmin geçmişi:",
-            result["history_summary"]
-        )
-
-        for m in result["candidates"]:
-
-            if m.get("btts_result") is True:
-                verdict = "✓ BİLDİK"
-
-            elif m.get("btts_result") is False:
-                verdict = "✕ BİLEMEDİK"
-
-            else:
-                verdict = "BEKLİYOR"
-
+        for m in candidates:
             print(
-                f"{m['home']} - {m['away']}: "
-                f"{m['score']}/100 | {verdict}"
+                m["date"],
+                m["home"], "-",
+                m["away"],
+                m["score"],
+                m["selection_label"]
             )
-
-        HISTORY_OUTPUT.parent.mkdir(
-            parents=True,
-            exist_ok=True
-        )
-
-        HISTORY_OUTPUT.write_text(
-            json.dumps(
-                history,
-                ensure_ascii=False,
-                indent=2
-            ),
-            encoding="utf-8"
-        )
 
     except Exception as exc:
-
         result["diagnostics"] = {
-            "fatal_error": (
-                f"{type(exc).__name__}: {exc}"
-            )
+            "fatal_error": f"{type(exc).__name__}: {exc}"
         }
-
         print("HATA:", exc)
 
     OUTPUT.parent.mkdir(
@@ -791,16 +581,11 @@ def main():
     )
 
     OUTPUT.write_text(
-        json.dumps(
-            result,
-            ensure_ascii=False,
-            indent=2
-        ),
+        json.dumps(result, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
 
-    print("Sonuç yazıldı:", OUTPUT)
-    print("Tahmin geçmişi:", HISTORY_OUTPUT)
+    print("JSON yazıldı:", OUTPUT)
 
 
 if __name__ == "__main__":
