@@ -4,896 +4,723 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="StudioErs günlük KG Var maç adayları, geçmiş karşılıklı gol istatistikleri ve canlı skorlar.">
-<meta name="theme-color" content="#0b1020">
-<title>Günün KG Var Adayları ve Canlı Skorlar | StudioErs</title>
+<title>Günün KG Var Adayları | StudioErs</title>
+<meta name="description" content="Günün karşılıklı gol var adayları, maç analizleri ve canlı skorları. Güncel futbol fikstürü StudioErs'te.">
+<meta name="theme-color" content="#07111f">
 
 <style>
-:root{
-  color-scheme:dark;
-  --bg:#080d19;
-  --panel:#111a2b;
-  --line:#2a3b56;
-  --text:#f3f7ff;
-  --muted:#9eacc3;
-  --mint:#6ff0bd;
-  --blue:#91b7ff;
+:root {
+  --bg:#07111f;
+  --panel:#101e30;
+  --panel2:#14243a;
+  --line:#263a52;
+  --text:#f2f6fc;
+  --muted:#91a3b9;
+  --green:#27d98b;
+  --yellow:#ffc857;
+  --red:#ff6577;
+  --blue:#55aaff;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{
   margin:0;
-  background:radial-gradient(ellipse at 50% -15%,#1b3150 0,transparent 48%),var(--bg);
+  background:
+    radial-gradient(circle at 50% -10%,#17385a 0,transparent 42%),
+    var(--bg);
   color:var(--text);
-  font:15px/1.65 Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   min-height:100vh;
 }
-body:before{
-  content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;
-  background-image:linear-gradient(#283955 1px,transparent 1px),linear-gradient(90deg,#283955 1px,transparent 1px);
-  background-size:38px 38px;
-  mask-image:linear-gradient(to bottom,black,transparent 75%);
+.container{width:min(1120px,94%);margin:auto;padding:24px 0 35px}
+.header{text-align:center;margin-bottom:25px}
+.logo{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:13px;font-weight:800;letter-spacing:2px;
+  color:var(--green);margin-bottom:12px
 }
-main{position:relative;max-width:1120px;margin:auto;padding:28px 20px 44px}
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:14px;flex-wrap:wrap;padding:12px 0 22px;
-  border-bottom:1px solid #24334b;
+.logo-ball{font-size:25px}
+h1{font-size:clamp(25px,5vw,39px);margin:0 0 9px}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.6}
+.date-line{margin-top:13px;color:#c7d5e5;font-size:13px}
+.statusbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;
+  background:var(--panel);border:1px solid var(--line);
+  padding:13px 16px;border-radius:13px;margin-bottom:20px;
+  color:var(--muted);font-size:12px
 }
-.logo{font-weight:900;letter-spacing:2px;font-size:14px}
-.logo span,h1 span{color:var(--mint)}
-.tag{
-  border:1px solid #31435f;border-radius:999px;padding:6px 12px;
-  color:#bdcbe0;font-size:11px;letter-spacing:.6px;
-  text-transform:uppercase;background:#111c2d;
+.status-left{display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.dot.loading{background:var(--yellow)}
+.dot.error{background:var(--red)}
+.refresh{color:var(--green)}
+.section-title{
+  display:flex;align-items:center;gap:9px;
+  margin:24px 0 14px;font-size:18px;font-weight:800
 }
-h1{
-  font-size:clamp(38px,7vw,68px);letter-spacing:-2.6px;
-  line-height:.99;margin:42px 0 18px;font-weight:850;
+.section-title:before{
+  content:"";width:4px;height:20px;background:var(--green);
+  border-radius:5px
 }
-.intro{color:#aab8ce;max-width:680px;font-size:15px;margin:0 0 26px}
-.status{margin:18px 0;color:#b9c7dc;font-size:13px}
-.refresh{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;flex-wrap:wrap;margin:18px 0 16px;padding:12px 14px;
-  border:1px solid #253650;border-radius:14px;
-  background:rgba(17,26,43,.82);color:var(--muted);
-  font-size:12px;backdrop-filter:blur(8px);
-}
-button{
-  background:linear-gradient(135deg,#7bf0c2,#48cda2);
-  color:#071a17;border:0;border-radius:10px;padding:10px 15px;
-  cursor:pointer;font-weight:800;font-size:12px;
-  box-shadow:0 5px 18px #42d7a21b;
-  transition:transform .18s,filter .18s;
-}
-button:hover{filter:brightness(1.08);transform:translateY(-1px)}
-button:disabled{opacity:.6;cursor:wait;transform:none}
 .cards{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:13px;align-items:stretch;
+  gap:15px
 }
 .card{
-  position:relative;isolation:isolate;overflow:hidden;
-  background:radial-gradient(circle at 100% 0%,#24455a 0,transparent 42%),linear-gradient(155deg,rgba(22,37,57,.99),rgba(9,17,31,.99));
-  border:1px solid #34516a;border-radius:30px;
-  padding:17px 15px 16px;min-width:0;
-  box-shadow:0 14px 30px #00000035,inset 0 1px 0 #ffffff0b;
-  transition:transform .2s,border-color .2s;
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,var(--panel2),var(--panel));
+  border:1px solid var(--line);border-radius:17px;
+  padding:17px;min-width:0
 }
 .card:after{
-  content:"⚽";position:absolute;z-index:-1;right:-17px;top:48px;
-  font-size:94px;line-height:1;opacity:.055;
-  filter:grayscale(1);transform:rotate(-18deg);pointer-events:none;
+  content:"⚽";position:absolute;right:-10px;bottom:-24px;
+  font-size:100px;opacity:.035;pointer-events:none
 }
-.card:hover{transform:translateY(-3px);border-color:#6ff0bd80}
-.card:before{
-  content:"";position:absolute;inset:0 18% auto;height:3px;
-  border-radius:0 0 99px 99px;
-  background:linear-gradient(90deg,transparent,var(--mint),#8aaeff,transparent);
+.card-top{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:8px;margin-bottom:17px
 }
 .league{
-  color:var(--blue);text-transform:uppercase;font-size:10px;
-  letter-spacing:1.15px;font-weight:800;
+  color:var(--muted);font-size:11px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.score-badge{
+  font-size:11px;font-weight:800;color:var(--green);
+  background:#123c31;padding:6px 9px;border-radius:20px;
+  white-space:nowrap
 }
 .teams{
-  display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);
-  align-items:center;gap:5px;margin:17px 0 15px;
-  font-size:12px;font-weight:800;
+  display:grid;grid-template-columns:1fr 42px 1fr;
+  align-items:center;gap:5px;text-align:center
 }
-.team{text-align:center;min-width:0;overflow-wrap:anywhere}
+.team{min-width:0}
 .team img{
-  display:block;width:39px;height:39px;object-fit:contain;
-  margin:0 auto 7px;filter:drop-shadow(0 4px 7px #0005);
+  width:43px;height:43px;object-fit:contain;
+  display:block;margin:0 auto 8px
 }
-.vs{text-align:center;color:#7487a5;font-size:10px;letter-spacing:1px;font-weight:800}
-.score{font-size:31px;color:var(--mint);font-weight:900;line-height:1.2;letter-spacing:-1px}
-.muted{color:var(--muted);font-size:11px}
-.bar{height:5px;background:#27364e;border-radius:99px;margin:9px 0 14px;overflow:hidden}
-.bar span{
-  display:block;height:100%;background:linear-gradient(90deg,#48cfa1,#9bffce);
-  border-radius:99px;box-shadow:0 0 12px #6ff0bd50;
+.team-name{
+  font-size:13px;font-weight:700;line-height:1.35;
+  overflow-wrap:anywhere;min-height:34px;
+  display:flex;align-items:center;justify-content:center
 }
-.forms{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.form{
-  padding:9px 8px;border:1px solid #293a54;border-radius:17px;
-  background:linear-gradient(145deg,#101e30,#0b1422);
-  color:#9eacc3;font-size:10px;overflow-wrap:anywhere;
+.vs{color:var(--muted);font-size:11px;font-weight:800}
+.match-score{
+  font-size:23px;font-weight:900;color:white;
+  white-space:nowrap
 }
-.form strong{display:block;color:#f4f7ff;font-size:13px;margin-top:5px}
-.livebox{
-  margin-top:14px;padding:12px 10px;border:1px solid #2e514b;
-  border-radius:23px;background:linear-gradient(145deg,#102923,#0b1b20);
-  box-shadow:inset 0 1px 0 #ffffff08;
+.match-score small{font-size:12px;color:var(--muted)}
+.match-info{
+  border-top:1px solid var(--line);margin-top:16px;padding-top:12px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;font-size:11px;color:var(--muted)
 }
-.livehead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px}
-.live-label{
-  font-size:10px;letter-spacing:1.2px;color:var(--mint);
-  font-weight:900;display:flex;align-items:center;gap:7px;
+.match-state{font-weight:800;color:var(--yellow)}
+.match-state.live{color:var(--green)}
+.match-state.finished{color:#aab8ca}
+.match-state.cancelled{color:var(--red)}
+.empty{
+  padding:28px 16px;text-align:center;
+  background:var(--panel);border:1px dashed var(--line);
+  border-radius:15px;color:var(--muted);font-size:13px;
+  line-height:1.7
 }
-.live-label:before{
-  content:"";width:7px;height:7px;border-radius:50%;
-  background:var(--mint);box-shadow:0 0 0 4px #6ff0bd1c;
+.notice{
+  margin-top:18px;padding:14px 16px;
+  border:1px solid var(--line);border-radius:12px;
+  color:var(--muted);font-size:12px;line-height:1.7;
+  background:#0b1828
 }
-.live-status{font-size:12px;font-weight:800;color:#fff}
-.live-score{font-size:27px;font-weight:950;text-align:center;margin:2px 0;letter-spacing:-1px}
-.live-teams{
-  display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
-  gap:8px;align-items:center;
+.footer{
+  text-align:center;color:#71849b;font-size:11px;
+  margin-top:27px;line-height:1.8
 }
-.live-team{display:flex;align-items:center;gap:5px;min-width:0;font-size:10px;font-weight:750}
-.live-team:last-child{justify-content:flex-end;text-align:right}
-.live-team img{width:24px;height:24px;object-fit:contain;flex-shrink:0}
-.live-team span{overflow-wrap:anywhere}
-.live-mid{text-align:center;min-width:57px}
-.pill{
-  display:inline-flex;align-items:center;gap:5px;padding:5px 10px;
-  border-radius:999px;background:#1a4539;color:#7cf3c3;
-  font-size:10px;font-weight:900;letter-spacing:.25px;
-}
-.pill.wait{background:#25344b;color:#c8d5e8}
-.pill.done{background:#30364a;color:#d6dced}
-.empty,.notice{
-  padding:20px;border:1px solid #2a3b55;border-radius:16px;
-  color:var(--muted);background:#111a2b;
-}
-.notice{margin-top:24px;font-size:12px}
-.notice strong{color:#e8efff}
-footer{margin-top:28px;padding-top:20px;border-top:1px solid #223149;color:#7788a3;font-size:11px}
-footer a{color:var(--mint);text-decoration:none}
-footer a:hover{text-decoration:underline}
-@media(max-width:680px){
-  main{max-width:560px;padding:16px 12px 24px}
-  .cards{grid-template-columns:minmax(0,1fr);gap:14px}
-  .card{padding:20px 18px;border-radius:30px;box-shadow:0 10px 25px #00000020}
-  .card:hover{transform:none}
-  .teams{margin:18px 0 15px;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);gap:8px;font-size:14px}
-  .team img{width:46px;height:46px;margin-bottom:7px}
-  .forms{gap:9px}
-  .form{padding:11px;border-radius:17px}
-  .livebox{margin-top:15px;padding:14px;border-radius:23px}
-  .intro{margin-bottom:16px}
-  .status{margin:12px 0}
-  .notice{padding:14px;margin-top:16px}
+.footer a{color:var(--green);text-decoration:none;font-weight:700}
+@media(max-width:760px){
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:520px){
-  main{padding:13px 10px 22px}
-  header{padding-bottom:16px}
-  h1{margin:30px 0 14px;font-size:clamp(36px,11vw,52px);letter-spacing:-1.5px}
-  .intro{font-size:13px}
-  .card{padding:19px 16px;border-radius:28px}
-  .teams{font-size:13px}
-  .team img{width:43px;height:43px}
-  .live-team{font-size:11px;gap:5px}
-  .live-team img{width:26px;height:26px}
-  .live-mid{min-width:65px}
-  .live-score{font-size:29px}
-}
-@media(max-width:360px){
-  main{padding-inline:7px}
-  .card{padding:16px 12px}
-  .teams{grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:4px;font-size:12px}
-  .live-team{font-size:10px}
-  .live-mid{min-width:52px}
-  .live-score{font-size:25px}
+  .container{width:92%;padding-top:20px}
+  .cards{grid-template-columns:1fr;gap:12px}
+  .card{padding:17px}
+  .team img{width:47px;height:47px}
+  .team-name{font-size:14px}
 }
 </style>
 </head>
 
 <body>
-<main>
-  <header>
-    <div class="logo">STUDIO<span>ERS</span> / KG VAR</div>
-    <div class="tag">Günlük istatistik ekranı</div>
+<main class="container">
+  <header class="header">
+    <div class="logo"><span class="logo-ball">⚽</span> STUDIOERS</div>
+    <h1>Günün KG Var Adayları</h1>
+    <div class="subtitle">
+      Günün karşılıklı gol beklentisi yüksek maçları ve canlı maç durumları
+    </div>
+    <div class="date-line" id="todayDate">Yükleniyor...</div>
   </header>
 
-  <h1>Günün KG Var<br><span>adayları</span></h1>
-
-  <p class="intro">
-    Günlük maç adaylarını, takımların geçmiş karşılıklı gol istatistiklerini
-    ve kaynakta bulunması hâlinde canlı skor ile maç dakikasını inceleyin.
-  </p>
-
-  <div class="status" id="status" aria-live="polite">İstatistikler yükleniyor...</div>
-
-  <div class="refresh">
-    <span id="liveStatus">Canlı skor verisi kontrol ediliyor...</span>
-    <button id="refreshButton" type="button">↻ Şimdi yenile</button>
+  <div class="statusbar">
+    <div class="status-left">
+      <span class="dot loading" id="connectionDot"></span>
+      <span id="connectionText">Maç verileri kontrol ediliyor...</span>
+    </div>
+    <div class="refresh">Otomatik güncelleme: 60 saniye</div>
   </div>
 
-  <section class="cards" id="cards" aria-live="polite">
-    <div class="empty">Maç adayları yükleniyor...</div>
+  <div class="section-title">Bugünün karşılıklı gol adayları</div>
+  <section class="cards" id="candidateCards">
+    <div class="empty">Aday maçlar yükleniyor...</div>
+  </section>
+
+  <div class="section-title">Canlı skor ve maç durumları</div>
+  <section class="cards" id="liveCards">
+    <div class="empty">Canlı maçlar kontrol ediliyor...</div>
   </section>
 
   <div class="notice">
-    <strong>Önemli bilgi:</strong>
-    KG Var puanı bir yüzde veya gerçekleşme olasılığı değildir.
-    Geçmiş maçlardan türetilmiş bir sıralama puanıdır; sonuç garantisi vermez.
-    Canlı skor ve maç dakikası üçüncü taraf veri kaynağına bağlıdır.
-    Veriler gecikebilir veya eksik olabilir. Bahis kararı için tek başına
-    bu ekrana güvenmeyin.
+    <strong>Bilgilendirme:</strong> KG Var adayları istatistiksel değerlendirmedir,
+    kesin sonuç veya bahis garantisi değildir. Maç skorları ve durumları
+    SportScore verilerinden alınır.
   </div>
 
-  <footer>
-    StudioErs · KG Var · Son güncelleme: <span id="updated">—</span>
-    <br><br>
-    Canlı spor verileri:
-    <a href="https://sportscore.com/" target="_blank" rel="noopener">Powered by SportScore</a>
+  <footer class="footer">
+    Veriler SportScore üzerinden sağlanmaktadır.<br>
+    <a href="https://sportscore.com/" target="_blank" rel="dofollow noopener">
+      Powered by SportScore
+    </a>
+    <br>© StudioErs
   </footer>
 </main>
 
 <script>
-(function(){
 "use strict";
 
-/* AYARLAR */
-const JSON_URL = "./kgvar.json";
+/* API AYARLARI */
 const API = "https://sportscore.com/api/widget";
-const LIVE_URL = API + "/matches/?sport=football&limit=50";
-const REFRESH_MS = 120000;
-const MAX_CANDIDATE_LOOKUPS = 3;
+const MATCHES_URL = API + "/matches/?sport=football&limit=50";
+const REFRESH_MS = 60000;
 
-const statusEl = document.getElementById("status");
-const cardsEl = document.getElementById("cards");
-const updatedEl = document.getElementById("updated");
-const liveStatusEl = document.getElementById("liveStatus");
-const refreshButton = document.getElementById("refreshButton");
+let candidateData = [];
+let allMatches = [];
+let lastUpdate = null;
+let isLoading = false;
 
-let candidates = [];
-let liveMatches = [];
-let refreshing = false;
+const $ = id => document.getElementById(id);
 
-/* GÜVENLİ METİN */
-function esc(value){
-  return String(value ?? "").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[c]);
+function clean(value) {
+  return String(value ?? "").trim();
 }
 
-function normalize(value){
-  return String(value ?? "")
+function normalize(value) {
+  return clean(value)
     .toLocaleLowerCase("tr-TR")
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/ı/g,"i")
-    .replace(/[^a-z0-9]+/g," ")
-    .trim()
-    .replace(/\s+/g," ");
+    .replace(/[^a-z0-9]+/g,"")
+    .replace(/(footballclub|soccerclub|fc|cf|afc|sc)$/g,"");
 }
 
-function slugifyTeam(value){
-  return String(value ?? "")
+function slugify(value) {
+  return clean(value)
+    .toLocaleLowerCase("en")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g,"")
     .replace(/ı/g,"i")
-    .toLowerCase()
-    .replace(/&/g," and ")
+    .replace(/&/g,"and")
     .replace(/[^a-z0-9]+/g,"-")
-    .replace(/^-+|-+$/g,"");
+    .replace(/^-|-$/g,"");
 }
 
-/* TAKIM İSİMLERİ */
-function aliases(name){
-  const n = normalize(name);
-  const groups = [
-    ["ssv jeddeloh ii","ssv jeddeloh","jeddeloh ii","jeddeloh"],
-    ["hertha berlin","hertha bsc","hertha bsc berlin","hertha"],
-    ["poblense","cd poblense"],
-    ["ceuta","ad ceuta","ad ceuta fc"],
-    ["jos watergraafsmeer","watergraafsmeer"],
-    ["nac breda","nac"]
+function getName(match, side) {
+  const value = match?.[side];
+
+  if (typeof value === "string") return value;
+  if (value && typeof value === "object") {
+    return value.name || value.team_name || value.title || "";
+  }
+
+  return match?.[side + "_name"] ||
+    match?.[side + "_team"]?.name ||
+    match?.[side + "Team"]?.name || "";
+}
+
+function getLogo(match, side) {
+  const value = match?.[side];
+
+  if (value && typeof value === "object") {
+    return value.logo || value.image || value.crest || "";
+  }
+
+  return match?.[side + "_logo"] ||
+    match?.[side + "_image"] ||
+    match?.[side + "_badge"] ||
+    match?.[side + "_crest"] ||
+    match?.[side + "_team_logo"] ||
+    match?.[side + "_team"]?.logo ||
+    match?.[side + "Team"]?.logo || "";
+}
+
+function getScore(match, side) {
+  const value = match?.[side + "_score"] ??
+    match?.[side + "_goals"] ??
+    match?.[side + "Score"] ??
+    match?.score?.[side];
+
+  if (value === null || value === undefined || value === "") return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function getStatusText(match) {
+  return [
+    match?.status,
+    match?.status_text,
+    match?.statusText,
+    match?.state,
+    match?.state_text,
+    match?.short_status,
+    match?.elapsed,
+    match?.minute
+  ].filter(v => v !== null && v !== undefined).join(" ").toLowerCase();
+}
+
+function getMatchState(match) {
+  const raw = getStatusText(match);
+  const status = raw.replace(/[_-]+/g," ").replace(/\s+/g," ").trim();
+
+  /* Önce bitiş durumlarını kontrol et */
+  if (/\b(ft|aet|pen|finished|finish|complete|completed|ended|full time|after extra time|final|maç bitti|maç sonu|bitti|sona erdi)\b/i.test(status)) {
+    return {label:"MAÇ BİTTİ",type:"finished"};
+  }
+
+  if (/\b(cancelled|canceled|abandoned|postponed|suspended|iptal|ertelendi|tatil edildi)\b/i.test(status)) {
+    return {label:"ERTELENDİ / İPTAL",type:"cancelled"};
+  }
+
+  if (/\b(ht|halftime|half time|devre|interval)\b/i.test(status)) {
+    return {label:"DEVRE ARASI",type:"live"};
+  }
+
+  if (/\b(1h|2h|et|bt|live|in play|in progress|playing|first half|second half|uzatma|penalties|canlı)\b/i.test(status)) {
+    return {label:extractMinute(match) || "CANLI",type:"live"};
+  }
+
+  /* Durum alanı boş olsa bile dakika bilgisi varsa canlı say */
+  const minute = extractMinute(match);
+  if (minute) return {label:minute,type:"live"};
+
+  const homeScore = getScore(match,"home");
+  const awayScore = getScore(match,"away");
+
+  if (homeScore !== null && awayScore !== null) {
+    const kickoff = match?.time || match?.date || match?.kickoff;
+    if (kickoff && !Number.isNaN(Date.parse(kickoff))) {
+      if (Date.now() - Date.parse(kickoff) > 3 * 60 * 60 * 1000) {
+        return {label:"DURUM BEKLENİYOR",type:"unknown"};
+      }
+    }
+  }
+
+  if (/\b(ns|not started|upcoming|scheduled|fixture|notstarted)\b/i.test(status)) {
+    return {label:"BAŞLAMADI",type:"upcoming"};
+  }
+
+  return {label:"DURUM BEKLENİYOR",type:"unknown"};
+}
+
+function extractMinute(match) {
+  const candidates = [
+    match?.minute,
+    match?.elapsed,
+    match?.time_elapsed,
+    match?.match_minute,
+    match?.timer
   ];
 
-  for(const group of groups){
-    if(group.some(x=>normalize(x)===n)) return group.map(normalize);
-  }
-  return [n];
-}
+  for (const value of candidates) {
+    if (value === null || value === undefined) continue;
+    const str = String(value).trim();
 
-function teamMatches(a,b){
-  const aa=aliases(a),bb=aliases(b);
-  return aa.some(x=>bb.some(y=>{
-    if(!x||!y) return false;
-    if(x===y) return true;
-    return x.length>=6 && y.length>=6 &&
-      (x.startsWith(y)||y.startsWith(x));
-  }));
-}
+    if (/^\d{1,3}\+?\d*['′]?$/.test(str)) {
+      return str.replace(/['′]/g,"") + "'";
+    }
 
-/* API'DEN MAÇ NESNELERİNİ TOPLA */
-function getSideName(value){
-  if(typeof value==="string"||typeof value==="number") return String(value);
-  if(value&&typeof value==="object"){
-    return value.name ?? value.title ?? value.team_name ?? "";
+    if (/^(ht|et|pen)$/i.test(str)) return str.toUpperCase();
   }
+
   return "";
 }
 
-function collectMatches(data,depth=0,out=[]){
-  if(!data||depth>7) return out;
+function formatKickoff(value) {
+  if (!value) return "Saat bilgisi yok";
 
-  if(Array.isArray(data)){
-    for(const item of data) collectMatches(item,depth+1,out);
-    return out;
-  }
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return clean(value);
 
-  if(typeof data!=="object") return out;
-
-  const home=getSideName(
-    data.home ?? data.home_name ?? data.homeTeam ?? data.home_team
-  );
-  const away=getSideName(
-    data.away ?? data.away_name ?? data.awayTeam ?? data.away_team
-  );
-
-  if(home&&away){
-    out.push(data);
-    return out;
-  }
-
-  for(const [key,value] of Object.entries(data)){
-    if([
-      "matches","match","data","results","events","fixtures",
-      "upcoming","recent","live","team","response"
-    ].includes(key.toLowerCase())){
-      collectMatches(value,depth+1,out);
-    }
-  }
-  return out;
+  return new Intl.DateTimeFormat("tr-TR", {
+    timeZone:"Europe/Istanbul",
+    hour:"2-digit",
+    minute:"2-digit",
+    day:"2-digit",
+    month:"2-digit"
+  }).format(date);
 }
 
-function getName(m,side){
-  return getSideName(
-    m?.[side] ??
-    m?.[side+"_name"] ??
-    m?.[side+"Team"] ??
-    m?.[side+"_team"]
-  );
+function safeImage(url) {
+  if (!url || typeof url !== "string") return "";
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return "";
+    return parsed.href;
+  } catch {
+    return "";
+  }
 }
 
-function getLogo(m,side){
-  const team=m?.[side+"Team"] ?? m?.[side+"_team"] ?? {};
-  return m?.[side+"_logo"] ??
-    m?.[side+"_image"] ??
-    m?.[side+"_badge"] ??
-    m?.[side+"_crest"] ??
-    m?.[side+"_team_logo"] ??
-    team?.logo ??
-    team?.image ??
-    team?.badge ??
+function logoHTML(url) {
+  const safe = safeImage(url);
+  if (!safe) return '<div style="height:43px;font-size:28px">⚽</div>';
+  return `<img src="${safe}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+function getCandidateList(json) {
+  if (Array.isArray(json)) return json;
+  return json?.candidates ||
+    json?.matches ||
+    json?.data?.candidates ||
+    json?.data ||
+    [];
+}
+
+function findCandidateNames(candidate) {
+  const home = candidate.home || candidate.home_team ||
+    candidate.homeTeam || candidate.ev_sahibi || "";
+  const away = candidate.away || candidate.away_team ||
+    candidate.awayTeam || candidate.deplasman || "";
+
+  return {
+    home: typeof home === "object" ? home.name || "" : clean(home),
+    away: typeof away === "object" ? away.name || "" : clean(away)
+  };
+}
+
+function sameTeam(a,b) {
+  const x = normalize(a);
+  const y = normalize(b);
+  return x && y && (x === y || x.includes(y) || y.includes(x));
+}
+
+function matchCandidate(match,candidate) {
+  const names = findCandidateNames(candidate);
+  const home = getName(match,"home");
+  const away = getName(match,"away");
+
+  return sameTeam(home,names.home) &&
+         sameTeam(away,names.away);
+}
+
+function getCandidateScore(candidate) {
+  return candidate.score ??
+    candidate.candidate_score ??
+    candidate.kgvar_score ??
+    candidate.puan ??
+    candidate.rating ??
     "";
 }
 
-/* MAÇ EŞLEŞTİRME */
-function findLiveMatch(candidate){
-  return liveMatches.find(m=>
-    (
-      teamMatches(getName(m,"home"),candidate.home) &&
-      teamMatches(getName(m,"away"),candidate.away)
-    ) ||
-    (
-      teamMatches(getName(m,"home"),candidate.away) &&
-      teamMatches(getName(m,"away"),candidate.home)
-    )
-  ) || null;
+function getCompetition(match,candidate) {
+  return match?.competition ||
+    match?.league ||
+    candidate?.competition ||
+    candidate?.league ||
+    "Futbol";
 }
 
-/* ADAY MAÇLAR İÇİN ÖZEL SORGULAR */
-function candidateLookupUrls(candidate){
-  const home=slugifyTeam(candidate.home);
-  const away=slugifyTeam(candidate.away);
-  if(!home||!away) return [];
+function renderMatchCard(match,candidate,mode) {
+  const home = getName(match,"home") || findCandidateNames(candidate || {}).home || "Ev sahibi";
+  const away = getName(match,"away") || findCandidateNames(candidate || {}).away || "Deplasman";
+  const homeLogo = getLogo(match,"home");
+  const awayLogo = getLogo(match,"away");
+  const hs = getScore(match,"home");
+  const as = getScore(match,"away");
+  const state = getMatchState(match);
+  const kickoff = formatKickoff(match?.time || match?.date || match?.kickoff);
+  const competition = getCompetition(match,candidate);
 
-  return [
-    API+"/match/?sport=football&slug="+encodeURIComponent(home+"-vs-"+away),
-    API+"/match/?sport=football&slug="+encodeURIComponent(away+"-vs-"+home),
-    API+"/team/?sport=football&slug="+encodeURIComponent(home)+"&limit=30",
-    API+"/team/?sport=football&slug="+encodeURIComponent(away)+"&limit=30"
-  ];
-}
+  const scoreHTML = hs !== null && as !== null
+    ? `${hs} - ${as}`
+    : `<small>VS</small>`;
 
-/* MAÇ DURUMU */
-function getMatchState(match){
-  const status=normalize(match.status);
-  const text=String(match.status_text??match.statusText??"").trim();
-  const lower=normalize(text+" "+status);
-
-  if(/postpon|delayed|ertel/.test(lower))
-    return {label:"ERTELENDİ",type:"wait"};
-
-  if(/cancel|abandon|iptal/.test(lower))
-    return {label:"İPTAL",type:"done"};
-
-  if(/finished|finish|full time|completed|mac sonu/.test(lower))
-    return {label:"MAÇ BİTTİ",type:"done"};
-
-  if(/half time|halftime|devre arasi/.test(lower)||/\bht\b/i.test(text))
-    return {label:"DEVRE ARASI",type:"live"};
-
-  if(/second half|2nd half|segunda parte|ikinci yari/.test(lower))
-    return {label:"2. YARI",type:"live"};
-
-  if(/first half|1st half|primera parte|ilk yari/.test(lower)){
-    return {label:extractMinute(match)||"1. YARI",type:"live"};
-  }
-
-  if(/upcoming|scheduled|not started|fixture|baslamadi/.test(lower))
-    return {label:"BAŞLAMADI",type:"wait"};
-
-  const minute=extractMinute(match);
-
-  if(status==="live"||/live|in play|in-play|canli/.test(lower)){
-    return {label:minute||"CANLI",type:"live"};
-  }
-
-  if(minute) return {label:minute,type:"live"};
-  if(status==="finished") return {label:"MAÇ BİTTİ",type:"done"};
-  if(status==="upcoming") return {label:"BAŞLAMADI",type:"wait"};
-
-  return {label:text||"Durum bilgisi yok",type:"wait"};
-}
-
-/* MAÇ DAKİKASI */
-function extractMinute(match){
-  const minuteKeys=new Set([
-    "minute","minutes","elapsed","elapsed_minute","elapsed_minutes",
-    "match_minute","current_minute","minute_elapsed","timer",
-    "matchtime","time_elapsed","elapsedtime","clock","game_minute"
-  ]);
-
-  function parseMinute(value){
-    if(value===undefined||value===null||value==="") return "";
-
-    if(typeof value==="number"&&Number.isFinite(value)&&value>=0&&value<=130){
-      return Math.floor(value)+"'";
-    }
-
-    if(typeof value!=="string") return "";
-    const s=value.trim();
-
-    let m=s.match(/^(\d{1,3}(?:\s*\+\s*\d{1,2})?)\s*(?:['′]|min(?:ute)?s?)?$/i);
-    if(m&&Number(m[1].split(/[+\s]/)[0])<=130){
-      return m[1].replace(/\s+/g,"")+"'";
-    }
-
-    m=s.match(/\b(\d{1,3}(?:\s*\+\s*\d{1,2})?)\s*['′]/);
-    if(m) return m[1].replace(/\s+/g,"")+"'";
-
-    m=s.match(/\b(?:minute|minutes|min)\s*[:.]?\s*(\d{1,3})\b/i)||
-      s.match(/\b(\d{1,3})\s*(?:minutes|min)\b/i);
-
-    if(m&&Number(m[1])<=130) return m[1]+"'";
-    return "";
-  }
-
-  function searchNested(obj,depth=0){
-    if(!obj||typeof obj!=="object"||depth>5) return "";
-
-    if(Array.isArray(obj)){
-      for(const item of obj){
-        const found=searchNested(item,depth+1);
-        if(found) return found;
-      }
-      return "";
-    }
-
-    for(const [key,value] of Object.entries(obj)){
-      const k=String(key).toLowerCase().replace(/[^a-z]/g,"");
-
-      if(minuteKeys.has(k)){
-        const parsed=parseMinute(value);
-        if(parsed) return parsed;
-
-        if(value&&typeof value==="object"){
-          const nested=searchNested(value,depth+1);
-          if(nested) return nested;
-        }
-      }
-    }
-
-    for(const value of Object.values(obj)){
-      if(value&&typeof value==="object"){
-        const found=searchNested(value,depth+1);
-        if(found) return found;
-      }
-    }
-    return "";
-  }
-
-  return searchNested(match)||
-    parseMinute(match?.status_text??match?.statusText??"");
-}
-
-/* SKOR */
-function getScore(match){
-  const home=match.home_score??match.homeScore??
-    match.score_home??match.score?.home??match.scores?.home??
-    match.homeTeam?.score??match.home_team?.score;
-
-  const away=match.away_score??match.awayScore??
-    match.score_away??match.score?.away??match.scores?.away??
-    match.awayTeam?.score??match.away_team?.score;
-
-  if(home===null||home===undefined||away===null||away===undefined||
-     home===""||away==="") return null;
-
-  return {home:String(home),away:String(away)};
-}
-
-/* İSTATİSTİK METNİ */
-function formText(form){
-  if(!form||!Number(form.played)) return "Yeterli veri yok";
-  return String(form.btts??0)+"/"+String(form.played)+" KG Var";
-}
-
-function safeLogo(url){
-  if(typeof url!=="string") return "";
-  try{
-    const parsed=new URL(url);
-    if(parsed.protocol!=="https:"&&parsed.protocol!=="http:") return "";
-    return parsed.href;
-  }catch(e){
-    return "";
-  }
-}
-
-/* TÜRKİYE SAATİ */
-function formatKickoff(candidate){
-  const rawTime=String(
-    candidate?.time??candidate?.kickoff??
-    candidate?.start_time??candidate?.match_time??""
-  ).trim();
-
-  const rawDate=String(candidate?.date??"").trim();
-  const raw=rawTime||rawDate;
-  if(!raw) return "Başlama saati belirtilmemiş";
-
-  if(/T/.test(raw)&&/(?:Z|[+-]\d{2}:?\d{2})$/i.test(raw)){
-    const d=new Date(raw);
-    if(!Number.isNaN(d.getTime())){
-      return "Türkiye saati · "+d.toLocaleString("tr-TR",{
-        timeZone:"Europe/Istanbul",
-        day:"2-digit",month:"2-digit",
-        hour:"2-digit",minute:"2-digit",hour12:false
-      });
-    }
-  }
-
-  const timeMatch=raw.match(/(?:^|T|\s)([01]?\d|2[0-3]):([0-5]\d)(?::[0-5]\d)?(?:$|\s|Z|[+-])/);
-
-  if(timeMatch){
-    const time=timeMatch[1].padStart(2,"0")+":"+timeMatch[2];
-    const dateSource=rawDate||(raw.includes("T")?raw.slice(0,10):"");
-
-    if(/^\d{4}-\d{2}-\d{2}$/.test(dateSource)){
-      const p=dateSource.split("-");
-      return "Türkiye saati · "+p[2]+"."+p[1]+" · "+time;
-    }
-    return "Başlama saati · "+time+" (Türkiye)";
-  }
-
-  if(/^\d{4}-\d{2}-\d{2}$/.test(raw)){
-    const p=raw.split("-");
-    return "Maç tarihi · "+p[2]+"."+p[1]+"."+p[0];
-  }
-
-  return "Başlama saati belirtilmemiş";
-}
-
-/* CANLI SKOR KUTUSU */
-function renderLive(candidate){
-  const live=findLiveMatch(candidate);
-
-  if(!live){
-    return `
-      <div class="livebox">
-        <div class="livehead">
-          <span class="live-label">MAÇ BİLGİSİ</span>
-          <span class="pill wait">FİKSTÜR</span>
-        </div>
-        <div class="muted" style="text-align:center;padding:5px 0">
-          ${esc(formatKickoff(candidate))}
-        </div>
-        <div class="muted" style="text-align:center;margin-top:5px">
-          Skor bilgisi henüz yayınlanmadı.
-        </div>
-      </div>`;
-  }
-
-  const score=getScore(live);
-  const state=getMatchState(live);
-
-  const homeLogo=safeLogo(
-    getLogo(live,"home")||
-    candidate.home_logo||candidate.home_image||candidate.home_badge
-  );
-
-  const awayLogo=safeLogo(
-    getLogo(live,"away")||
-    candidate.away_logo||candidate.away_image||candidate.away_badge
-  );
-
-  const scoreText=score
-    ?esc(score.home)+" – "+esc(score.away)
-    :"– : –";
-
-  const pillClass=state.type==="live"?"":
-    state.type==="done"?"done":"wait";
-
-  return `
-    <div class="livebox">
-      <div class="livehead">
-        <span class="live-label">MAÇ DURUMU</span>
-        <span class="pill ${pillClass}">${esc(state.label)}</span>
-      </div>
-
-      <div class="live-teams">
-        <div class="live-team">
-          ${homeLogo?`<img src="${esc(homeLogo)}" alt="" loading="lazy" onerror="this.style.display='none'">`:""}
-          <span>${esc(getName(live,"home")||candidate.home)}</span>
-        </div>
-
-        <div class="live-mid">
-          <div class="live-score">${scoreText}</div>
-        </div>
-
-        <div class="live-team">
-          <span>${esc(getName(live,"away")||candidate.away)}</span>
-          ${awayLogo?`<img src="${esc(awayLogo)}" alt="" loading="lazy" onerror="this.style.display='none'">`:""}
-        </div>
-      </div>
-
-      <div class="muted" style="text-align:center;margin-top:8px">
-        ${score?"Kaynak skor: "+esc(score.home)+" – "+esc(score.away):"Kaynakta skor bilgisi henüz bulunmuyor."}
-      </div>
-    </div>`;
-}
-
-/* TARİH */
-function formatDateOnlyTR(value){
-  const s=String(value??"").trim();
-  const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);
-  return m?m[3]+"."+m[2]+"."+m[1]:s;
-}
-
-/* ADAY KARTI */
-function renderCandidate(match){
-  const score=Math.max(0,Math.min(100,Number(match.score)||0));
-  const homeLogo=safeLogo(match.home_logo||match.home_image||match.home_badge);
-  const awayLogo=safeLogo(match.away_logo||match.away_image||match.away_badge);
+  const badge = candidate
+    ? `<span class="score-badge">KG VAR ${escapeHTML(getCandidateScore(candidate) || "")}</span>`
+    : "";
 
   return `
     <article class="card">
-      <div class="league">
-        ${esc(match.league||"Lig bilgisi yok")}
-        ${match.date?" · "+esc(formatDateOnlyTR(match.date)):""}
+      <div class="card-top">
+        <span class="league">${escapeHTML(competition)}</span>
+        ${badge}
       </div>
 
       <div class="teams">
         <div class="team">
-          ${homeLogo?`<img src="${esc(homeLogo)}" alt="" loading="lazy" onerror="this.style.display='none'">`:""}
-          ${esc(match.home||"Ev sahibi")}
+          ${logoHTML(homeLogo)}
+          <div class="team-name">${escapeHTML(home)}</div>
         </div>
-        <div class="vs">VS</div>
+
+        <div>
+          <div class="match-score">${scoreHTML}</div>
+        </div>
+
         <div class="team">
-          ${awayLogo?`<img src="${esc(awayLogo)}" alt="" loading="lazy" onerror="this.style.display='none'">`:""}
-          ${esc(match.away||"Deplasman")}
+          ${logoHTML(awayLogo)}
+          <div class="team-name">${escapeHTML(away)}</div>
         </div>
       </div>
 
-      <div class="muted">İstatistiksel sıralama puanı</div>
-      <div class="score">${score}<span class="muted"> / 100</span></div>
-      <div class="bar"><span style="width:${score}%"></span></div>
-
-      <div class="forms">
-        <div class="form">
-          ${esc(match.home||"Ev sahibi")}
-          <strong>${esc(formText(match.home_form))}</strong>
-        </div>
-        <div class="form">
-          ${esc(match.away||"Deplasman")}
-          <strong>${esc(formText(match.away_form))}</strong>
-        </div>
+      <div class="match-info">
+        <span>${escapeHTML(kickoff)}</span>
+        <span class="match-state ${state.type}">${escapeHTML(state.label)}</span>
       </div>
-
-      ${renderLive(match)}
-    </article>`;
+    </article>
+  `;
 }
 
-/* EKRANI YENİLE */
-function render(){
-  if(!candidates.length){
-    cardsEl.innerHTML=
-      '<div class="empty">Bugün aday bulunamadı veya günlük veri dosyası boş.</div>';
-    return;
-  }
-  cardsEl.innerHTML=candidates.map(renderCandidate).join("");
-}
-
-/* JSON İSTEĞİ */
-async function fetchJSON(url){
-  const response=await fetch(url,{
+async function fetchJSON(url) {
+  const response = await fetch(url, {
+    method:"GET",
     cache:"no-store",
     headers:{"Accept":"application/json"}
   });
 
-  if(!response.ok) throw new Error("HTTP "+response.status);
-  return response.json();
+  if (!response.ok) throw new Error("HTTP " + response.status);
+  return await response.json();
 }
 
-/* GÜNLÜK ADAYLAR */
-async function loadCandidates(){
-  const data=await fetchJSON(JSON_URL+"?t="+Date.now());
+function collectMatches(data) {
+  if (!data) return [];
+  if (Array.isArray(data)) return data;
 
-  if(data.diagnostics&&data.diagnostics.fatal_error){
-    throw new Error(data.diagnostics.fatal_error);
+  if (Array.isArray(data.matches)) return data.matches;
+  if (Array.isArray(data.data)) return data.data;
+  if (Array.isArray(data.fixtures)) return data.fixtures;
+  if (Array.isArray(data.results)) return data.results;
+
+  if (data.data && typeof data.data === "object") {
+    return collectMatches(data.data);
   }
 
-  candidates=Array.isArray(data.candidates)?data.candidates:[];
-
-  statusEl.textContent=(data.date||"Günlük")+" · KG Var aday listesi";
-
-  if(data.updated_at){
-    const date=new Date(data.updated_at);
-    updatedEl.textContent=Number.isNaN(date.getTime())
-      ?String(data.updated_at)
-      :date.toLocaleString("tr-TR",{timeZone:"Europe/Istanbul"});
-  }else{
-    updatedEl.textContent=new Date().toLocaleString(
-      "tr-TR",{timeZone:"Europe/Istanbul"}
-    );
-  }
-
-  render();
+  return [];
 }
 
-/* CANLI MAÇ VERİLERİ */
-async function loadLiveScores(){
-  const found=[];
-  let successful=0;
+function uniqueMatches(matches) {
+  const seen = new Set();
+  return matches.filter(match => {
+    const slug = match.slug || match.url || "";
+    const key = slug || [
+      getName(match,"home"),
+      getName(match,"away"),
+      match.time || match.date || ""
+    ].join("|");
 
-  // İlk olarak genel maç listesini al.
-  try{
-    const general=await fetchJSON(LIVE_URL+"&t="+Date.now());
-    successful++;
-    found.push(...collectMatches(general));
-  }catch(error){
-    console.warn("Genel maç listesi alınamadı:",error);
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+async function fetchCandidateMatch(candidate) {
+  const names = findCandidateNames(candidate);
+  if (!names.home || !names.away) return null;
+
+  const urls = [];
+
+  /* JSON içindeki slug varsa öncelikle onu kullan */
+  if (candidate.slug) {
+    urls.push(`${API}/match/?sport=football&slug=${encodeURIComponent(candidate.slug)}`);
   }
 
-  // Genel listede bulunmayan adayları özel olarak sorgula.
-  const missingCandidates=candidates.filter(candidate=>
-    !found.some(m=>
-      (
-        teamMatches(getName(m,"home"),candidate.home)&&
-        teamMatches(getName(m,"away"),candidate.away)
-      )||
-      (
-        teamMatches(getName(m,"home"),candidate.away)&&
-        teamMatches(getName(m,"away"),candidate.home)
-      )
-    )
-  ).slice(0,MAX_CANDIDATE_LOOKUPS);
+  if (candidate.url && !candidate.slug) {
+    const parts = String(candidate.url).split("/").filter(Boolean);
+    const possibleSlug = parts[parts.length - 2] || parts[parts.length - 1];
+    if (possibleSlug) {
+      urls.push(`${API}/match/?sport=football&slug=${encodeURIComponent(possibleSlug)}`);
+    }
+  }
 
-  const results=await Promise.allSettled(
-    missingCandidates.map(async candidate=>{
-      const urls=candidateLookupUrls(candidate);
+  const homeSlug = slugify(names.home);
+  const awaySlug = slugify(names.away);
 
-      const responses=await Promise.allSettled(
-        urls.map(url=>fetchJSON(url+"&t="+Date.now()))
-      );
+  urls.push(
+    `${API}/match/?sport=football&slug=${encodeURIComponent(homeSlug + "-vs-" + awaySlug)}`,
+    `${API}/match/?sport=football&slug=${encodeURIComponent(awaySlug + "-vs-" + homeSlug)}`
+  );
 
-      const matches=[];
-      let ok=0;
+  /* Maç detay slug'ı bulunamazsa takım fikstürlerinde ara */
+  urls.push(
+    `${API}/team/?sport=football&slug=${encodeURIComponent(homeSlug)}&limit=30`,
+    `${API}/team/?sport=football&slug=${encodeURIComponent(awaySlug)}&limit=30`
+  );
 
-      for(const response of responses){
-        if(response.status==="fulfilled"){
-          ok++;
-          matches.push(...collectMatches(response.value));
-        }else{
-          console.warn("Aday maç sorgusu başarısız:",response.reason);
-        }
+  for (const url of urls) {
+    try {
+      const data = await fetchJSON(url);
+      const matches = collectMatches(data);
+
+      if (matches.length) {
+        const found = matches.find(match => matchCandidate(match,candidate));
+        if (found) return found;
+
+        /* Tek maç detay endpoint'i doğrudan maç objesi döndürürse */
+        if (getName(data,"home") && getName(data,"away") &&
+            matchCandidate(data,candidate)) return data;
       }
-
-      return {matches,successful:ok};
-    })
-  );
-
-  for(const result of results){
-    if(result.status==="fulfilled"){
-      successful+=result.value.successful;
-      found.push(...result.value.matches);
+    } catch (error) {
+      /* Bulunamayan slug için sonraki sorguyu dene */
     }
   }
 
-  // Aynı maçı birden fazla kez gösterme.
-  liveMatches=found.filter((match,index,array)=>
-    array.findIndex(other=>
-      normalize(getName(other,"home"))===normalize(getName(match,"home"))&&
-      normalize(getName(other,"away"))===normalize(getName(match,"away"))
-    )===index
-  );
-
-  if(successful===0){
-    throw new Error("SportScore sorgularının hiçbiri çalışmadı.");
-  }
-
-  const matchedCount=candidates.filter(candidate=>
-    findLiveMatch(candidate)
-  ).length;
-
-  liveStatusEl.textContent=
-    "SportScore kontrol edildi · "+
-    matchedCount+"/"+candidates.length+
-    " aday eşleşti · 120 sn'de bir yenilenir";
-
-  render();
+  return null;
 }
 
-/* TOPLU YENİLEME */
-async function refreshAll(){
-  if(refreshing) return;
+async function loadCandidates() {
+  try {
+    const response = await fetch("./kgvar.json?t=" + Date.now(), {
+      cache:"no-store"
+    });
 
-  refreshing=true;
-  refreshButton.disabled=true;
-  refreshButton.textContent="Yükleniyor...";
+    if (!response.ok) throw new Error("kgvar.json okunamadı");
 
-  const tasks=await Promise.allSettled([
-    loadCandidates(),
-    loadLiveScores()
-  ]);
+    const json = await response.json();
+    candidateData = getCandidateList(json);
 
-  const candidateResult=tasks[0];
-  const liveResult=tasks[1];
+    if (!Array.isArray(candidateData)) candidateData = [];
 
-  if(candidateResult.status==="rejected"){
-    console.error("KG Var verisi yüklenemedi:",candidateResult.reason);
-    statusEl.textContent="KG Var verisi yüklenemedi";
+    $("todayDate").textContent =
+      "Veri tarihi: " + (json.date || json.generated_at || new Date().toLocaleDateString("tr-TR"));
 
-    if(!candidates.length){
-      cardsEl.innerHTML=
-        '<div class="empty">Günlük veri dosyası yüklenemedi. GitHub Actions çalışmasını ve kgvar.json dosyasını kontrol edin.</div>';
+    const cards = $("candidateCards");
+
+    if (!candidateData.length) {
+      cards.innerHTML = '<div class="empty">Bugün kriterleri karşılayan KG Var adayı bulunamadı.</div>';
+      return;
     }
-  }
 
-  if(liveResult.status==="rejected"){
-    console.error("Canlı skor kaynağına ulaşılamadı:",liveResult.reason);
-    liveStatusEl.textContent=
-      "Canlı skor kaynağına ulaşılamadı. Daha sonra yeniden denenecek.";
-    render();
-  }
+    /* Önce eldeki maç listesinden eşleştir */
+    const tasks = candidateData.map(async candidate => {
+      let found = allMatches.find(match => matchCandidate(match,candidate));
 
-  refreshing=false;
-  refreshButton.disabled=false;
-  refreshButton.textContent="↻ Şimdi yenile";
+      /* Bulunamazsa maç ve takım detay endpoint'lerini dene */
+      if (!found) found = await fetchCandidateMatch(candidate);
+
+      return {candidate,match:found};
+    });
+
+    const results = await Promise.all(tasks);
+
+    cards.innerHTML = results.map(({candidate,match}) => {
+      if (match) return renderMatchCard(match,candidate,"candidate");
+
+      /* Maç bulunamadıysa sahte skor veya sahte durum gösterme */
+      const names = findCandidateNames(candidate);
+      const placeholder = {
+        home:names.home,
+        away:names.away,
+        competition:candidate.competition || candidate.league || "Futbol",
+        time:candidate.time || candidate.date || "",
+        status:"upcoming"
+      };
+
+      return renderMatchCard(placeholder,candidate,"candidate")
+        .replace("BAŞLAMADI","SKOR BEKLENİYOR")
+        .replace("DURUM BEKLENİYOR","SKOR BEKLENİYOR");
+    }).join("");
+
+  } catch (error) {
+    $("candidateCards").innerHTML =
+      '<div class="empty">Aday listesi yüklenemedi. kgvar.json dosyasını kontrol edin.</div>';
+    console.error("Aday listesi:",error);
+  }
 }
 
-refreshButton.addEventListener("click",refreshAll);
+async function loadLiveMatches() {
+  try {
+    const data = await fetchJSON(MATCHES_URL);
+    const matches = collectMatches(data);
+    allMatches = uniqueMatches(matches);
 
-refreshAll();
-setInterval(refreshAll,REFRESH_MS);
+    const liveAndRecent = allMatches.filter(match => {
+      const state = getMatchState(match);
+      return state.type === "live" ||
+             state.type === "finished" ||
+             state.type === "unknown";
+    });
 
-})();
+    if (!liveAndRecent.length) {
+      $("liveCards").innerHTML =
+        '<div class="empty">Şu anda listelenecek canlı veya tamamlanmış maç bulunamadı.</div>';
+    } else {
+      $("liveCards").innerHTML = liveAndRecent
+        .slice(0,12)
+        .map(match => renderMatchCard(match,null,"live"))
+        .join("");
+    }
+
+    $("connectionDot").className = "dot";
+    $("connectionText").textContent =
+      "Veriler güncel · " + allMatches.length + " maç kontrol edildi";
+
+    lastUpdate = new Date();
+
+  } catch (error) {
+    $("connectionDot").className = "dot error";
+    $("connectionText").textContent = "Skor servisine şu anda ulaşılamıyor.";
+    $("liveCards").innerHTML =
+      '<div class="empty">Canlı skor verisi şu anda alınamadı. Bir sonraki güncellemede tekrar denenecek.</div>';
+    console.error("Canlı skor:",error);
+  }
+}
+
+async function updatePage() {
+  if (isLoading) return;
+  isLoading = true;
+
+  $("connectionDot").className = "dot loading";
+  $("connectionText").textContent = "Maç durumları güncelleniyor...";
+
+  try {
+    await loadLiveMatches();
+    await loadCandidates();
+  } finally {
+    isLoading = false;
+  }
+}
+
+function updateDate() {
+  $("todayDate").textContent =
+    new Intl.DateTimeFormat("tr-TR", {
+      weekday:"long",
+      year:"numeric",
+      month:"long",
+      day:"numeric",
+      timeZone:"Europe/Istanbul"
+    }).format(new Date());
+}
+
+updateDate();
+updatePage();
+setInterval(updatePage,REFRESH_MS);
 </script>
 </body>
 </html>
