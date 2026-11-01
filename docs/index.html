@@ -10,272 +10,126 @@
 
 <style>
 :root{
-  --bg:#07111f;
-  --panel:#101e30;
-  --panel2:#14243a;
-  --line:#263a52;
-  --text:#f2f6fc;
-  --muted:#91a3b9;
-  --green:#27d98b;
-  --yellow:#ffc857;
-  --red:#ff6577;
+  --bg:#07111f;--panel:#101e30;--panel2:#14243a;
+  --line:#263a52;--text:#f2f6fc;--muted:#91a3b9;
+  --green:#27d98b;--yellow:#ffc857;--red:#ff6577;
 }
 *{box-sizing:border-box}
 body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
+  margin:0;min-height:100vh;color:var(--text);
   font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 50% -10%,#17385a 0,transparent 42%),
-    var(--bg);
+  background:radial-gradient(circle at 50% -10%,#17385a 0,transparent 42%),var(--bg)
 }
 .container{width:min(1100px,94%);margin:auto;padding:27px 0 40px}
 header{text-align:center;margin-bottom:25px}
-.brand{
-  color:var(--green);
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:2px;
-  margin-bottom:12px
-}
+.brand{color:var(--green);font-size:13px;font-weight:900;letter-spacing:2px;margin-bottom:12px}
 .brand span{font-size:24px;vertical-align:middle;margin-right:7px}
 h1{font-size:clamp(26px,5vw,40px);margin:0 0 9px}
 .subtitle{font-size:14px;color:var(--muted);line-height:1.6}
 .date{font-size:13px;color:#c7d5e5;margin-top:13px}
-
 .statusbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:10px;
-  background:var(--panel);
-  border:1px solid var(--line);
-  padding:13px 16px;
-  border-radius:13px;
-  margin-bottom:22px;
-  font-size:12px;
-  color:var(--muted)
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+  gap:10px;background:var(--panel);border:1px solid var(--line);
+  padding:13px 16px;border-radius:13px;margin-bottom:22px;
+  font-size:12px;color:var(--muted)
 }
 .status-left{display:flex;align-items:center;gap:9px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
 .dot.loading{background:var(--yellow)}
 .dot.error{background:var(--red)}
 .refresh{color:var(--green)}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;
-  margin-bottom:27px
-}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:27px}
 .stat{
   background:linear-gradient(145deg,var(--panel2),var(--panel));
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:17px 12px;
-  text-align:center;
-  min-width:0
+  border:1px solid var(--line);border-radius:14px;padding:17px 12px;
+  text-align:center;min-width:0
 }
 .stat-value{font-size:clamp(22px,4vw,30px);font-weight:900;margin-bottom:5px}
 .stat-label{font-size:11px;color:var(--muted)}
 .stat.green .stat-value{color:var(--green)}
 .stat.red .stat-value{color:var(--red)}
 .stat.yellow .stat-value{color:var(--yellow)}
-
 .section-title{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  margin:27px 0 14px;
-  font-size:18px;
-  font-weight:800
+  display:flex;align-items:center;gap:9px;margin:27px 0 14px;
+  font-size:18px;font-weight:800
 }
-.section-title:before{
-  content:"";
-  width:4px;
-  height:20px;
-  background:var(--green);
-  border-radius:5px
-}
-.section-subtitle{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
-  margin:-5px 0 14px
-}
+.section-title:before{content:"";width:4px;height:20px;background:var(--green);border-radius:5px}
+.section-subtitle{color:var(--muted);font-size:12px;line-height:1.6;margin:-5px 0 14px}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
 .card{
-  position:relative;
-  overflow:hidden;
-  min-width:0;
+  position:relative;overflow:hidden;min-width:0;
   background:linear-gradient(145deg,var(--panel2),var(--panel));
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:17px
+  border:1px solid var(--line);border-radius:17px;padding:17px
 }
 .card:after{
-  content:"⚽";
-  position:absolute;
-  right:-10px;
-  bottom:-24px;
-  font-size:100px;
-  opacity:.035;
-  pointer-events:none
+  content:"⚽";position:absolute;right:-10px;bottom:-24px;
+  font-size:100px;opacity:.035;pointer-events:none
 }
-.card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-  margin-bottom:17px
-}
-.league{
-  font-size:11px;
-  color:var(--muted);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap
-}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:17px}
+.league{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .score-badge{
-  flex-shrink:0;
-  font-size:10px;
-  font-weight:900;
-  color:var(--green);
-  background:#123c31;
-  padding:7px 9px;
-  border-radius:20px
+  flex-shrink:0;font-size:10px;font-weight:900;color:var(--green);
+  background:#123c31;padding:7px 9px;border-radius:20px
 }
-.teams{
-  display:grid;
-  grid-template-columns:1fr 55px 1fr;
-  align-items:center;
-  gap:5px;
-  text-align:center
-}
+.teams{display:grid;grid-template-columns:1fr 55px 1fr;align-items:center;gap:5px;text-align:center}
 .team{min-width:0}
 .team-icon{
-  width:46px;
-  height:46px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 8px;
-  font-size:29px
+  width:46px;height:46px;display:flex;align-items:center;
+  justify-content:center;margin:0 auto 8px;font-size:29px
 }
+.team-icon img{width:100%;height:100%;object-fit:contain}
 .team-name{
-  font-size:13px;
-  font-weight:700;
-  line-height:1.35;
-  min-height:35px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow-wrap:anywhere
+  font-size:13px;font-weight:700;line-height:1.35;min-height:35px;
+  display:flex;align-items:center;justify-content:center;overflow-wrap:anywhere
 }
 .match-score{font-size:24px;font-weight:900;white-space:nowrap}
 .vs{font-size:12px;color:var(--muted)}
 .match-info{
-  border-top:1px solid var(--line);
-  margin-top:16px;
-  padding-top:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-  font-size:11px;
-  color:var(--muted)
+  border-top:1px solid var(--line);margin-top:16px;padding-top:12px;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:8px;font-size:11px;color:var(--muted)
 }
 .match-state{font-weight:900;text-align:right;color:var(--yellow)}
 .match-state.correct{color:var(--green)}
 .match-state.wrong{color:var(--red)}
 .match-state.pending{color:var(--yellow)}
-.match-result{
-  margin-top:12px;
-  padding:10px;
-  border-radius:9px;
-  text-align:center;
-  font-size:12px;
-  font-weight:900
-}
+.match-state.live{color:var(--green)}
+.match-result{margin-top:12px;padding:10px;border-radius:9px;text-align:center;font-size:12px;font-weight:900}
 .match-result.correct{background:#123c31;color:var(--green)}
 .match-result.wrong{background:#421e2b;color:var(--red)}
 .match-result.pending{background:#3d321b;color:var(--yellow)}
-
 .history-list{display:grid;gap:13px}
-.history-day{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden
-}
+.history-day{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .history-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:8px;
-  padding:14px 16px;
-  border-bottom:1px solid var(--line);
-  font-size:13px;
-  font-weight:800
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+  gap:8px;padding:14px 16px;border-bottom:1px solid var(--line);
+  font-size:13px;font-weight:800
 }
 .history-heading small{font-size:11px;color:var(--muted);font-weight:normal}
 .history-match{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  padding:13px 16px;
-  border-bottom:1px solid rgba(38,58,82,.6);
-  font-size:12px
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:13px 16px;border-bottom:1px solid rgba(38,58,82,.6);font-size:12px
 }
 .history-match:last-child{border-bottom:0}
 .history-teams{min-width:0;line-height:1.6}
 .history-teams strong{display:block;font-size:12px;overflow-wrap:anywhere}
 .history-score{font-weight:900;white-space:nowrap;font-size:14px}
-.history-result{
-  flex-shrink:0;
-  font-size:10px;
-  font-weight:900;
-  min-width:88px;
-  text-align:right
-}
+.history-result{flex-shrink:0;font-size:10px;font-weight:900;min-width:88px;text-align:right}
 .history-result.correct{color:var(--green)}
 .history-result.wrong{color:var(--red)}
 .history-result.pending{color:var(--yellow)}
-
 .empty{
-  grid-column:1/-1;
-  text-align:center;
-  padding:28px 16px;
-  background:var(--panel);
-  border:1px dashed var(--line);
-  border-radius:15px;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7
+  grid-column:1/-1;text-align:center;padding:28px 16px;
+  background:var(--panel);border:1px dashed var(--line);
+  border-radius:15px;color:var(--muted);font-size:13px;line-height:1.7
 }
 .notice{
-  margin-top:22px;
-  padding:14px 16px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:#0b1828;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.8
+  margin-top:22px;padding:14px 16px;border:1px solid var(--line);
+  border-radius:12px;background:#0b1828;color:var(--muted);
+  font-size:12px;line-height:1.8
 }
-.footer{
-  text-align:center;
-  color:#71849b;
-  font-size:11px;
-  margin-top:27px;
-  line-height:1.8
-}
+.footer{text-align:center;color:#71849b;font-size:11px;margin-top:27px;line-height:1.8}
 .footer a{color:var(--green);text-decoration:none;font-weight:700}
-
 @media(max-width:760px){
   .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -297,9 +151,7 @@ h1{font-size:clamp(26px,5vw,40px);margin:0 0 9px}
 <header>
   <div class="brand"><span>⚽</span> STUDIOERS</div>
   <h1>Günün KG Var Adayları</h1>
-  <div class="subtitle">
-    İstatistiksel analizle belirlenen karşılıklı gol tahminleri
-  </div>
+  <div class="subtitle">İstatistiksel analizle belirlenen karşılıklı gol tahminleri</div>
   <div class="date" id="todayDate"></div>
 </header>
 
@@ -312,124 +164,87 @@ h1{font-size:clamp(26px,5vw,40px);margin:0 0 9px}
 </div>
 
 <section class="stats">
-  <div class="stat">
-    <div class="stat-value" id="totalPicks">0</div>
-    <div class="stat-label">Toplam Tahmin</div>
-  </div>
-  <div class="stat green">
-    <div class="stat-value" id="correctPicks">0</div>
-    <div class="stat-label">Doğru Tahmin</div>
-  </div>
-  <div class="stat red">
-    <div class="stat-value" id="wrongPicks">0</div>
-    <div class="stat-label">Yanlış Tahmin</div>
-  </div>
-  <div class="stat yellow">
-    <div class="stat-value" id="successRate">-%</div>
-    <div class="stat-label">Başarı Oranı</div>
-  </div>
+  <div class="stat"><div class="stat-value" id="totalPicks">0</div><div class="stat-label">Toplam Tahmin</div></div>
+  <div class="stat green"><div class="stat-value" id="correctPicks">0</div><div class="stat-label">Doğru Tahmin</div></div>
+  <div class="stat red"><div class="stat-value" id="wrongPicks">0</div><div class="stat-label">Yanlış Tahmin</div></div>
+  <div class="stat yellow"><div class="stat-value" id="successRate">-%</div><div class="stat-label">Başarı Oranı</div></div>
 </section>
 
 <div class="section-title">Bugünün KG Var Adayları</div>
-<div class="section-subtitle">
-  Günlük olarak belirlenen üç aday. Sonuçlar maçlar tamamlandığında güncellenir.
-</div>
-
+<div class="section-subtitle">Günün üç adayı ve doğrulanmış maç sonuçları.</div>
 <section class="cards" id="candidateCards">
   <div class="empty">Aday maçlar yükleniyor...</div>
 </section>
 
 <div class="section-title">Geçmiş Tahminler</div>
-<div class="section-subtitle">
-  Önceki günlerde seçilen maçlar ve gerçekleşen sonuçları.
-</div>
-
+<div class="section-subtitle">Önceki günlerin tahminleri ve gerçekleşen sonuçları.</div>
 <section class="history-list" id="historyList">
   <div class="empty">Tahmin geçmişi yükleniyor...</div>
 </section>
 
 <div class="notice">
-  <strong style="color:var(--green)">✓ BİLDİK:</strong>
-  Her iki takım da gol attı.<br>
-  <strong style="color:var(--red)">✕ BİLEMEDİK:</strong>
-  Takımlardan en az biri gol atamadı.<br>
-  <strong style="color:var(--yellow)">BEKLİYOR:</strong>
-  Maç sonucu henüz kaynak veriye işlenmedi.<br><br>
-  Aday puanı istatistiksel değerlendirmeyi gösterir; kesin sonuç veya bahis garantisi değildir.
+  <strong style="color:var(--green)">✓ BİLDİK:</strong> Her iki takım da gol attı.<br>
+  <strong style="color:var(--red)">✕ BİLEMEDİK:</strong> Takımlardan en az biri gol atamadı.<br>
+  <strong style="color:var(--yellow)">BEKLİYOR:</strong> Maç sonucu henüz doğrulanmadı.<br><br>
   Başarı oranı yalnızca sonucu belli olan tahminler üzerinden hesaplanır.
+  İstatistiksel aday puanı kesin sonuç veya bahis garantisi değildir.
 </div>
 
 <footer class="footer">
-  İstatistiksel veriler open-matchday açık CSV kaynağından alınmaktadır.<br>
-  <a href="https://github.com/oladeeayo/open-matchday" target="_blank" rel="noopener">
-    Veri Kaynağı
-  </a>
+  İstatistiksel aday verileri open-matchday açık CSV kaynağından alınmaktadır.<br>
+  Maç skorları için SportScore sorgusu kullanılır.<br>
+  <a href="https://github.com/oladeeayo/open-matchday" target="_blank" rel="noopener">Veri Kaynağı</a>
   <br>© StudioErs
 </footer>
-
 </main>
 
 <script>
 "use strict";
 
+const API = "https://sportscore.com";
 const REFRESH_MS = 60000;
 const $ = id => document.getElementById(id);
 
 let dailyData = null;
 let historyData = null;
+let liveResults = new Map();
+let liveStates = new Map();
 
-function clean(value){
-  return String(value ?? "").trim();
-}
+function clean(v){return String(v ?? "").trim()}
 
-function escapeHTML(value){
-  return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
+function escapeHTML(v){
+  return String(v ?? "").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   })[c]);
 }
 
-function normalize(value){
-  return clean(value)
-    .toLocaleLowerCase("tr-TR")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"")
-    .replace(/ı/g,"i")
-    .replace(/[^a-z0-9]/g,"");
+function normalize(v){
+  return clean(v).toLocaleLowerCase("tr-TR")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/ı/g,"i").replace(/[^a-z0-9]/g,"");
 }
 
-function getNames(match){
+function getNames(m){
   return {
-    home: clean(match?.home || match?.home_team || match?.homeTeam),
-    away: clean(match?.away || match?.away_team || match?.awayTeam)
+    home:clean(m?.home || m?.home_team || m?.homeTeam),
+    away:clean(m?.away || m?.away_team || m?.awayTeam)
   };
 }
 
 function getDays(){
-  const history =
-    dailyData?.history?.days ? dailyData.history :
-    historyData?.days ? historyData :
-    dailyData?.days ? dailyData :
-    null;
-
-  return history?.days || {};
+  if(dailyData?.history?.days) return dailyData.history.days;
+  if(historyData?.days) return historyData.days;
+  if(dailyData?.days) return dailyData.days;
+  return {};
 }
 
 function getAllPicks(){
   const days = getDays();
   const all = [];
 
-  Object.keys(days).sort().forEach(date => {
-    const candidates = days[date]?.candidates || [];
-
-    candidates.forEach(candidate => {
-      all.push({
-        ...candidate,
-        date: candidate.date || date
-      });
+  Object.keys(days).sort().forEach(date=>{
+    (days[date]?.candidates || []).forEach(c=>{
+      all.push({...c,date:c.date || date});
     });
   });
 
@@ -437,283 +252,402 @@ function getAllPicks(){
 }
 
 function findHistoryPick(candidate){
-  const names = getNames(candidate);
+  const n = getNames(candidate);
   const date = clean(candidate.date);
 
-  return getAllPicks().find(item => {
+  return getAllPicks().find(item=>{
     const other = getNames(item);
-
     return clean(item.date) === date &&
-      normalize(other.home) === normalize(names.home) &&
-      normalize(other.away) === normalize(names.away);
+      normalize(other.home) === normalize(n.home) &&
+      normalize(other.away) === normalize(n.away);
   }) || null;
+}
+
+function candidateKey(c){
+  const n = getNames(c);
+  return clean(c.date) + "|" + normalize(n.home) + "|" + normalize(n.away);
 }
 
 function getResult(candidate){
   const item = findHistoryPick(candidate) || candidate;
 
-  const homeScore = item.actual_home_score;
-  const awayScore = item.actual_away_score;
-
-  if (typeof item.btts_result === "boolean") {
+  if(typeof item.btts_result === "boolean"){
     return {
-      status: item.btts_result ? "correct" : "wrong",
-      homeScore,
-      awayScore
+      status:item.btts_result ? "correct" : "wrong",
+      homeScore:item.actual_home_score,
+      awayScore:item.actual_away_score,
+      source:"history"
+    };
+  }
+
+  const live = liveResults.get(candidateKey(candidate));
+
+  if(live){
+    return {
+      status:live.btts ? "correct" : "wrong",
+      homeScore:live.homeScore,
+      awayScore:live.awayScore,
+      source:"live"
     };
   }
 
   return {
-    status: "pending",
-    homeScore,
-    awayScore
+    status:"pending",
+    homeScore:null,
+    awayScore:null,
+    source:"none"
   };
 }
 
 function formatDate(value){
-  if(!value) return "";
-
-  const date = new Date(value + "T12:00:00");
-
-  if(Number.isNaN(date.getTime())) return value;
-
+  if(!value)return "";
+  const d=new Date(value+"T12:00:00");
+  if(Number.isNaN(d.getTime()))return value;
   return new Intl.DateTimeFormat("tr-TR",{
-    day:"numeric",
-    month:"long",
-    year:"numeric"
-  }).format(date);
+    day:"numeric",month:"long",year:"numeric"
+  }).format(d);
 }
 
 function formatLeague(value){
-  return clean(value)
-    .replace(/_/g," ")
-    .replace(/\b\w/g, letter => letter.toUpperCase());
+  return clean(value).replace(/_/g," ")
+    .replace(/\b\w/g,x=>x.toUpperCase());
 }
 
 function resultLabel(status){
-  if(status === "correct") return "✓ BİLDİK";
-  if(status === "wrong") return "✕ BİLEMEDİK";
+  if(status==="correct")return "✓ BİLDİK";
+  if(status==="wrong")return "✕ BİLEMEDİK";
   return "◷ BEKLİYOR";
 }
 
-function renderCard(candidate){
-  const names = getNames(candidate);
-  const result = getResult(candidate);
+function renderCard(c){
+  const n=getNames(c);
+  const r=getResult(c);
+  const score=r.homeScore!==null && r.homeScore!==undefined &&
+              r.awayScore!==null && r.awayScore!==undefined
+    ? `${r.homeScore} - ${r.awayScore}` : "VS";
 
-  const score = result.homeScore !== null &&
-                result.homeScore !== undefined &&
-                result.awayScore !== null &&
-                result.awayScore !== undefined
-    ? `${result.homeScore} - ${result.awayScore}`
-    : "VS";
+  const rating=c.score ?? c.candidate_score ?? c.kgvar_score ?? "-";
+  const league=formatLeague(c.league || c.competition || "Futbol");
 
-  const rating = candidate.score ??
-                 candidate.candidate_score ??
-                 candidate.kgvar_score ??
-                 "";
-
-  const league = formatLeague(candidate.league || candidate.competition || "Futbol");
-
-  let resultText = resultLabel(result.status);
+  const stateText=r.status==="pending"
+    ? (liveStates.get(candidateKey(c)) || "SONUÇ BEKLENİYOR")
+    : "MAÇ TAMAMLANDI";
 
   return `
-    <article class="card">
-      <div class="card-top">
-        <span class="league">${escapeHTML(league)}</span>
-        <span class="score-badge">KG VAR · ${escapeHTML(rating)}</span>
+  <article class="card">
+    <div class="card-top">
+      <span class="league">${escapeHTML(league)}</span>
+      <span class="score-badge">KG VAR · ${escapeHTML(rating)}</span>
+    </div>
+    <div class="teams">
+      <div class="team">
+        <div class="team-icon">⚽</div>
+        <div class="team-name">${escapeHTML(n.home)}</div>
       </div>
-
-      <div class="teams">
-        <div class="team">
-          <div class="team-icon">⚽</div>
-          <div class="team-name">${escapeHTML(names.home)}</div>
-        </div>
-
-        <div class="match-score">${escapeHTML(score)}</div>
-
-        <div class="team">
-          <div class="team-icon">⚽</div>
-          <div class="team-name">${escapeHTML(names.away)}</div>
-        </div>
+      <div class="match-score">${escapeHTML(score)}</div>
+      <div class="team">
+        <div class="team-icon">⚽</div>
+        <div class="team-name">${escapeHTML(n.away)}</div>
       </div>
-
-      <div class="match-info">
-        <span>${escapeHTML(formatDate(candidate.date))}</span>
-        <span class="match-state ${result.status}">
-          ${result.status === "pending" ? "SONUÇ BEKLENİYOR" : "MAÇ TAMAMLANDI"}
-        </span>
-      </div>
-
-      <div class="match-result ${result.status}">
-        ${resultText}
-      </div>
-    </article>
-  `;
+    </div>
+    <div class="match-info">
+      <span>${escapeHTML(formatDate(c.date))}</span>
+      <span class="match-state ${r.status}">${escapeHTML(stateText)}</span>
+    </div>
+    <div class="match-result ${r.status}">${resultLabel(r.status)}</div>
+  </article>`;
 }
 
 function calculateStats(){
-  const picks = getAllPicks();
+  const picks=getAllPicks();
+  const todayPicks=Array.isArray(dailyData?.candidates)
+    ? dailyData.candidates : [];
 
-  let correct = 0;
-  let wrong = 0;
-  let pending = 0;
+  const byKey=new Map();
 
-  picks.forEach(pick => {
-    if(typeof pick.btts_result === "boolean"){
-      if(pick.btts_result) correct++;
-      else wrong++;
-    } else {
-      pending++;
-    }
+  picks.forEach(p=>byKey.set(candidateKey(p),p));
+  todayPicks.forEach(p=>{
+    if(!byKey.has(candidateKey(p)))byKey.set(candidateKey(p),p);
   });
 
-  const completed = correct + wrong;
-  const rate = completed > 0
-    ? Math.round(correct / completed * 100)
-    : null;
+  let correct=0,wrong=0,pending=0;
 
-  $("totalPicks").textContent = picks.length;
-  $("correctPicks").textContent = correct;
-  $("wrongPicks").textContent = wrong;
-  $("successRate").textContent = rate === null ? "-%" : "%" + rate;
+  byKey.forEach(p=>{
+    const r=getResult(p);
+    if(r.status==="correct")correct++;
+    else if(r.status==="wrong")wrong++;
+    else pending++;
+  });
 
-  return {correct,wrong,pending,total:picks.length,rate};
+  const completed=correct+wrong;
+  const rate=completed ? Math.round(correct/completed*100) : null;
+
+  $("totalPicks").textContent=byKey.size;
+  $("correctPicks").textContent=correct;
+  $("wrongPicks").textContent=wrong;
+  $("successRate").textContent=rate===null?"-%":"%"+rate;
+
+  return {correct,wrong,pending,total:byKey.size,rate};
 }
 
 function renderHistory(){
-  const days = getDays();
-  const today = dailyData?.date || "";
+  const days=getDays();
+  const today=dailyData?.date || "";
 
-  const dates = Object.keys(days)
-    .filter(date => date !== today)
-    .sort((a,b) => b.localeCompare(a));
+  const dates=Object.keys(days)
+    .filter(d=>d!==today)
+    .sort((a,b)=>b.localeCompare(a));
 
   if(!dates.length){
-    $("historyList").innerHTML =
-      '<div class="empty">Henüz geçmiş günlere ait tahmin bulunmuyor. Yeni sonuçlar geldikçe burada görünecek.</div>';
+    $("historyList").innerHTML=
+      '<div class="empty">Henüz geçmiş günlere ait tahmin bulunmuyor.</div>';
     return;
   }
 
-  $("historyList").innerHTML = dates.map(date => {
-    const picks = days[date]?.candidates || [];
+  $("historyList").innerHTML=dates.map(date=>{
+    const picks=days[date]?.candidates || [];
+    let correct=0,wrong=0,pending=0;
 
-    let correct = 0;
-    let wrong = 0;
-    let pending = 0;
-
-    picks.forEach(pick => {
-      if(typeof pick.btts_result === "boolean"){
-        if(pick.btts_result) correct++;
-        else wrong++;
-      } else {
-        pending++;
-      }
+    picks.forEach(p=>{
+      const r=getResult(p);
+      if(r.status==="correct")correct++;
+      else if(r.status==="wrong")wrong++;
+      else pending++;
     });
 
-    const summary = `${correct} doğru · ${wrong} yanlış · ${pending} bekliyor`;
-
-    const rows = picks.map(pick => {
-      const names = getNames(pick);
-      const result = getResult(pick);
-
-      const score = result.homeScore !== null &&
-                    result.homeScore !== undefined &&
-                    result.awayScore !== null &&
-                    result.awayScore !== undefined
-        ? `${result.homeScore} - ${result.awayScore}`
-        : "—";
+    const rows=picks.map(p=>{
+      const n=getNames(p);
+      const r=getResult(p);
+      const score=r.homeScore!==null && r.homeScore!==undefined &&
+                  r.awayScore!==null && r.awayScore!==undefined
+        ? `${r.homeScore} - ${r.awayScore}` : "—";
 
       return `
-        <div class="history-match">
-          <div class="history-teams">
-            <strong>${escapeHTML(names.home)} – ${escapeHTML(names.away)}</strong>
-            <span style="color:var(--muted)">Puan: ${escapeHTML(pick.score ?? "-")}</span>
-          </div>
-          <div class="history-score">${escapeHTML(score)}</div>
-          <div class="history-result ${result.status}">
-            ${resultLabel(result.status)}
-          </div>
+      <div class="history-match">
+        <div class="history-teams">
+          <strong>${escapeHTML(n.home)} – ${escapeHTML(n.away)}</strong>
+          <span style="color:var(--muted)">Puan: ${escapeHTML(p.score ?? "-")}</span>
         </div>
-      `;
+        <div class="history-score">${escapeHTML(score)}</div>
+        <div class="history-result ${r.status}">${resultLabel(r.status)}</div>
+      </div>`;
     }).join("");
 
     return `
-      <article class="history-day">
-        <div class="history-heading">
-          <span>${escapeHTML(formatDate(date))}</span>
-          <small>${escapeHTML(summary)}</small>
-        </div>
-        ${rows || '<div class="empty">Bu gün için kayıtlı aday yok.</div>'}
-      </article>
-    `;
+    <article class="history-day">
+      <div class="history-heading">
+        <span>${escapeHTML(formatDate(date))}</span>
+        <small>${correct} doğru · ${wrong} yanlış · ${pending} bekliyor</small>
+      </div>
+      ${rows || '<div class="empty">Bu gün için kayıtlı aday yok.</div>'}
+    </article>`;
   }).join("");
 }
 
-async function fetchJSON(url){
-  const response = await fetch(url + "?t=" + Date.now(), {
+function collectMatches(data){
+  if(Array.isArray(data))return data;
+  if(!data || typeof data!=="object")return [];
+
+  for(const key of ["matches","fixtures","results"]){
+    if(Array.isArray(data[key]))return data[key];
+  }
+
+  if(data.data)return collectMatches(data.data);
+  if(data.match)return collectMatches(data.match);
+
+  return [];
+}
+
+function getTeamName(m,side){
+  const v=m?.[side];
+
+  if(typeof v==="string")return v;
+  if(v && typeof v==="object")return v.name || v.team_name || "";
+
+  return m?.[side+"_name"] ||
+    m?.[side+"_team"]?.name ||
+    m?.[side+"Team"]?.name || "";
+}
+
+function getTeamScore(m,side){
+  const v=m?.[side+"_score"] ??
+    m?.[side+"_goals"] ??
+    m?.[side+"Score"] ??
+    m?.score?.[side];
+
+  if(v===null || v===undefined || v==="")return null;
+  const n=Number(v);
+  return Number.isFinite(n)?n:null;
+}
+
+function getStatus(m){
+  return [
+    m?.status,m?.status_text,m?.statusText,m?.state,
+    m?.state_text,m?.short_status
+  ].filter(Boolean).join(" ").toLowerCase()
+    .replace(/[_-]+/g," ").replace(/\s+/g," ").trim();
+}
+
+function isFinished(m){
+  const s=getStatus(m);
+  return /\b(ft|aet|pen|finished|finish|complete|completed|ended|full time|after extra time|final)\b/i.test(s);
+}
+
+function isLive(m){
+  const s=getStatus(m);
+  return /\b(ht|halftime|half time|interval|1h|2h|et|live|in play|in progress|playing|first half|second half|canlı)\b/i.test(s);
+}
+
+function matchExact(m,c){
+  const home=normalize(getTeamName(m,"home"));
+  const away=normalize(getTeamName(m,"away"));
+  const n=getNames(c);
+
+  return home && away &&
+    home===normalize(n.home) &&
+    away===normalize(n.away);
+}
+
+async function fetchSportScoreDate(date){
+  const url=API+"/api/v1/fixtures/?sport=football&date="+
+    encodeURIComponent(date)+"&limit=200";
+
+  const response=await fetch(url,{
     cache:"no-store",
     headers:{"Accept":"application/json"}
   });
 
-  if(!response.ok){
-    throw new Error(url + " okunamadı: HTTP " + response.status);
-  }
+  if(!response.ok)throw new Error("SportScore HTTP "+response.status);
+  return collectMatches(await response.json());
+}
 
+async function loadLiveResults(candidates){
+  liveResults.clear();
+  liveStates.clear();
+
+  const dates=[...new Set(candidates.map(c=>clean(c.date)).filter(Boolean))];
+
+  const dateResults=await Promise.allSettled(
+    dates.map(date=>fetchSportScoreDate(date))
+  );
+
+  const matchesByDate=new Map();
+
+  dateResults.forEach((result,index)=>{
+    if(result.status==="fulfilled"){
+      matchesByDate.set(dates[index],result.value);
+    }else{
+      console.warn("SportScore tarih sorgusu başarısız:",dates[index],result.reason);
+    }
+  });
+
+  candidates.forEach(c=>{
+    const key=candidateKey(c);
+    const saved=findHistoryPick(c);
+
+    if(saved && typeof saved.btts_result==="boolean")return;
+
+    const matches=matchesByDate.get(clean(c.date)) || [];
+    const match=matches.find(m=>matchExact(m,c));
+
+    if(!match){
+      liveStates.set(key,"SKOR KAYNAĞINDA BULUNAMADI");
+      return;
+    }
+
+    const homeScore=getTeamScore(match,"home");
+    const awayScore=getTeamScore(match,"away");
+
+    if(isFinished(match)){
+      if(homeScore===null || awayScore===null){
+        liveStates.set(key,"SKOR BEKLENİYOR");
+        return;
+      }
+
+      liveResults.set(key,{
+        homeScore,
+        awayScore,
+        btts:homeScore>0 && awayScore>0
+      });
+      return;
+    }
+
+    if(isLive(match)){
+      liveStates.set(key,"MAÇ CANLI");
+      return;
+    }
+
+    const status=getStatus(match);
+
+    if(/\b(cancelled|canceled|abandoned|postponed|suspended|ertelendi|iptal)\b/i.test(status)){
+      liveStates.set(key,"ERTELENDİ / İPTAL");
+    }else{
+      liveStates.set(key,"MAÇ BAŞLAMADI");
+    }
+  });
+}
+
+async function fetchJSON(url){
+  const response=await fetch(url+"?t="+Date.now(),{
+    cache:"no-store",
+    headers:{"Accept":"application/json"}
+  });
+
+  if(!response.ok)throw new Error(url+" okunamadı: HTTP "+response.status);
   return response.json();
 }
 
 async function loadPage(){
-  $("connectionDot").className = "dot loading";
-  $("connectionText").textContent = "Tahminler ve sonuçlar güncelleniyor...";
+  $("connectionDot").className="dot loading";
+  $("connectionText").textContent="Tahminler ve maç sonuçları kontrol ediliyor...";
 
   try{
-    const results = await Promise.allSettled([
+    const results=await Promise.allSettled([
       fetchJSON("./kgvar.json"),
       fetchJSON("./kgvar-history.json")
     ]);
 
-    if(results[0].status === "fulfilled"){
-      dailyData = results[0].value;
-    } else {
-      throw results[0].reason;
+    if(results[0].status!=="fulfilled")throw results[0].reason;
+
+    dailyData=results[0].value;
+
+    if(results[1].status==="fulfilled"){
+      historyData=results[1].value;
     }
 
-    if(results[1].status === "fulfilled"){
-      historyData = results[1].value;
-    }
+    $("todayDate").textContent=formatDate(dailyData.date || "");
 
-    const today = dailyData.date || "";
+    const candidates=Array.isArray(dailyData.candidates)
+      ? dailyData.candidates.slice(0,3) : [];
 
-    $("todayDate").textContent = formatDate(today);
+    await loadLiveResults(candidates);
 
-    const candidates = Array.isArray(dailyData.candidates)
-      ? dailyData.candidates.slice(0,3)
-      : [];
+    $("candidateCards").innerHTML=candidates.length
+      ? candidates.map(renderCard).join("")
+      : '<div class="empty">Bugün kriterleri karşılayan KG Var adayı bulunamadı.</div>';
 
-    if(candidates.length){
-      $("candidateCards").innerHTML =
-        candidates.map(renderCard).join("");
-    } else {
-      $("candidateCards").innerHTML =
-        '<div class="empty">Bugün kriterleri karşılayan KG Var adayı bulunamadı.</div>';
-    }
-
-    const stats = calculateStats();
+    const stats=calculateStats();
     renderHistory();
 
-    $("connectionDot").className = "dot";
-    $("connectionText").textContent =
-      `${candidates.length} günlük aday · ${stats.total} toplam kayıt · ${stats.pending} sonuç bekliyor`;
+    const liveCount=[...liveResults.keys()].length;
+    const savedCount=candidates.filter(c=>{
+      const p=findHistoryPick(c);
+      return p && typeof p.btts_result==="boolean";
+    }).length;
 
-  } catch(error){
-    $("connectionDot").className = "dot error";
-    $("connectionText").textContent = "Veriler alınamadı. Tekrar denenecek.";
-    console.error("StudioErs KG Var:", error);
+    $("connectionDot").className="dot";
+    $("connectionText").textContent=
+      `${candidates.length} aday · ${savedCount} kayıtlı sonuç · ${liveCount} canlı sonuç doğrulandı · ${stats.pending} bekliyor`;
+
+  }catch(error){
+    $("connectionDot").className="dot error";
+    $("connectionText").textContent="Veriler alınamadı; tekrar denenecek.";
+    console.error("StudioErs KG Var:",error);
   }
 }
 
 loadPage();
-setInterval(loadPage, REFRESH_MS);
+setInterval(loadPage,REFRESH_MS);
 </script>
 </body>
 </html>
