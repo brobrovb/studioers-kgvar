@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Günün KG Var Adayları | StudioErs</title>
-<meta name="description" content="StudioErs günlük KG Var tahminleri, maç sonuçları, başarı oranı ve geçmiş tahmin performansı.">
+<meta name="description" content="StudioErs günlük KG Var adayları, canlı maç skorları, sonuçlar ve tahmin başarı oranı.">
 <meta name="theme-color" content="#07111f">
 
 <style>
@@ -71,11 +71,13 @@ h1{font-size:clamp(26px,5vw,40px);margin:0 0 9px}
   flex-shrink:0;font-size:10px;font-weight:900;color:var(--green);
   background:#123c31;padding:7px 9px;border-radius:20px
 }
-.teams{display:grid;grid-template-columns:1fr 55px 1fr;align-items:center;gap:5px;text-align:center}
+.teams{display:grid;grid-template-columns:1fr 58px 1fr;align-items:center;gap:5px;text-align:center}
 .team{min-width:0}
 .team-icon{
-  width:46px;height:46px;display:flex;align-items:center;
-  justify-content:center;margin:0 auto 8px;font-size:29px
+  width:54px;height:54px;display:flex;align-items:center;
+  justify-content:center;margin:0 auto 8px;
+  border-radius:50%;background:#0b1828;border:1px solid var(--line);
+  padding:7px;font-size:28px
 }
 .team-icon img{width:100%;height:100%;object-fit:contain}
 .team-name{
@@ -83,17 +85,14 @@ h1{font-size:clamp(26px,5vw,40px);margin:0 0 9px}
   display:flex;align-items:center;justify-content:center;overflow-wrap:anywhere
 }
 .match-score{font-size:24px;font-weight:900;white-space:nowrap}
-.vs{font-size:12px;color:var(--muted)}
 .match-info{
   border-top:1px solid var(--line);margin-top:16px;padding-top:12px;
   display:flex;justify-content:space-between;align-items:center;
   gap:8px;font-size:11px;color:var(--muted)
 }
 .match-state{font-weight:900;text-align:right;color:var(--yellow)}
-.match-state.correct{color:var(--green)}
+.match-state.correct,.match-state.live{color:var(--green)}
 .match-state.wrong{color:var(--red)}
-.match-state.pending{color:var(--yellow)}
-.match-state.live{color:var(--green)}
 .match-result{margin-top:12px;padding:10px;border-radius:9px;text-align:center;font-size:12px;font-weight:900}
 .match-result.correct{background:#123c31;color:var(--green)}
 .match-result.wrong{background:#421e2b;color:var(--red)}
@@ -138,8 +137,6 @@ h1{font-size:clamp(26px,5vw,40px);margin:0 0 9px}
   .container{width:92%;padding-top:20px}
   .cards{grid-template-columns:1fr;gap:12px}
   .card{padding:17px}
-  .team-icon{width:48px;height:48px}
-  .team-name{font-size:14px}
   .history-match{padding:12px}
 }
 </style>
@@ -187,15 +184,16 @@ h1{font-size:clamp(26px,5vw,40px);margin:0 0 9px}
   <strong style="color:var(--red)">✕ BİLEMEDİK:</strong> Takımlardan en az biri gol atamadı.<br>
   <strong style="color:var(--yellow)">BEKLİYOR:</strong> Maç sonucu henüz doğrulanmadı.<br><br>
   Başarı oranı yalnızca sonucu belli olan tahminler üzerinden hesaplanır.
-  İstatistiksel aday puanı kesin sonuç veya bahis garantisi değildir.
+  Aday puanı kesin sonuç veya bahis garantisi değildir.
 </div>
 
 <footer class="footer">
-  İstatistiksel aday verileri open-matchday açık CSV kaynağından alınmaktadır.<br>
-  Maç skorları için SportScore sorgusu kullanılır.<br>
-  <a href="https://github.com/oladeeayo/open-matchday" target="_blank" rel="noopener">Veri Kaynağı</a>
+  Aday verileri open-matchday açık CSV kaynağından alınmaktadır.<br>
+  Maç skorları ve takım logoları SportScore API üzerinden alınır.<br>
+  <a href="https://sportscore.com/" target="_blank" rel="dofollow">Powered by SportScore</a>
   <br>© StudioErs
 </footer>
+
 </main>
 
 <script>
@@ -208,6 +206,7 @@ const $ = id => document.getElementById(id);
 let dailyData = null;
 let historyData = null;
 let liveResults = new Map();
+let matchDetails = new Map();
 let liveStates = new Map();
 
 function clean(v){return String(v ?? "").trim()}
@@ -232,15 +231,19 @@ function getNames(m){
 }
 
 function getDays(){
-  if(dailyData?.history?.days) return dailyData.history.days;
-  if(historyData?.days) return historyData.days;
-  if(dailyData?.days) return dailyData.days;
-  return {};
+  const result = {};
+  const first = historyData?.days || {};
+  const second = dailyData?.history?.days || dailyData?.days || {};
+
+  Object.assign(result,first);
+  Object.assign(result,second);
+
+  return result;
 }
 
 function getAllPicks(){
-  const days = getDays();
-  const all = [];
+  const days=getDays();
+  const all=[];
 
   Object.keys(days).sort().forEach(date=>{
     (days[date]?.candidates || []).forEach(c=>{
@@ -251,52 +254,38 @@ function getAllPicks(){
   return all;
 }
 
-function findHistoryPick(candidate){
-  const n = getNames(candidate);
-  const date = clean(candidate.date);
-
-  return getAllPicks().find(item=>{
-    const other = getNames(item);
-    return clean(item.date) === date &&
-      normalize(other.home) === normalize(n.home) &&
-      normalize(other.away) === normalize(n.away);
-  }) || null;
+function candidateKey(c){
+  const n=getNames(c);
+  return clean(c.date)+"|"+normalize(n.home)+"|"+normalize(n.away);
 }
 
-function candidateKey(c){
-  const n = getNames(c);
-  return clean(c.date) + "|" + normalize(n.home) + "|" + normalize(n.away);
+function findHistoryPick(candidate){
+  const key=candidateKey(candidate);
+  return getAllPicks().find(p=>candidateKey(p)===key) || null;
 }
 
 function getResult(candidate){
-  const item = findHistoryPick(candidate) || candidate;
+  const saved=findHistoryPick(candidate) || candidate;
 
-  if(typeof item.btts_result === "boolean"){
+  if(typeof saved.btts_result==="boolean"){
     return {
-      status:item.btts_result ? "correct" : "wrong",
-      homeScore:item.actual_home_score,
-      awayScore:item.actual_away_score,
-      source:"history"
+      status:saved.btts_result?"correct":"wrong",
+      homeScore:saved.actual_home_score,
+      awayScore:saved.actual_away_score
     };
   }
 
-  const live = liveResults.get(candidateKey(candidate));
+  const live=liveResults.get(candidateKey(candidate));
 
   if(live){
     return {
-      status:live.btts ? "correct" : "wrong",
+      status:live.btts?"correct":"wrong",
       homeScore:live.homeScore,
-      awayScore:live.awayScore,
-      source:"live"
+      awayScore:live.awayScore
     };
   }
 
-  return {
-    status:"pending",
-    homeScore:null,
-    awayScore:null,
-    source:"none"
-  };
+  return {status:"pending",homeScore:null,awayScore:null};
 }
 
 function formatDate(value){
@@ -319,9 +308,19 @@ function resultLabel(status){
   return "◷ BEKLİYOR";
 }
 
+function logoHTML(url){
+  if(!url || !/^https?:\/\//i.test(url))return "⚽";
+
+  return `<img src="${escapeHTML(url)}" alt="" loading="lazy"
+    referrerpolicy="no-referrer"
+    onerror="this.style.display='none';this.parentElement.textContent='⚽'">`;
+}
+
 function renderCard(c){
   const n=getNames(c);
   const r=getResult(c);
+  const detail=matchDetails.get(candidateKey(c)) || {};
+
   const score=r.homeScore!==null && r.homeScore!==undefined &&
               r.awayScore!==null && r.awayScore!==undefined
     ? `${r.homeScore} - ${r.awayScore}` : "VS";
@@ -329,9 +328,9 @@ function renderCard(c){
   const rating=c.score ?? c.candidate_score ?? c.kgvar_score ?? "-";
   const league=formatLeague(c.league || c.competition || "Futbol");
 
-  const stateText=r.status==="pending"
-    ? (liveStates.get(candidateKey(c)) || "SONUÇ BEKLENİYOR")
-    : "MAÇ TAMAMLANDI";
+  let stateText="SONUÇ BEKLENİYOR";
+  if(r.status!=="pending")stateText="MAÇ TAMAMLANDI";
+  else if(liveStates.get(candidateKey(c)))stateText=liveStates.get(candidateKey(c));
 
   return `
   <article class="card">
@@ -341,12 +340,12 @@ function renderCard(c){
     </div>
     <div class="teams">
       <div class="team">
-        <div class="team-icon">⚽</div>
+        <div class="team-icon">${logoHTML(detail.home_logo)}</div>
         <div class="team-name">${escapeHTML(n.home)}</div>
       </div>
       <div class="match-score">${escapeHTML(score)}</div>
       <div class="team">
-        <div class="team-icon">⚽</div>
+        <div class="team-icon">${logoHTML(detail.away_logo)}</div>
         <div class="team-name">${escapeHTML(n.away)}</div>
       </div>
     </div>
@@ -359,20 +358,16 @@ function renderCard(c){
 }
 
 function calculateStats(){
-  const picks=getAllPicks();
-  const todayPicks=Array.isArray(dailyData?.candidates)
-    ? dailyData.candidates : [];
+  const all=new Map();
 
-  const byKey=new Map();
-
-  picks.forEach(p=>byKey.set(candidateKey(p),p));
-  todayPicks.forEach(p=>{
-    if(!byKey.has(candidateKey(p)))byKey.set(candidateKey(p),p);
+  getAllPicks().forEach(p=>all.set(candidateKey(p),p));
+  (dailyData?.candidates || []).forEach(p=>{
+    if(!all.has(candidateKey(p)))all.set(candidateKey(p),p);
   });
 
   let correct=0,wrong=0,pending=0;
 
-  byKey.forEach(p=>{
+  all.forEach(p=>{
     const r=getResult(p);
     if(r.status==="correct")correct++;
     else if(r.status==="wrong")wrong++;
@@ -380,14 +375,14 @@ function calculateStats(){
   });
 
   const completed=correct+wrong;
-  const rate=completed ? Math.round(correct/completed*100) : null;
+  const rate=completed?Math.round(correct/completed*100):null;
 
-  $("totalPicks").textContent=byKey.size;
+  $("totalPicks").textContent=all.size;
   $("correctPicks").textContent=correct;
   $("wrongPicks").textContent=wrong;
   $("successRate").textContent=rate===null?"-%":"%"+rate;
 
-  return {correct,wrong,pending,total:byKey.size,rate};
+  return {correct,wrong,pending,total:all.size};
 }
 
 function renderHistory(){
@@ -409,15 +404,16 @@ function renderHistory(){
     let correct=0,wrong=0,pending=0;
 
     picks.forEach(p=>{
-      const r=getResult(p);
+      const r=getResult({...p,date:p.date || date});
       if(r.status==="correct")correct++;
       else if(r.status==="wrong")wrong++;
       else pending++;
     });
 
     const rows=picks.map(p=>{
-      const n=getNames(p);
-      const r=getResult(p);
+      const item={...p,date:p.date || date};
+      const n=getNames(item);
+      const r=getResult(item);
       const score=r.homeScore!==null && r.homeScore!==undefined &&
                   r.awayScore!==null && r.awayScore!==undefined
         ? `${r.homeScore} - ${r.awayScore}` : "—";
@@ -444,71 +440,107 @@ function renderHistory(){
   }).join("");
 }
 
+/* SportScore yanıtlarını farklı olası zarf yapılarından çıkar */
 function collectMatches(data){
   if(Array.isArray(data))return data;
   if(!data || typeof data!=="object")return [];
 
-  for(const key of ["matches","fixtures","results"]){
-    if(Array.isArray(data[key]))return data[key];
+  if(Array.isArray(data.matches))return data.matches;
+  if(Array.isArray(data.fixtures))return data.fixtures;
+  if(Array.isArray(data.results))return data.results;
+
+  for(const key of ["data","response","result"]){
+    if(data[key]){
+      const found=collectMatches(data[key]);
+      if(found.length)return found;
+    }
   }
-
-  if(data.data)return collectMatches(data.data);
-  if(data.match)return collectMatches(data.match);
-
   return [];
 }
 
-function getTeamName(m,side){
-  const v=m?.[side];
+function teamName(m,side){
+  const value=m?.[side];
 
-  if(typeof v==="string")return v;
-  if(v && typeof v==="object")return v.name || v.team_name || "";
+  if(typeof value==="string")return value;
+  if(value && typeof value==="object"){
+    return value.name || value.team_name || value.title || "";
+  }
 
   return m?.[side+"_name"] ||
-    m?.[side+"_team"]?.name ||
-    m?.[side+"Team"]?.name || "";
+         m?.[side+"_team"]?.name ||
+         m?.[side+"Team"]?.name || "";
 }
 
-function getTeamScore(m,side){
-  const v=m?.[side+"_score"] ??
+function teamLogo(m,side){
+  const value=m?.[side];
+
+  if(value && typeof value==="object"){
+    return value.logo || value.image || value.logo_url || "";
+  }
+
+  return m?.[side+"_logo"] ||
+         m?.[side+"_logo_url"] ||
+         m?.[side+"_team"]?.logo || "";
+}
+
+function teamScore(m,side){
+  const value=m?.[side+"_score"] ??
     m?.[side+"_goals"] ??
     m?.[side+"Score"] ??
-    m?.score?.[side];
+    m?.score?.[side] ??
+    m?.scores?.[side];
 
-  if(v===null || v===undefined || v==="")return null;
-  const n=Number(v);
-  return Number.isFinite(n)?n:null;
+  if(value===null || value===undefined || value==="")return null;
+
+  const number=Number(value);
+  return Number.isFinite(number)?number:null;
 }
 
-function getStatus(m){
+function matchStatus(m){
   return [
-    m?.status,m?.status_text,m?.statusText,m?.state,
-    m?.state_text,m?.short_status
+    m?.status,m?.status_text,m?.statusText,
+    m?.state,m?.state_text,m?.short_status
   ].filter(Boolean).join(" ").toLowerCase()
     .replace(/[_-]+/g," ").replace(/\s+/g," ").trim();
 }
 
 function isFinished(m){
-  const s=getStatus(m);
-  return /\b(ft|aet|pen|finished|finish|complete|completed|ended|full time|after extra time|final)\b/i.test(s);
+  const s=matchStatus(m);
+
+  return /\b(ft|aet|pen|finished|finish|complete|completed|ended|full time|after extra time|final|maç sonu)\b/i.test(s);
 }
 
 function isLive(m){
-  const s=getStatus(m);
-  return /\b(ht|halftime|half time|interval|1h|2h|et|live|in play|in progress|playing|first half|second half|canlı)\b/i.test(s);
+  const s=matchStatus(m);
+
+  return /\b(ht|halftime|half time|interval|1h|2h|et|live|in play|in progress|playing|first half|second half|canli)\b/i.test(s);
 }
 
-function matchExact(m,c){
-  const home=normalize(getTeamName(m,"home"));
-  const away=normalize(getTeamName(m,"away"));
-  const n=getNames(c);
-
-  return home && away &&
-    home===normalize(n.home) &&
-    away===normalize(n.away);
+function isCancelled(m){
+  return /\b(cancelled|canceled|abandoned|postponed|suspended|ertelendi|iptal)\b/i.test(matchStatus(m));
 }
 
-async function fetchSportScoreDate(date){
+/* Önce tam isim eşleşmesi aranır. Yanlış maçın skoru kullanılmaz. */
+function findExactMatch(matches,candidate){
+  const names=getNames(candidate);
+  const home=normalize(names.home);
+  const away=normalize(names.away);
+
+  if(!home || !away)return null;
+
+  return matches.find(m=>
+    normalize(teamName(m,"home"))===home &&
+    normalize(teamName(m,"away"))===away
+  ) || null;
+}
+
+function dateShift(date,days){
+  const d=new Date(date+"T12:00:00Z");
+  d.setUTCDate(d.getUTCDate()+days);
+  return d.toISOString().slice(0,10);
+}
+
+async function fetchFixtures(date){
   const url=API+"/api/v1/fixtures/?sport=football&date="+
     encodeURIComponent(date)+"&limit=200";
 
@@ -517,50 +549,99 @@ async function fetchSportScoreDate(date){
     headers:{"Accept":"application/json"}
   });
 
-  if(!response.ok)throw new Error("SportScore HTTP "+response.status);
-  return collectMatches(await response.json());
+  if(!response.ok)throw new Error("SportScore "+response.status+" ("+date+")");
+
+  const json=await response.json();
+  return collectMatches(json);
 }
 
-async function loadLiveResults(candidates){
+async function fetchDateMatches(date){
+  const dates=[date,dateShift(date,-1),dateShift(date,1)];
+  const results=await Promise.allSettled(dates.map(fetchFixtures));
+  const all=[];
+
+  results.forEach(result=>{
+    if(result.status==="fulfilled")all.push(...result.value);
+  });
+
+  return all;
+}
+
+async function loadMatchData(){
   liveResults.clear();
+  matchDetails.clear();
   liveStates.clear();
 
-  const dates=[...new Set(candidates.map(c=>clean(c.date)).filter(Boolean))];
+  const all=new Map();
 
-  const dateResults=await Promise.allSettled(
-    dates.map(date=>fetchSportScoreDate(date))
+  (dailyData?.candidates || []).forEach(p=>{
+    all.set(candidateKey(p),p);
+  });
+
+  getAllPicks().forEach(p=>{
+    if(!all.has(candidateKey(p)))all.set(candidateKey(p),p);
+  });
+
+  const candidates=[...all.values()];
+
+  /* API sorgusunu sadece henüz sonucu kaydedilmemiş tahminler için yap */
+  const pending=candidates.filter(p=>{
+    const saved=findHistoryPick(p) || p;
+    return typeof saved.btts_result!=="boolean";
+  });
+
+  const dates=[...new Set(pending.map(p=>clean(p.date)).filter(Boolean))];
+
+  /* Geçmişte çok eski kayıtları tekrar sorgulamayarak API yükünü sınırlıyoruz */
+  const today=dailyData?.date || "";
+  const allowedDates=dates.filter(d=>{
+    if(d===today)return true;
+    const diff=(new Date(today+"T12:00:00Z")-new Date(d+"T12:00:00Z"))/86400000;
+    return diff>=0 && diff<=30;
+  });
+
+  const dateData=await Promise.allSettled(
+    allowedDates.map(async date=>[date,await fetchDateMatches(date)])
   );
 
   const matchesByDate=new Map();
 
-  dateResults.forEach((result,index)=>{
+  dateData.forEach(result=>{
     if(result.status==="fulfilled"){
-      matchesByDate.set(dates[index],result.value);
+      matchesByDate.set(result.value[0],result.value[1]);
     }else{
-      console.warn("SportScore tarih sorgusu başarısız:",dates[index],result.reason);
+      console.warn("SportScore tarih sorgusu başarısız:",result.reason);
     }
   });
 
-  candidates.forEach(c=>{
-    const key=candidateKey(c);
-    const saved=findHistoryPick(c);
-
-    if(saved && typeof saved.btts_result==="boolean")return;
-
-    const matches=matchesByDate.get(clean(c.date)) || [];
-    const match=matches.find(m=>matchExact(m,c));
+  pending.forEach(candidate=>{
+    const key=candidateKey(candidate);
+    const matches=matchesByDate.get(clean(candidate.date)) || [];
+    const match=findExactMatch(matches,candidate);
 
     if(!match){
-      liveStates.set(key,"SKOR KAYNAĞINDA BULUNAMADI");
+      liveStates.set(key,"KAYNAKTA EŞLEŞME BULUNAMADI");
       return;
     }
 
-    const homeScore=getTeamScore(match,"home");
-    const awayScore=getTeamScore(match,"away");
+    const homeScore=teamScore(match,"home");
+    const awayScore=teamScore(match,"away");
+
+    const detail={
+      home_logo:teamLogo(match,"home"),
+      away_logo:teamLogo(match,"away")
+    };
+
+    matchDetails.set(key,detail);
+
+    if(isCancelled(match)){
+      liveStates.set(key,"ERTELENDİ / İPTAL");
+      return;
+    }
 
     if(isFinished(match)){
       if(homeScore===null || awayScore===null){
-        liveStates.set(key,"SKOR BEKLENİYOR");
+        liveStates.set(key,"TAM SKOR ALINAMADI");
         return;
       }
 
@@ -572,17 +653,29 @@ async function loadLiveResults(candidates){
       return;
     }
 
-    if(isLive(match)){
-      liveStates.set(key,"MAÇ CANLI");
-      return;
-    }
-
-    const status=getStatus(match);
-
-    if(/\b(cancelled|canceled|abandoned|postponed|suspended|ertelendi|iptal)\b/i.test(status)){
-      liveStates.set(key,"ERTELENDİ / İPTAL");
+    if(homeScore!==null || awayScore!==null){
+      /* Maç devam ederken geçici skoru sonuç olarak sayma */
+      liveStates.set(key,isLive(match)?"MAÇ CANLI":"SKOR GÜNCELLENİYOR");
     }else{
-      liveStates.set(key,"MAÇ BAŞLAMADI");
+      liveStates.set(key,isLive(match)?"MAÇ CANLI":"MAÇ BAŞLAMADI");
+    }
+  });
+
+  /* Sonucu zaten geçmiş dosyasında olan bugünkü maçların logolarını da al */
+  const todayCandidates=dailyData?.candidates || [];
+
+  todayCandidates.forEach(c=>{
+    const key=candidateKey(c);
+    if(matchDetails.has(key))return;
+
+    const matches=matchesByDate.get(clean(c.date)) || [];
+    const match=findExactMatch(matches,c);
+
+    if(match){
+      matchDetails.set(key,{
+        home_logo:teamLogo(match,"home"),
+        away_logo:teamLogo(match,"away")
+      });
     }
   });
 }
@@ -610,17 +703,14 @@ async function loadPage(){
     if(results[0].status!=="fulfilled")throw results[0].reason;
 
     dailyData=results[0].value;
-
-    if(results[1].status==="fulfilled"){
-      historyData=results[1].value;
-    }
+    historyData=results[1].status==="fulfilled"?results[1].value:null;
 
     $("todayDate").textContent=formatDate(dailyData.date || "");
 
+    await loadMatchData();
+
     const candidates=Array.isArray(dailyData.candidates)
       ? dailyData.candidates.slice(0,3) : [];
-
-    await loadLiveResults(candidates);
 
     $("candidateCards").innerHTML=candidates.length
       ? candidates.map(renderCard).join("")
@@ -629,25 +719,34 @@ async function loadPage(){
     const stats=calculateStats();
     renderHistory();
 
-    const liveCount=[...liveResults.keys()].length;
-    const savedCount=candidates.filter(c=>{
-      const p=findHistoryPick(c);
-      return p && typeof p.btts_result==="boolean";
+    const checked=liveResults.size;
+    const saved=candidates.filter(c=>{
+      const p=findHistoryPick(c)||c;
+      return typeof p.btts_result==="boolean";
     }).length;
 
     $("connectionDot").className="dot";
     $("connectionText").textContent=
-      `${candidates.length} aday · ${savedCount} kayıtlı sonuç · ${liveCount} canlı sonuç doğrulandı · ${stats.pending} bekliyor`;
+      `${candidates.length} aday · ${saved} kayıtlı sonuç · ${checked} API sonucu doğrulandı · ${stats.pending} bekliyor`;
 
   }catch(error){
     $("connectionDot").className="dot error";
-    $("connectionText").textContent="Veriler alınamadı; tekrar denenecek.";
+    $("connectionText").textContent="Veri bağlantısı başarısız; tekrar denenecek.";
     console.error("StudioErs KG Var:",error);
   }
 }
 
-loadPage();
-setInterval(loadPage,REFRESH_MS);
+let loading=false;
+
+async function safeLoadPage(){
+  if(loading)return;
+  loading=true;
+  try{await loadPage();}
+  finally{loading=false;}
+}
+
+safeLoadPage();
+setInterval(safeLoadPage,REFRESH_MS);
 </script>
 </body>
 </html>
