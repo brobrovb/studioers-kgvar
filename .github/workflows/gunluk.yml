@@ -16,28 +16,33 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Build today's shortlist
+      - name: Build KG Var candidates and update history
         run: python gunun_kgvar.py
 
-      - name: Commit updated JSON
+      - name: Commit and push JSON files
         run: |
-          if git diff --quiet -- docs/kgvar.json; then
-            echo "JSON did not change."
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/kgvar.json
-          git commit -m "Update daily KG Var candidates"
+
+          git add docs/kgvar.json docs/kgvar-history.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to save."
+            exit 0
+          fi
+
+          git commit -m "Update KG Var predictions and results"
           git push
