@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-31T09:24:29+03:00",
-  "date": "2026-10-31",
+  "updated_at": "2026-11-01T09:56:35+03:00",
+  "date": "2026-11-01",
   "timezone": "Europe/Istanbul",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
@@ -8,14 +8,14 @@
   "candidate_count": 3,
   "candidates": [
     {
-      "date": "2026-10-31",
-      "home": "Threave Rovers",
-      "away": "Pollok",
-      "league": "SCO_CUP_scottish-cup",
+      "date": "2026-11-01",
+      "home": "Perth Glory FC",
+      "away": "Adelaide United FC",
+      "league": "AUS_1_a-league",
       "score": 100,
       "home_form": {
-        "played": 1,
-        "btts": 1,
+        "played": 2,
+        "btts": 2,
         "rate": 1.0
       },
       "away_form": {
@@ -24,26 +24,26 @@
         "rate": 1.0
       },
       "home_home_form": {
-        "played": 1,
-        "btts": 1,
-        "rate": 1.0
-      },
-      "away_away_form": {
         "played": 0,
         "btts": 0,
         "rate": null
+      },
+      "away_away_form": {
+        "played": 1,
+        "btts": 1,
+        "rate": 1.0
       }
     },
     {
-      "date": "2026-10-31",
-      "home": "SV Werder Bremen",
-      "away": "TSG Hoffenheim",
-      "league": "GER_1_bundesliga",
-      "score": 93,
+      "date": "2026-11-01",
+      "home": "RC Strasbourg Alsace",
+      "away": "AJ Auxerre",
+      "league": "FRA_1_ligue-1",
+      "score": 87,
       "home_form": {
-        "played": 7,
-        "btts": 7,
-        "rate": 1.0
+        "played": 8,
+        "btts": 6,
+        "rate": 0.75
       },
       "away_form": {
         "played": 8,
@@ -56,26 +56,26 @@
         "rate": 1.0
       },
       "away_away_form": {
-        "played": 5,
+        "played": 4,
         "btts": 4,
-        "rate": 0.8
+        "rate": 1.0
       }
     },
     {
-      "date": "2026-10-31",
-      "home": "Kelty Hearts",
-      "away": "Elgin City",
-      "league": "SCO_4_league-two",
-      "score": 91,
+      "date": "2026-11-01",
+      "home": "R. Racing Club",
+      "away": "Real Madrid",
+      "league": "ESP_1_la-liga",
+      "score": 84,
       "home_form": {
         "played": 8,
         "btts": 6,
         "rate": 0.75
       },
       "away_form": {
-        "played": 1,
-        "btts": 1,
-        "rate": 1.0
+        "played": 8,
+        "btts": 7,
+        "rate": 0.875
       },
       "home_home_form": {
         "played": 5,
@@ -83,15 +83,15 @@
         "rate": 1.0
       },
       "away_away_form": {
-        "played": 1,
-        "btts": 1,
-        "rate": 1.0
+        "played": 6,
+        "btts": 5,
+        "rate": 0.833
       }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17700,
+    "matches_parsed": 17713,
     "source_errors_count": 0,
     "source_errors_sample": []
   }
