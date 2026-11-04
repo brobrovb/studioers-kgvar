@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-03T10:20:48+03:00",
-  "date": "2026-11-03",
+  "updated_at": "2026-11-04T10:02:01+03:00",
+  "date": "2026-11-04",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-05",
+  "scan_until": "2026-11-06",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
@@ -10,6 +10,52 @@
   "strong_count": 3,
   "watch_count": 0,
   "candidates": [
+    {
+      "date": "2026-11-06",
+      "time": "20:00",
+      "home": "Dijon FCO",
+      "away": "Red Star FC",
+      "league": "FRA_2_ligue-2",
+      "score": 83,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 9,
+        "rate": 0.9,
+        "scored_rate": 0.9,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.9,
+        "avg_conceded": 1.8
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 7,
+        "rate": 0.7,
+        "scored_rate": 0.8,
+        "conceded_rate": 0.8,
+        "avg_scored": 1.3,
+        "avg_conceded": 1.6
+      },
+      "home_home_form": {
+        "played": 5,
+        "btts": 4,
+        "rate": 0.8,
+        "scored_rate": 0.8,
+        "conceded_rate": 1.0,
+        "avg_scored": 2.0,
+        "avg_conceded": 2.0
+      },
+      "away_away_form": {
+        "played": 6,
+        "btts": 5,
+        "rate": 0.833,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.833,
+        "avg_scored": 1.83,
+        "avg_conceded": 1.17
+      }
+    },
     {
       "date": "2026-11-05",
       "time": "18:45",
@@ -101,66 +147,20 @@
         "avg_scored": 3.0,
         "avg_conceded": 1.57
       }
-    },
-    {
-      "date": "2026-11-04",
-      "time": "00:00",
-      "home": "Venados FC",
-      "away": "Club Atlético Morelia",
-      "league": "MEX_2_liga-expansion",
-      "score": 77,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.8,
-        "avg_scored": 1.9,
-        "avg_conceded": 1.5
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 7,
-        "rate": 0.7,
-        "scored_rate": 1.0,
-        "conceded_rate": 0.7,
-        "avg_scored": 1.5,
-        "avg_conceded": 1.1
-      },
-      "home_home_form": {
-        "played": 7,
-        "btts": 5,
-        "rate": 0.714,
-        "scored_rate": 1.0,
-        "conceded_rate": 0.714,
-        "avg_scored": 3.0,
-        "avg_conceded": 1.14
-      },
-      "away_away_form": {
-        "played": 8,
-        "btts": 5,
-        "rate": 0.625,
-        "scored_rate": 0.875,
-        "conceded_rate": 0.75,
-        "avg_scored": 1.12,
-        "avg_conceded": 1.12
-      }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17739,
-    "upcoming_fixtures": 94,
+    "matches_parsed": 17749,
+    "upcoming_fixtures": 148,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 49,
-      "weak_btts": 30,
-      "weak_scoring": 0,
-      "weak_conceding": 2,
-      "weak_venue_form": 1,
-      "below_score_threshold": 8
+      "insufficient_history": 47,
+      "weak_btts": 71,
+      "weak_scoring": 1,
+      "weak_conceding": 4,
+      "weak_venue_form": 3,
+      "below_score_threshold": 11
     },
     "source_errors_count": 0,
     "source_errors_sample": []
