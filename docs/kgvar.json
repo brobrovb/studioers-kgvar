@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-04T10:02:01+03:00",
-  "date": "2026-11-04",
+  "updated_at": "2026-11-05T10:28:53+03:00",
+  "date": "2026-11-05",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-06",
+  "scan_until": "2026-11-07",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
@@ -11,58 +11,58 @@
   "watch_count": 0,
   "candidates": [
     {
-      "date": "2026-11-06",
-      "time": "20:00",
-      "home": "Dijon FCO",
-      "away": "Red Star FC",
-      "league": "FRA_2_ligue-2",
-      "score": 83,
+      "date": "2026-11-07",
+      "time": "18:45",
+      "home": "ADO Den Haag",
+      "away": "Sparta Rotterdam",
+      "league": "NED_1_eredivisie",
+      "score": 91,
       "selection_level": "strong",
       "selection_label": "GÜÇLÜ ADAY",
       "home_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 0.8,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.3,
+        "avg_conceded": 1.9
+      },
+      "away_form": {
         "played": 10,
         "btts": 9,
         "rate": 0.9,
         "scored_rate": 0.9,
         "conceded_rate": 1.0,
         "avg_scored": 1.9,
-        "avg_conceded": 1.8
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 7,
-        "rate": 0.7,
-        "scored_rate": 0.8,
-        "conceded_rate": 0.8,
-        "avg_scored": 1.3,
-        "avg_conceded": 1.6
+        "avg_conceded": 2.6
       },
       "home_home_form": {
         "played": 5,
-        "btts": 4,
-        "rate": 0.8,
-        "scored_rate": 0.8,
+        "btts": 5,
+        "rate": 1.0,
+        "scored_rate": 1.0,
         "conceded_rate": 1.0,
-        "avg_scored": 2.0,
-        "avg_conceded": 2.0
+        "avg_scored": 1.6,
+        "avg_conceded": 2.4
       },
       "away_away_form": {
-        "played": 6,
+        "played": 5,
         "btts": 5,
-        "rate": 0.833,
+        "rate": 1.0,
         "scored_rate": 1.0,
-        "conceded_rate": 0.833,
-        "avg_scored": 1.83,
-        "avg_conceded": 1.17
+        "conceded_rate": 1.0,
+        "avg_scored": 2.2,
+        "avg_conceded": 2.4
       }
     },
     {
-      "date": "2026-11-05",
-      "time": "18:45",
-      "home": "Midtjylland",
-      "away": "Ajax",
-      "league": "UEFA_1_conference-league",
-      "score": 82,
+      "date": "2026-11-07",
+      "time": "16:30",
+      "home": "Preußen Münster",
+      "away": "MSV Duisburg",
+      "league": "GER_3_3-liga",
+      "score": 90,
       "selection_level": "strong",
       "selection_label": "GÜÇLÜ ADAY",
       "home_form": {
@@ -71,96 +71,96 @@
         "rate": 0.8,
         "scored_rate": 0.9,
         "conceded_rate": 0.9,
-        "avg_scored": 2.0,
-        "avg_conceded": 1.2
+        "avg_scored": 1.6,
+        "avg_conceded": 2.1
       },
       "away_form": {
         "played": 10,
-        "btts": 8,
-        "rate": 0.8,
+        "btts": 9,
+        "rate": 0.9,
         "scored_rate": 1.0,
-        "conceded_rate": 0.8,
-        "avg_scored": 2.5,
-        "avg_conceded": 1.3
+        "conceded_rate": 0.9,
+        "avg_scored": 2.4,
+        "avg_conceded": 1.5
       },
       "home_home_form": {
-        "played": 7,
-        "btts": 5,
-        "rate": 0.714,
-        "scored_rate": 0.857,
-        "conceded_rate": 0.857,
-        "avg_scored": 2.0,
-        "avg_conceded": 1.14
-      },
-      "away_away_form": {
-        "played": 6,
-        "btts": 4,
-        "rate": 0.667,
-        "scored_rate": 1.0,
-        "conceded_rate": 0.667,
-        "avg_scored": 3.17,
-        "avg_conceded": 1.0
-      }
-    },
-    {
-      "date": "2026-11-05",
-      "time": "02:05",
-      "home": "Tlaxcala FC",
-      "away": "Club Atlético La Paz",
-      "league": "MEX_2_liga-expansion",
-      "score": 81,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 10,
-        "btts": 7,
-        "rate": 0.7,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.8,
-        "avg_scored": 2.2,
-        "avg_conceded": 1.3
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 1.0,
-        "conceded_rate": 0.8,
-        "avg_scored": 2.6,
-        "avg_conceded": 1.2
-      },
-      "home_home_form": {
-        "played": 7,
-        "btts": 5,
-        "rate": 0.714,
-        "scored_rate": 0.857,
-        "conceded_rate": 0.857,
-        "avg_scored": 2.57,
-        "avg_conceded": 1.57
-      },
-      "away_away_form": {
         "played": 7,
         "btts": 6,
         "rate": 0.857,
         "scored_rate": 1.0,
         "conceded_rate": 0.857,
-        "avg_scored": 3.0,
-        "avg_conceded": 1.57
+        "avg_scored": 1.71,
+        "avg_conceded": 1.71
+      },
+      "away_away_form": {
+        "played": 6,
+        "btts": 6,
+        "rate": 1.0,
+        "scored_rate": 1.0,
+        "conceded_rate": 1.0,
+        "avg_scored": 2.67,
+        "avg_conceded": 1.67
+      }
+    },
+    {
+      "date": "2026-11-07",
+      "time": "",
+      "home": "Carmarthen Town",
+      "away": "Aberystwyth",
+      "league": "WAL_3_cymru-south",
+      "score": 87,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 10,
+        "rate": 1.0,
+        "scored_rate": 1.0,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.8,
+        "avg_conceded": 2.2
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 6,
+        "rate": 0.6,
+        "scored_rate": 0.8,
+        "conceded_rate": 0.7,
+        "avg_scored": 2.4,
+        "avg_conceded": 1.0
+      },
+      "home_home_form": {
+        "played": 7,
+        "btts": 7,
+        "rate": 1.0,
+        "scored_rate": 1.0,
+        "conceded_rate": 1.0,
+        "avg_scored": 2.14,
+        "avg_conceded": 2.57
+      },
+      "away_away_form": {
+        "played": 3,
+        "btts": 3,
+        "rate": 1.0,
+        "scored_rate": 1.0,
+        "conceded_rate": 1.0,
+        "avg_scored": 3.67,
+        "avg_conceded": 1.67
       }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17749,
-    "upcoming_fixtures": 148,
+    "matches_parsed": 17748,
+    "upcoming_fixtures": 357,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 47,
-      "weak_btts": 71,
-      "weak_scoring": 1,
-      "weak_conceding": 4,
-      "weak_venue_form": 3,
-      "below_score_threshold": 11
+      "insufficient_history": 74,
+      "weak_btts": 196,
+      "weak_scoring": 7,
+      "weak_conceding": 11,
+      "weak_venue_form": 14,
+      "below_score_threshold": 22
     },
     "source_errors_count": 0,
     "source_errors_sample": []
