@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-06T10:27:55+03:00",
-  "date": "2026-11-06",
+  "updated_at": "2026-11-07T09:40:26+03:00",
+  "date": "2026-11-07",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-08",
+  "scan_until": "2026-11-09",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
@@ -152,15 +152,15 @@
   "diagnostics": {
     "competitions_discovered": 75,
     "matches_parsed": 17751,
-    "upcoming_fixtures": 429,
+    "upcoming_fixtures": 262,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 45,
-      "weak_btts": 270,
-      "weak_scoring": 10,
-      "weak_conceding": 14,
-      "weak_venue_form": 17,
-      "below_score_threshold": 21
+      "insufficient_history": 8,
+      "weak_btts": 184,
+      "weak_scoring": 6,
+      "weak_conceding": 10,
+      "weak_venue_form": 7,
+      "below_score_threshold": 12
     },
     "source_errors_count": 0,
     "source_errors_sample": []
