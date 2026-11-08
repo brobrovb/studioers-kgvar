@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-07T09:40:26+03:00",
-  "date": "2026-11-07",
+  "updated_at": "2026-11-08T09:47:11+03:00",
+  "date": "2026-11-08",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-09",
+  "scan_until": "2026-11-10",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
@@ -10,98 +10,6 @@
   "strong_count": 3,
   "watch_count": 0,
   "candidates": [
-    {
-      "date": "2026-11-07",
-      "time": "18:45",
-      "home": "ADO Den Haag",
-      "away": "Sparta Rotterdam",
-      "league": "NED_1_eredivisie",
-      "score": 91,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.8,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.3,
-        "avg_conceded": 1.9
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 9,
-        "rate": 0.9,
-        "scored_rate": 0.9,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.9,
-        "avg_conceded": 2.6
-      },
-      "home_home_form": {
-        "played": 5,
-        "btts": 5,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.6,
-        "avg_conceded": 2.4
-      },
-      "away_away_form": {
-        "played": 5,
-        "btts": 5,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 2.2,
-        "avg_conceded": 2.4
-      }
-    },
-    {
-      "date": "2026-11-07",
-      "time": "16:30",
-      "home": "Preußen Münster",
-      "away": "MSV Duisburg",
-      "league": "GER_3_3-liga",
-      "score": 90,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.9,
-        "avg_scored": 1.6,
-        "avg_conceded": 2.1
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 9,
-        "rate": 0.9,
-        "scored_rate": 1.0,
-        "conceded_rate": 0.9,
-        "avg_scored": 2.4,
-        "avg_conceded": 1.5
-      },
-      "home_home_form": {
-        "played": 7,
-        "btts": 6,
-        "rate": 0.857,
-        "scored_rate": 1.0,
-        "conceded_rate": 0.857,
-        "avg_scored": 1.71,
-        "avg_conceded": 1.71
-      },
-      "away_away_form": {
-        "played": 6,
-        "btts": 6,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 2.67,
-        "avg_conceded": 1.67
-      }
-    },
     {
       "date": "2026-11-08",
       "time": "16:30",
@@ -147,20 +55,112 @@
         "avg_scored": 1.17,
         "avg_conceded": 2.0
       }
+    },
+    {
+      "date": "2026-11-08",
+      "time": "16:15",
+      "home": "Real Sociedad",
+      "away": "Rayo Vallecano",
+      "league": "ESP_1_la-liga",
+      "score": 85,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 0.9,
+        "conceded_rate": 0.9,
+        "avg_scored": 2.3,
+        "avg_conceded": 1.6
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 0.9,
+        "conceded_rate": 0.9,
+        "avg_scored": 1.7,
+        "avg_conceded": 2.0
+      },
+      "home_home_form": {
+        "played": 7,
+        "btts": 5,
+        "rate": 0.714,
+        "scored_rate": 0.714,
+        "conceded_rate": 0.857,
+        "avg_scored": 1.29,
+        "avg_conceded": 1.43
+      },
+      "away_away_form": {
+        "played": 6,
+        "btts": 6,
+        "rate": 1.0,
+        "scored_rate": 1.0,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.5,
+        "avg_conceded": 2.5
+      }
+    },
+    {
+      "date": "2026-11-08",
+      "time": "20:00",
+      "home": "FC Utrecht",
+      "away": "N.E.C. Nijmegen",
+      "league": "NED_1_eredivisie",
+      "score": 84,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 0.9,
+        "conceded_rate": 0.9,
+        "avg_scored": 1.8,
+        "avg_conceded": 2.5
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 0.8,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.6,
+        "avg_conceded": 1.7
+      },
+      "home_home_form": {
+        "played": 5,
+        "btts": 5,
+        "rate": 1.0,
+        "scored_rate": 1.0,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.8,
+        "avg_conceded": 3.0
+      },
+      "away_away_form": {
+        "played": 5,
+        "btts": 3,
+        "rate": 0.6,
+        "scored_rate": 0.6,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.6,
+        "avg_conceded": 1.4
+      }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
     "matches_parsed": 17751,
-    "upcoming_fixtures": 262,
+    "upcoming_fixtures": 93,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 8,
-      "weak_btts": 184,
-      "weak_scoring": 6,
-      "weak_conceding": 10,
-      "weak_venue_form": 7,
-      "below_score_threshold": 12
+      "insufficient_history": 7,
+      "weak_btts": 66,
+      "weak_scoring": 2,
+      "weak_conceding": 3,
+      "weak_venue_form": 1,
+      "below_score_threshold": 4
     },
     "source_errors_count": 0,
     "source_errors_sample": []
