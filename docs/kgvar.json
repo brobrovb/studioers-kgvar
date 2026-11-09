@@ -1,166 +1,120 @@
 {
-  "updated_at": "2026-11-08T09:47:11+03:00",
-  "date": "2026-11-08",
+  "updated_at": "2026-11-09T10:19:11+03:00",
+  "date": "2026-11-09",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-10",
+  "scan_until": "2026-11-11",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
-  "candidate_count": 3,
-  "strong_count": 3,
+  "candidate_count": 2,
+  "strong_count": 2,
   "watch_count": 0,
   "candidates": [
     {
-      "date": "2026-11-08",
-      "time": "16:30",
-      "home": "VfB Stuttgart II",
-      "away": "SC Verl",
-      "league": "GER_3_3-liga",
-      "score": 89,
+      "date": "2026-11-11",
+      "time": "21:00",
+      "home": "Club Atlético Morelia",
+      "away": "Leones Negros",
+      "league": "MEX_2_liga-expansion",
+      "score": 79,
       "selection_level": "strong",
       "selection_label": "GÜÇLÜ ADAY",
       "home_form": {
         "played": 10,
         "btts": 8,
         "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.9,
-        "avg_scored": 1.7,
-        "avg_conceded": 1.8
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 9,
-        "rate": 0.9,
         "scored_rate": 1.0,
-        "conceded_rate": 0.9,
+        "conceded_rate": 0.8,
         "avg_scored": 1.4,
-        "avg_conceded": 1.8
-      },
-      "home_home_form": {
-        "played": 5,
-        "btts": 5,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.8,
-        "avg_conceded": 2.4
-      },
-      "away_away_form": {
-        "played": 6,
-        "btts": 5,
-        "rate": 0.833,
-        "scored_rate": 1.0,
-        "conceded_rate": 0.833,
-        "avg_scored": 1.17,
-        "avg_conceded": 2.0
-      }
-    },
-    {
-      "date": "2026-11-08",
-      "time": "16:15",
-      "home": "Real Sociedad",
-      "away": "Rayo Vallecano",
-      "league": "ESP_1_la-liga",
-      "score": 85,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.9,
-        "avg_scored": 2.3,
-        "avg_conceded": 1.6
+        "avg_conceded": 1.2
       },
       "away_form": {
         "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.9,
-        "avg_scored": 1.7,
-        "avg_conceded": 2.0
-      },
-      "home_home_form": {
-        "played": 7,
-        "btts": 5,
-        "rate": 0.714,
-        "scored_rate": 0.714,
-        "conceded_rate": 0.857,
-        "avg_scored": 1.29,
-        "avg_conceded": 1.43
-      },
-      "away_away_form": {
-        "played": 6,
-        "btts": 6,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.5,
-        "avg_conceded": 2.5
-      }
-    },
-    {
-      "date": "2026-11-08",
-      "time": "20:00",
-      "home": "FC Utrecht",
-      "away": "N.E.C. Nijmegen",
-      "league": "NED_1_eredivisie",
-      "score": 84,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.9,
-        "avg_scored": 1.8,
-        "avg_conceded": 2.5
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
+        "btts": 7,
+        "rate": 0.7,
         "scored_rate": 0.8,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.6,
-        "avg_conceded": 1.7
+        "conceded_rate": 0.9,
+        "avg_scored": 1.9,
+        "avg_conceded": 1.4
       },
       "home_home_form": {
-        "played": 5,
-        "btts": 5,
-        "rate": 1.0,
+        "played": 8,
+        "btts": 7,
+        "rate": 0.875,
         "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.8,
-        "avg_conceded": 3.0
+        "conceded_rate": 0.875,
+        "avg_scored": 2.38,
+        "avg_conceded": 1.38
       },
       "away_away_form": {
-        "played": 5,
-        "btts": 3,
+        "played": 9,
+        "btts": 5,
+        "rate": 0.556,
+        "scored_rate": 0.778,
+        "conceded_rate": 0.778,
+        "avg_scored": 1.78,
+        "avg_conceded": 1.0
+      }
+    },
+    {
+      "date": "2026-11-11",
+      "time": "21:00",
+      "home": "Piratas",
+      "away": "Club Atlético La Paz",
+      "league": "MEX_2_liga-expansion",
+      "score": 75,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 6,
         "rate": 0.6,
-        "scored_rate": 0.6,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.6,
+        "scored_rate": 0.9,
+        "conceded_rate": 0.7,
+        "avg_scored": 2.0,
+        "avg_conceded": 1.2
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.8,
+        "avg_scored": 2.5,
         "avg_conceded": 1.4
+      },
+      "home_home_form": {
+        "played": 8,
+        "btts": 4,
+        "rate": 0.5,
+        "scored_rate": 0.875,
+        "conceded_rate": 0.625,
+        "avg_scored": 2.0,
+        "avg_conceded": 0.62
+      },
+      "away_away_form": {
+        "played": 8,
+        "btts": 6,
+        "rate": 0.75,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.75,
+        "avg_scored": 2.75,
+        "avg_conceded": 1.38
       }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17751,
-    "upcoming_fixtures": 93,
+    "matches_parsed": 17749,
+    "upcoming_fixtures": 23,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 7,
-      "weak_btts": 66,
-      "weak_scoring": 2,
-      "weak_conceding": 3,
-      "weak_venue_form": 1,
-      "below_score_threshold": 4
+      "insufficient_history": 6,
+      "weak_btts": 13,
+      "weak_scoring": 0,
+      "weak_conceding": 0,
+      "weak_venue_form": 0,
+      "below_score_threshold": 2
     },
     "source_errors_count": 0,
     "source_errors_sample": []
