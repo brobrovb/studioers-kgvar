@@ -1,23 +1,116 @@
 {
-  "updated_at": "2026-11-10T10:50:07+03:00",
-  "date": "2026-11-10",
+  "updated_at": "2026-11-11T10:18:04+03:00",
+  "date": "2026-11-11",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-12",
+  "scan_until": "2026-11-13",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
-  "candidate_count": 0,
-  "strong_count": 0,
+  "candidate_count": 2,
+  "strong_count": 2,
   "watch_count": 0,
-  "candidates": [],
+  "candidates": [
+    {
+      "date": "2026-11-13",
+      "time": "03:00",
+      "home": "Club Atlético Morelia",
+      "away": "Leones Negros",
+      "league": "MEX_2_liga-expansion",
+      "score": 79,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.8,
+        "avg_scored": 1.4,
+        "avg_conceded": 1.2
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 7,
+        "rate": 0.7,
+        "scored_rate": 0.8,
+        "conceded_rate": 0.9,
+        "avg_scored": 1.9,
+        "avg_conceded": 1.4
+      },
+      "home_home_form": {
+        "played": 8,
+        "btts": 7,
+        "rate": 0.875,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.875,
+        "avg_scored": 2.38,
+        "avg_conceded": 1.38
+      },
+      "away_away_form": {
+        "played": 9,
+        "btts": 5,
+        "rate": 0.556,
+        "scored_rate": 0.778,
+        "conceded_rate": 0.778,
+        "avg_scored": 1.78,
+        "avg_conceded": 1.0
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "time": "",
+      "home": "Pruszkow",
+      "away": "Kleczew",
+      "league": "POL_3_division-2",
+      "score": 76,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 6,
+        "rate": 0.6,
+        "scored_rate": 0.9,
+        "conceded_rate": 0.7,
+        "avg_scored": 2.1,
+        "avg_conceded": 1.3
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 0.8,
+        "conceded_rate": 0.9,
+        "avg_scored": 1.5,
+        "avg_conceded": 1.7
+      },
+      "home_home_form": {
+        "played": 7,
+        "btts": 5,
+        "rate": 0.714,
+        "scored_rate": 0.857,
+        "conceded_rate": 0.857,
+        "avg_scored": 1.86,
+        "avg_conceded": 1.29
+      },
+      "away_away_form": {
+        "played": 4,
+        "btts": 3,
+        "rate": 0.75,
+        "scored_rate": 0.75,
+        "conceded_rate": 0.75,
+        "avg_scored": 1.0,
+        "avg_conceded": 2.25
+      }
+    }
+  ],
   "diagnostics": {
     "competitions_discovered": 75,
     "matches_parsed": 17762,
-    "upcoming_fixtures": 13,
+    "upcoming_fixtures": 15,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 10,
-      "weak_btts": 3,
+      "insufficient_history": 7,
+      "weak_btts": 6,
       "weak_scoring": 0,
       "weak_conceding": 0,
       "weak_venue_form": 0,
