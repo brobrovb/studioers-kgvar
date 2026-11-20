@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-19T11:04:09+03:00",
-  "date": "2026-11-19",
+  "updated_at": "2026-11-20T10:51:44+03:00",
+  "date": "2026-11-20",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-21",
+  "scan_until": "2026-11-22",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
@@ -10,52 +10,6 @@
   "strong_count": 3,
   "watch_count": 0,
   "candidates": [
-    {
-      "date": "2026-11-20",
-      "time": "",
-      "home": "Pontypridd",
-      "away": "Carmarthen Town",
-      "league": "WAL_3_cymru-south",
-      "score": 88,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.9,
-        "avg_scored": 2.5,
-        "avg_conceded": 1.7
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 9,
-        "rate": 0.9,
-        "scored_rate": 0.9,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.5,
-        "avg_conceded": 2.5
-      },
-      "home_home_form": {
-        "played": 6,
-        "btts": 4,
-        "rate": 0.667,
-        "scored_rate": 0.833,
-        "conceded_rate": 0.833,
-        "avg_scored": 2.33,
-        "avg_conceded": 1.33
-      },
-      "away_away_form": {
-        "played": 5,
-        "btts": 5,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.8,
-        "avg_conceded": 1.6
-      }
-    },
     {
       "date": "2026-11-21",
       "time": "18:45",
@@ -100,6 +54,52 @@
         "conceded_rate": 0.833,
         "avg_scored": 1.5,
         "avg_conceded": 2.17
+      }
+    },
+    {
+      "date": "2026-11-22",
+      "time": "",
+      "home": "KFUM Oslo",
+      "away": "Brann",
+      "league": "NOR_1_eliteserien",
+      "score": 88,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 9,
+        "rate": 0.9,
+        "scored_rate": 0.9,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.5,
+        "avg_conceded": 2.0
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 0.8,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.7,
+        "avg_conceded": 1.8
+      },
+      "home_home_form": {
+        "played": 6,
+        "btts": 6,
+        "rate": 1.0,
+        "scored_rate": 1.0,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.83,
+        "avg_conceded": 1.67
+      },
+      "away_away_form": {
+        "played": 7,
+        "btts": 5,
+        "rate": 0.714,
+        "scored_rate": 0.714,
+        "conceded_rate": 0.857,
+        "avg_scored": 1.43,
+        "avg_conceded": 1.71
       }
     },
     {
@@ -151,16 +151,16 @@
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17791,
-    "upcoming_fixtures": 324,
+    "matches_parsed": 17797,
+    "upcoming_fixtures": 402,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 21,
-      "weak_btts": 213,
-      "weak_scoring": 6,
-      "weak_conceding": 10,
-      "weak_venue_form": 13,
-      "below_score_threshold": 30
+      "insufficient_history": 24,
+      "weak_btts": 263,
+      "weak_scoring": 10,
+      "weak_conceding": 14,
+      "weak_venue_form": 17,
+      "below_score_threshold": 31
     },
     "source_errors_count": 0,
     "source_errors_sample": []
