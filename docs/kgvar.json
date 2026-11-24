@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-23T11:22:01+03:00",
-  "date": "2026-11-23",
+  "updated_at": "2026-11-24T13:30:07+03:00",
+  "date": "2026-11-24",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-25",
+  "scan_until": "2026-11-26",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
@@ -10,52 +10,6 @@
   "strong_count": 3,
   "watch_count": 0,
   "candidates": [
-    {
-      "date": "2026-11-24",
-      "time": "",
-      "home": "Leek",
-      "away": "Gainsborough",
-      "league": "ENG_7_northern-premier-league",
-      "score": 94,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 8,
-        "btts": 8,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 2.0,
-        "avg_conceded": 2.5
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.9,
-        "avg_scored": 2.2,
-        "avg_conceded": 1.6
-      },
-      "home_home_form": {
-        "played": 3,
-        "btts": 3,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 2.67,
-        "avg_conceded": 2.33
-      },
-      "away_away_form": {
-        "played": 5,
-        "btts": 5,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 2.6,
-        "avg_conceded": 1.6
-      }
-    },
     {
       "date": "2026-11-24",
       "time": "20:45",
@@ -147,20 +101,66 @@
         "avg_scored": 2.56,
         "avg_conceded": 1.56
       }
+    },
+    {
+      "date": "2026-11-24",
+      "time": "20:45",
+      "home": "Portsmouth",
+      "away": "West Ham United",
+      "league": "ENG_2_championship",
+      "score": 79,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 7,
+        "rate": 0.7,
+        "scored_rate": 0.8,
+        "conceded_rate": 0.8,
+        "avg_scored": 1.4,
+        "avg_conceded": 1.1
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.8,
+        "avg_scored": 2.0,
+        "avg_conceded": 1.8
+      },
+      "home_home_form": {
+        "played": 8,
+        "btts": 6,
+        "rate": 0.75,
+        "scored_rate": 0.875,
+        "conceded_rate": 0.875,
+        "avg_scored": 1.75,
+        "avg_conceded": 1.62
+      },
+      "away_away_form": {
+        "played": 9,
+        "btts": 7,
+        "rate": 0.778,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.778,
+        "avg_scored": 2.56,
+        "avg_conceded": 1.44
+      }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17816,
-    "upcoming_fixtures": 110,
+    "matches_parsed": 17847,
+    "upcoming_fixtures": 113,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 10,
-      "weak_btts": 70,
+      "insufficient_history": 33,
+      "weak_btts": 57,
       "weak_scoring": 0,
-      "weak_conceding": 3,
+      "weak_conceding": 1,
       "weak_venue_form": 2,
-      "below_score_threshold": 12
+      "below_score_threshold": 11
     },
     "source_errors_count": 0,
     "source_errors_sample": []
