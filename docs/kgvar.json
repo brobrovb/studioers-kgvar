@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-26T11:58:26+03:00",
-  "date": "2026-11-26",
+  "updated_at": "2026-11-27T12:11:52+03:00",
+  "date": "2026-11-27",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-28",
+  "scan_until": "2026-11-29",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
@@ -57,77 +57,77 @@
       }
     },
     {
-      "date": "2026-11-28",
-      "time": "",
-      "home": "APOEL",
-      "away": "Krasava",
-      "league": "CYP_1_first-division",
-      "score": 85,
+      "date": "2026-11-29",
+      "time": "17:30",
+      "home": "TSG Hoffenheim",
+      "away": "FC Augsburg",
+      "league": "GER_1_bundesliga",
+      "score": 88,
       "selection_level": "strong",
       "selection_label": "GÜÇLÜ ADAY",
       "home_form": {
         "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.8,
-        "avg_scored": 2.2,
-        "avg_conceded": 1.2
+        "btts": 7,
+        "rate": 0.7,
+        "scored_rate": 0.8,
+        "conceded_rate": 0.9,
+        "avg_scored": 1.5,
+        "avg_conceded": 1.6
       },
       "away_form": {
         "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.8,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.0,
-        "avg_conceded": 2.2
-      },
-      "home_home_form": {
-        "played": 4,
-        "btts": 3,
-        "rate": 0.75,
-        "scored_rate": 1.0,
-        "conceded_rate": 0.75,
-        "avg_scored": 3.75,
-        "avg_conceded": 0.75
-      },
-      "away_away_form": {
-        "played": 4,
-        "btts": 4,
+        "btts": 10,
         "rate": 1.0,
         "scored_rate": 1.0,
         "conceded_rate": 1.0,
-        "avg_scored": 1.0,
-        "avg_conceded": 2.5
+        "avg_scored": 2.4,
+        "avg_conceded": 2.4
+      },
+      "home_home_form": {
+        "played": 5,
+        "btts": 4,
+        "rate": 0.8,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.8,
+        "avg_scored": 2.2,
+        "avg_conceded": 1.6
+      },
+      "away_away_form": {
+        "played": 7,
+        "btts": 6,
+        "rate": 0.857,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.857,
+        "avg_scored": 3.0,
+        "avg_conceded": 2.43
       }
     },
     {
-      "date": "2026-11-27",
-      "time": "20:00",
-      "home": "FC Groningen",
-      "away": "Willem II",
-      "league": "NED_1_eredivisie",
-      "score": 84,
+      "date": "2026-11-29",
+      "time": "",
+      "home": "Brann",
+      "away": "Kristiansund",
+      "league": "NOR_1_eliteserien",
+      "score": 87,
       "selection_level": "strong",
       "selection_label": "GÜÇLÜ ADAY",
       "home_form": {
         "played": 10,
-        "btts": 8,
-        "rate": 0.8,
+        "btts": 9,
+        "rate": 0.9,
         "scored_rate": 0.9,
-        "conceded_rate": 0.9,
+        "conceded_rate": 1.0,
         "avg_scored": 2.1,
-        "avg_conceded": 2.3
+        "avg_conceded": 1.9
       },
       "away_form": {
         "played": 10,
         "btts": 8,
         "rate": 0.8,
-        "scored_rate": 0.8,
-        "conceded_rate": 1.0,
-        "avg_scored": 1.2,
-        "avg_conceded": 3.2
+        "scored_rate": 1.0,
+        "conceded_rate": 0.8,
+        "avg_scored": 1.7,
+        "avg_conceded": 2.6
       },
       "home_home_form": {
         "played": 8,
@@ -135,32 +135,32 @@
         "rate": 0.75,
         "scored_rate": 0.875,
         "conceded_rate": 0.875,
-        "avg_scored": 1.75,
-        "avg_conceded": 2.38
+        "avg_scored": 2.0,
+        "avg_conceded": 1.62
       },
       "away_away_form": {
-        "played": 8,
-        "btts": 7,
-        "rate": 0.875,
-        "scored_rate": 0.875,
+        "played": 6,
+        "btts": 5,
+        "rate": 0.833,
+        "scored_rate": 0.833,
         "conceded_rate": 1.0,
-        "avg_scored": 1.38,
-        "avg_conceded": 3.5
+        "avg_scored": 1.5,
+        "avg_conceded": 3.0
       }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
     "matches_parsed": 17866,
-    "upcoming_fixtures": 328,
+    "upcoming_fixtures": 377,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 41,
-      "weak_btts": 196,
-      "weak_scoring": 11,
+      "insufficient_history": 16,
+      "weak_btts": 251,
+      "weak_scoring": 12,
       "weak_conceding": 12,
-      "weak_venue_form": 17,
-      "below_score_threshold": 25
+      "weak_venue_form": 22,
+      "below_score_threshold": 29
     },
     "source_errors_count": 0,
     "source_errors_sample": []
