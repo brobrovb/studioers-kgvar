@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-11-27T12:11:52+03:00",
-  "date": "2026-11-27",
+  "updated_at": "2026-11-28T11:31:04+03:00",
+  "date": "2026-11-28",
   "timezone": "Europe/Istanbul",
-  "scan_until": "2026-11-29",
+  "scan_until": "2026-11-30",
   "source": "open-matchday public CSV data",
   "source_url": "https://github.com/oladeeayo/open-matchday",
   "notice": "Aday puanı olasılık veya garanti değildir. İstatistikler aday maç tarihinden önceki tamamlanmış karşılaşmalardan hesaplanır. Başlamış ve tamamlanmış maçlar listelenmez.",
@@ -10,52 +10,6 @@
   "strong_count": 3,
   "watch_count": 0,
   "candidates": [
-    {
-      "date": "2026-11-28",
-      "time": "",
-      "home": "Trethomas Bluebirds",
-      "away": "Ynyshir Albions",
-      "league": "WAL_3_cymru-south",
-      "score": 89,
-      "selection_level": "strong",
-      "selection_label": "GÜÇLÜ ADAY",
-      "home_form": {
-        "played": 10,
-        "btts": 10,
-        "rate": 1.0,
-        "scored_rate": 1.0,
-        "conceded_rate": 1.0,
-        "avg_scored": 2.4,
-        "avg_conceded": 1.9
-      },
-      "away_form": {
-        "played": 10,
-        "btts": 8,
-        "rate": 0.8,
-        "scored_rate": 0.9,
-        "conceded_rate": 0.8,
-        "avg_scored": 2.0,
-        "avg_conceded": 1.5
-      },
-      "home_home_form": {
-        "played": 7,
-        "btts": 6,
-        "rate": 0.857,
-        "scored_rate": 0.857,
-        "conceded_rate": 0.857,
-        "avg_scored": 2.29,
-        "avg_conceded": 2.0
-      },
-      "away_away_form": {
-        "played": 7,
-        "btts": 5,
-        "rate": 0.714,
-        "scored_rate": 0.857,
-        "conceded_rate": 0.714,
-        "avg_scored": 1.14,
-        "avg_conceded": 1.14
-      }
-    },
     {
       "date": "2026-11-29",
       "time": "17:30",
@@ -117,8 +71,8 @@
         "rate": 0.9,
         "scored_rate": 0.9,
         "conceded_rate": 1.0,
-        "avg_scored": 2.1,
-        "avg_conceded": 1.9
+        "avg_scored": 2.0,
+        "avg_conceded": 2.2
       },
       "away_form": {
         "played": 10,
@@ -130,13 +84,13 @@
         "avg_conceded": 2.6
       },
       "home_home_form": {
-        "played": 8,
-        "btts": 6,
-        "rate": 0.75,
-        "scored_rate": 0.875,
-        "conceded_rate": 0.875,
-        "avg_scored": 2.0,
-        "avg_conceded": 1.62
+        "played": 9,
+        "btts": 7,
+        "rate": 0.778,
+        "scored_rate": 0.889,
+        "conceded_rate": 0.889,
+        "avg_scored": 1.89,
+        "avg_conceded": 1.89
       },
       "away_away_form": {
         "played": 6,
@@ -147,20 +101,66 @@
         "avg_scored": 1.5,
         "avg_conceded": 3.0
       }
+    },
+    {
+      "date": "2026-11-29",
+      "time": "",
+      "home": "Fredrikstad",
+      "away": "Aalesund",
+      "league": "NOR_1_eliteserien",
+      "score": 86,
+      "selection_level": "strong",
+      "selection_label": "GÜÇLÜ ADAY",
+      "home_form": {
+        "played": 10,
+        "btts": 8,
+        "rate": 0.8,
+        "scored_rate": 0.8,
+        "conceded_rate": 0.9,
+        "avg_scored": 1.3,
+        "avg_conceded": 1.9
+      },
+      "away_form": {
+        "played": 10,
+        "btts": 9,
+        "rate": 0.9,
+        "scored_rate": 1.0,
+        "conceded_rate": 0.9,
+        "avg_scored": 2.0,
+        "avg_conceded": 2.1
+      },
+      "home_home_form": {
+        "played": 7,
+        "btts": 4,
+        "rate": 0.571,
+        "scored_rate": 0.857,
+        "conceded_rate": 0.714,
+        "avg_scored": 1.0,
+        "avg_conceded": 1.29
+      },
+      "away_away_form": {
+        "played": 7,
+        "btts": 7,
+        "rate": 1.0,
+        "scored_rate": 1.0,
+        "conceded_rate": 1.0,
+        "avg_scored": 1.71,
+        "avg_conceded": 1.71
+      }
     }
   ],
   "diagnostics": {
     "competitions_discovered": 75,
-    "matches_parsed": 17866,
-    "upcoming_fixtures": 377,
+    "matches_parsed": 17860,
+    "upcoming_fixtures": 257,
     "scan_days": 3,
     "rejected_candidates": {
-      "insufficient_history": 16,
-      "weak_btts": 251,
-      "weak_scoring": 12,
+      "insufficient_history": 1,
+      "weak_btts": 175,
+      "weak_scoring": 10,
       "weak_conceding": 12,
-      "weak_venue_form": 22,
-      "below_score_threshold": 29
+      "weak_venue_form": 17,
+      "below_score_threshold": 16
     },
     "source_errors_count": 0,
     "source_errors_sample": []
